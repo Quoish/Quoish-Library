@@ -1,0 +1,20 @@
+{
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-avocado-topaz",
+  "blue-topaz-theme@@background-settings-workplace-background-image": false,
+  "blue-topaz-theme@@background-image-settings-switch": false,
+  "blue-topaz-theme@@background-notebook-liked-switch": false,
+  "Blue-Topaz-Codebox-Highlight@@text-color-code@@light": "#1F2635",
+  "Blue-Topaz-Codebox-Highlight@@text-color-code@@dark": "#F6F8FA",
+  "blue-topaz-theme@@line-height-main": 1.5,
+  "blue-topaz-theme@@paragraph-spacing": 1.5,
+  "blue-topaz-theme@@h1-toggle-underline": true,
+  "blue-topaz-theme@@h3-size": "1.2em",
+  "blue-topaz-theme@@h3-weight": "solid",
+  "blue-topaz-theme@@font-weight-strong": "bold",
+  "blue-topaz-theme@@font-family-change-to-default": false,
+  "blue-topaz-theme@@font-family-strong": "Bookerly,'Inter', 'Segoe UI', '方正兰亭粗黑简体', 'ai Screen R', '霞鹜文楷 GB', 'LXGW WenKai', 'Segoe UI Emoji', var(--font-interface)",
+  "blue-topaz-theme@@font-text-theme": "Bookerly,'Inter', 'Segoe UI','方正兰亭黑简体', 'LXGW WenKai', 'Segoe UI Emoji',var(--font-interface)",
+  "blue-topaz-theme@@notebook-liked-markdown-page-options": "notebook-liked-markdown-page-stripe-notebook-1",
+  "blue-topaz-theme@@toggle-paragraph-spacing": true,
+  "blue-topaz-theme@@text-indentation-two-em": false
+}
