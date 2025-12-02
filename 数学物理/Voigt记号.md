@@ -18,7 +18,38 @@ $$        \begin{aligned}
 在物理学中，这样的对称二阶张量的实例有应力$\sigma_{ij}=\sigma_{\alpha}$，应变$\varepsilon_{ij}=\varepsilon_{\alpha}$。
 ## 因子2问题
 在文献中Voigt记号通常存在两种约定。
-学术中更多采用包含因子2的约定
+学术中更多采用包含因子2的约定，即$$\begin{pmatrix}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+2\varepsilon_{23} \\
+2\varepsilon_{31} \\
+2\varepsilon_{12}
+\end{pmatrix}=
+\begin{pmatrix}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\varepsilon_{3} \\
+\varepsilon_{4} \\
+\varepsilon_{5} \\
+\varepsilon_{6}
+\end{pmatrix}$$
+而工程上更多采用不含因子2的约定，即$$\begin{pmatrix}
+\varepsilon_{11} \\
+\varepsilon_{22} \\
+\varepsilon_{33} \\
+\varepsilon_{23} \\
+\varepsilon_{31} \\
+\varepsilon_{12}
+\end{pmatrix}=
+\begin{pmatrix}
+\varepsilon_{1} \\
+\varepsilon_{2} \\
+\varepsilon_{3} \\
+\varepsilon_{4} \\
+\varepsilon_{5} \\
+\varepsilon_{6}
+\end{pmatrix}$$
 # 三阶张量
 三阶张量$P_{ijk}$原本有$3\times3\times 3=27$个分量。
 但当三阶张量的其中两个具有指标对称性$P_{ijk}=P_{ikj}$时，**独立的分量从27个变成18个**。
