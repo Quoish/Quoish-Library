@@ -89,7 +89,7 @@ $$\begin{align}
 $$I(x)=I_{0} \left( \frac{\sin \alpha}{\alpha} \right)^2 \left( \frac{\sin \frac{N\varphi}{2}}{\sin \frac{\varphi}{2}} \right)^2
 $$
 其中$I_{0}$是中心点$P_{0}$的光强。
-这里的$\left( \frac{\sin \alpha}{\alpha} \right)^2$是衍射的影响，$\left( \frac{\sin \frac{N\varphi}{2}}{\sin \frac{\varphi}{2}} \right)^2$是干涉的影响，可以看作是等振幅等相位差的多光束干涉受到单缝衍射的调制。
+这里的$\left( \dfrac{\sin \alpha}{\alpha} \right)^2$是衍射的影响，$\left( \dfrac{\sin \frac{N\varphi}{2}}{\sin \frac{\varphi}{2}} \right)^2$是干涉的影响，可以看作是等振幅等相位差的多光束干涉受到单缝衍射的调制。
 为了方便表示，我们改写为
 $$\begin{equation}
 \left\{
