@@ -29,7 +29,7 @@ Levi-Civita符号定义为$$\varepsilon_{ijk}=\frac{(i-j)(j-k)(k-i)}{2}=\begin{e
 \right.
 \end{equation}$$显然$\varepsilon_{ijk}=\varepsilon_{jki}=\varepsilon_{kij}=-\varepsilon_{jik}=-\varepsilon_{kji}=-\varepsilon_{ikj}$。
 # $\varepsilon-\delta$恒等式
-Kronecker符号和Levi-Civita符号存在以下关系$$\varepsilon_{ijx}\varepsilon_{pqx}=\delta_{ip}-\delta_{jq}=\begin{vmatrix}
+Kronecker符号和Levi-Civita符号存在以下关系$$\varepsilon_{ijx}\varepsilon_{pqx}=\delta_{ip}\delta_{jq}-\delta_{iq}\delta_{jp}=\begin{vmatrix}
 \delta_{ip} & \delta_{iq} \\
 \delta_{jp} & \delta_{jq}
 \end{vmatrix}$$
