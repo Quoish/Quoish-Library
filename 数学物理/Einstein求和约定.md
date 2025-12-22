@@ -17,7 +17,7 @@ Kronecker符号定义为$$\delta_{ij}=\begin{equation}
 \end{equation}$$它刚好代表单位矩阵的矩阵元。
 Kronecker符号关于它的两个下标对称$\delta_{ij}=\delta_{ji}$。
 Kronecker符号具有收缩指标的作用，例如$\delta_{ik}A_{kj}=A_{ij},\delta_{ik}\delta_{kj}=\delta_{ij}$。
-注意：$\delta_{ii}=\delta_{11}+\delta_{22}+\delta_{33}=3$。
+注意：$$\delta_{ii}=\delta_{11}+\delta_{22}+\delta_{33}=3$$
 # Levi-Civita符号
 Levi-Civita符号定义为$$\varepsilon_{ijk}=\frac{(i-j)(j-k)(k-i)}{2}=\begin{equation}
 \left\{
@@ -32,7 +32,12 @@ Levi-Civita符号定义为$$\varepsilon_{ijk}=\frac{(i-j)(j-k)(k-i)}{2}=\begin{e
 Kronecker符号和Levi-Civita符号存在以下关系$$\varepsilon_{ijx}\varepsilon_{pqx}=\delta_{ip}\delta_{jq}-\delta_{iq}\delta_{jp}=\begin{vmatrix}
 \delta_{ip} & \delta_{iq} \\
 \delta_{jp} & \delta_{jq}
-\end{vmatrix}$$
+\end{vmatrix}$$$$\varepsilon_{ijk}\varepsilon_{pqr}=\begin{vmatrix}
+\delta_{ip} & \delta_{iq} & \delta_{ir} \\
+\delta_{jp} & \delta_{jq} & \delta_{jr} \\
+\delta_{kp} & \delta_{kq} & \delta_{kr}
+\end{vmatrix}$$$$\varepsilon_{ixy}\varepsilon_{pxy}=2\delta_{ip}$$$$\varepsilon_{ijk}\varepsilon_{ijk}=6$$
+
 # 简记下的矢量公式
 ## 矢量点积
 $$\vec{A}\cdot \vec{B}=A_{i}B_{i}$$
@@ -43,10 +48,17 @@ $$\vec{A}\times \vec{B}=\varepsilon_{ijk}A_{i}B_{j}\hat{x}_{k}=\begin{vmatrix}
 A_{1} & A_{2} & A_{3} \\
 B_{1} & B_{2} & B_{3} \\
 \hat{x}_{1} & \hat{x}_{2} & \hat{x}_{3}
-\end{vmatrix}$$$$(\vec{A}\times \vec{B})_{k}=\varepsilon_{ijk}A_{i}B_{j}$$
+\end{vmatrix}$$
+$$(\vec{A}\times \vec{B})_{k}=\varepsilon_{ijk}A_{i}B_{j}$$
 ## 基矢量叉积
 $$\hat{x}_{i}\times \hat{x}_{j}=\varepsilon_{ijk}\hat{x}_{k}$$
 ## 矢量混合积
 $$\vec{A}\cdot (\vec{B}\times \vec{C})=\varepsilon_{ijk}A_{i}B_{j}C_{k}$$
 ## 矢量三重叉积
-$$\vec{A}\times (\vec{B}\times \vec{C})=\varepsilon_{ilm}\varepsilon_{jkl}A_{i}B_{j}C_{k}\hat{x}_{m}$$
+$$\vec{A}\times (\vec{B}\times \vec{C})=\varepsilon_{ijk}\varepsilon_{klm}A_{j}B_{l}C_{m}\hat{x}_{i}$$
+## 梯度
+$$\nabla f=\hat{x}_{i}\partial_{i}f$$
+## 散度
+$$\nabla\cdot \vec{A}=\partial_{i}A_{i}$$
+## 旋度
+$$\nabla \times \vec{A}=\varepsilon_{ijk}\partial_{i}A_{j}\hat{x}_{k}$$
