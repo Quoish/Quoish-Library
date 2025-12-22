@@ -43,7 +43,7 @@ $$\vec{A}\times \vec{B}=\varepsilon_{ijk}A_{i}B_{j}\hat{x}_{k}=\begin{vmatrix}
 A_{1} & A_{2} & A_{3} \\
 B_{1} & B_{2} & B_{3} \\
 \hat{x}_{1} & \hat{x}_{2} & \hat{x}_{3}
-\end{vmatrix}$$
+\end{vmatrix}$$$$(\vec{A}\times \vec{B})_{k}=\varepsilon_{ijk}A_{i}B_{j}$$
 ## 基矢量叉积
 $$\hat{x}_{i}\times \hat{x}_{j}=\varepsilon_{ijk}\hat{x}_{k}$$
 ## 矢量混合积
