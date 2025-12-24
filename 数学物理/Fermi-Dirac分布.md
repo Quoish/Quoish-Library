@@ -26,7 +26,7 @@ $$\alpha = -\frac{\mu}{k_{B}T},\quad \beta=\frac{1}{k_{B}T}$$
 # Fermi海
 我们可以用Fermi-Dirac分布来描述自由电子气，即是[[固体能带论#Sommerfeld自由电子气模型]]中的自由电子。
 根据Fermi分布，温度为$T$时，能量为$\varepsilon$的一个量子态上的平均粒子数为
-$$n(\varepsilon)=\frac{N_{l}}{g_{l}}=\frac{1}{e^{\frac{\varepsilon-\mu}{k_{B}T}}+1}$$这被称为**Fermi分布函数**。
+$$n(\varepsilon)=\frac{N_{l}}{g_{l}}=\frac{1}{e^{\frac{\varepsilon-\mu}{k_{B}T}}+1}$$这被称为*Fermi分布函数*，在后面我们会给这里的$\mu$赋予一个新名字，叫做*Fermi能级*$\mu_{F}$。
 根据[[相空间#能量态密度]]，在体积$V$内，在能量范围$\varepsilon$~$\varepsilon+\mathrm{d}\varepsilon$范围内的量子态数目为
 $$2\cdot g(\varepsilon)\mathrm{d}\varepsilon=2\cdot \frac{2\pi V}{h^3}(2m)^{3/2}\varepsilon^{1/2}\mathrm{d}\varepsilon$$
 **乘了一个2是考虑到电子有两个自旋方向**。于是可以计算
