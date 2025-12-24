@@ -26,13 +26,13 @@ $$\alpha = -\frac{\mu}{k_{B}T},\quad \beta=\frac{1}{k_{B}T}$$
 # Fermi海
 我们可以用Fermi-Dirac分布来描述自由电子气，即是[[固体能带论#Sommerfeld自由电子气模型]]中的自由电子。
 根据Fermi分布，温度为$T$时，能量为$\varepsilon$的一个量子态上的平均粒子数为
-$$n(\varepsilon)=\frac{N_{l}}{g_{l}}=\frac{1}{e^{\frac{\varepsilon-\mu}{k_{B}T}}+1}$$
+$$n(\varepsilon)=\frac{N_{l}}{g_{l}}=\frac{1}{e^{\frac{\varepsilon-\mu}{k_{B}T}}+1}$$这被称为**Fermi分布函数**。
 根据[[相空间#能量态密度]]，在体积$V$内，在能量范围$\varepsilon$~$\varepsilon+\mathrm{d}\varepsilon$范围内的量子态数目为
 $$2\cdot g(\varepsilon)\mathrm{d}\varepsilon=2\cdot \frac{2\pi V}{h^3}(2m)^{3/2}\varepsilon^{1/2}\mathrm{d}\varepsilon$$
-乘了一个2是考虑到电子有两个自旋方向。于是可以计算
+**乘了一个2是考虑到电子有两个自旋方向**。于是可以计算
 $$N=\frac{4\pi V}{h^3}(2m)^{3/2}\int_{0}^{\infty}\frac{\varepsilon^{1/2}}{e^{\frac{\varepsilon-\mu}{k_{B}T}}+1}\mathrm{d}\varepsilon$$
 $$U=\frac{4\pi V}{h^3}(2m)^{3/2}\int_{0}^{\infty}\frac{\varepsilon^{3/2}}{e^{\frac{\varepsilon-\mu}{k_{B}T}}+1}\mathrm{d}\varepsilon$$
-可知，在给定$V,N,T$时，可以确定$\mu$
+可知，在给定$V,N,T$时，可以确定$\mu$。
 ## Fermi能级
 先讨论$T=0$时
 易知此时有$$n(\varepsilon)=
