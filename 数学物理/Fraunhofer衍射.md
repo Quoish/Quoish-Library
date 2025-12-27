@@ -108,7 +108,7 @@ $$\begin{equation}
 - 衍射：
 	- 中央明纹/中央峰（Central Maximum）：$$\alpha=0 \implies \sin\theta=0$$
 	- 极小（Minima）：$$\alpha=m\pi \implies a\sin\theta=m\lambda,\quad m=\pm 1,\pm 2,\dots,\quad 且m\neq 0$$
-	- 次极大（Secondary Maxima）：$$\frac{d}{d\alpha}\left(\frac{\sin\alpha}{\alpha}\right)^2=0 \implies \tan\alpha=\alpha$$
+	- 次极大（Secondary Maxima）：$$\frac{\mathrm{d}}{\mathrm{d}\alpha}\left(\frac{\sin\alpha}{\alpha}\right)^2=0 \implies \tan\alpha=\alpha$$
 - 干涉：
 	- 相消：暗纹（Dark Fringes）$$N\beta=k\pi,\ \beta\neq k'\pi \implies d\sin\theta=\frac{k}{N}\lambda,\ k\neq Nk'$$
 	- 相长：主极大（Principal Maxima）$$\beta=k\pi \implies d\sin\theta=k\lambda,\quad k=0,\pm 1,\pm 2,\dots$$
