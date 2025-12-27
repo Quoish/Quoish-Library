@@ -110,8 +110,8 @@ $$\begin{equation}
 	- 极小（Minima）：$$\alpha=m\pi \implies a\sin\theta=m\lambda,\quad m=\pm 1,\pm 2,\dots,\quad 且m\neq 0$$
 	- 次极大（Secondary Maxima）：$$\frac{\mathrm{d}}{\mathrm{d}\alpha}\left(\frac{\sin\alpha}{\alpha}\right)^2=0 \implies \tan\alpha=\alpha$$
 - 干涉：
-	- 相消：暗纹（Dark Fringes）$$N\beta=k\pi,\ \beta\neq k'\pi \implies d\sin\theta=\frac{k}{N}\lambda,\ k\neq Nk'$$
-	- 相长：主极大（Principal Maxima）$$\beta=k\pi \implies d\sin\theta=k\lambda,\quad k=0,\pm 1,\pm 2,\dots$$
+	- 相消：暗条纹（Dark Fringes）$$N\beta=k\pi,\ \beta\neq k'\pi \implies d\sin\theta=\frac{k}{N}\lambda,\ k\neq Nk'$$
+	- 相长：亮条纹（Light Fringes）、主极大（Principal Maxima）$$\beta=k\pi \implies d\sin\theta=k\lambda,\quad k=0,\pm 1,\pm 2,\dots$$
 ### 缺级
 当干涉相长遇上了衍射极小，则原本会有一个主极大的地方会呈现暗纹，这个现象称作缺级。
 $$\begin{equation}
