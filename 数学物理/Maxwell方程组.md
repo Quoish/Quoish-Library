@@ -119,10 +119,10 @@ $$\iiint_{\Omega}\nabla'\cdot\left( \frac{\vec{J}(\vec{r}')}{|\vec{r}-\vec{r}'|}
 这样我们就在电荷不变的情况下（$\frac{ \partial  \rho }{ \partial  t} =0$）证明了Ampere环路定理
 $$\nabla \times \vec{B}(\vec{r})=\mu_{0}\vec{J}(\vec{r})$$
 ## 位移电流
-上面的Ampere环路定理推导依赖于$\frac{ \partial  \rho }{ \partial  t} =0$，对于时变场来说，这并不成立。
+上面的Ampere环路定理推导依赖于$\dfrac{ \partial  \rho }{ \partial  t} =0$，对于时变场来说，这并不成立。
 但若我们假定时变场依然成立电场的Gauss定理$\nabla\cdot \vec{D}=\rho$，重新改写电荷守恒定律$$\nabla\cdot \vec{J}+\frac{ \partial  \rho }{ \partial  t} =\nabla\cdot \vec{J}+\nabla\cdot \frac{ \partial  \vec{D} }{ \partial  t} =\nabla\cdot\left( \vec{J}+\frac{ \partial  \vec{D} }{ \partial  t}  \right)=0$$
 这样我们能得到和静态场一样的形式。
-James Maxwell认为$\frac{ \partial  D }{ \partial  t}$也是一种形式的电流，称作*位移电流*，即$$\vec{j}=\frac{ \partial  D }{ \partial  t} $$
+James Maxwell认为$\dfrac{ \partial  D }{ \partial  t}$也是一种形式的电流，称作*位移电流*，即$$\vec{j}=\frac{ \partial  D }{ \partial  t} $$
 引入位移电流的概念后，修正Ampere环路定理，就得到了全电流Ampere环路定理$$\nabla \times \vec{H}=\vec{J}+\vec{j}$$
 # Lorentz力
 ## Coulumb力
