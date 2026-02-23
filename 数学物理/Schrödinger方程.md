@@ -2,7 +2,7 @@
 # Schrödinger方程
 对于一个质量为$m$的非相对论自由粒子，当其具有确定的能量$E=\hbar \omega$和动量$\vec{p}=\hbar \vec{k}$时，波函数为
 $$\Psi(\vec{r},t)=(2\pi \hbar)^{-3/2}e^{i(\vec{p}\cdot \vec{r}-Et)/\hbar}$$
-其中满足$E=\frac{p^2}{2m}$
+其中满足$E=\dfrac{p^2}{2m}$
 两边对时间$t$求偏导有$$i\hbar \frac{ \partial   }{ \partial  t} \Psi(\vec{r},t)=E\Psi(\vec{r},t)$$
 两边再同时求调和量有
 $$-\frac{\hbar^2}{2m}\nabla^2\Psi(\vec{r},t)=\frac{p^2}{2m}\Psi(\vec{r},t)$$
