@@ -8,6 +8,7 @@ Legendre变换是一种改变函数自变量的技巧。
 ![[勒让德变换.png]]
 更一般地，我们定义：
 设$f(x)$是关于$x$的一个凸函数，定义共轭变量$$p=\frac{ \partial  f }{ \partial  x} $$反解得到$x=x(p)$，则$f(x)$的*Legendre变换*为$$f^*(p)=px-f(x)$$
+有些地方的定义相差一个负号$$f^*(p)=f(x)-px$$
 Legendre变换的两个变量之间有如下关系$$\begin{equation}
 \left\{
 \begin{aligned}
@@ -20,3 +21,5 @@ Legendre变换的两个变量之间有如下关系$$\begin{equation}
 热力学中内能的自然变量是$S,V$，即$U=U(S,V)$，但实验中控制$T$比控制$S$要容易，为了将自变量从$S$改为$T$，就需要用到Legendre变换。
 固定$V$看$U-S$曲线，自变量$S$的共轭变量正是$\left. \dfrac{ \partial   U}{ \partial  S} \right|_{V}=T$，所以对应Legendre变换公式，构造出Helmholtz自由能$$F=TS-U$$它是一个关于$V,T$的函数，即$F=F(T,V)$。
 # 经典力学的应用
+用Lagrange量来描述力学规律时，使用的变量是广义坐标和广义坐标的一阶导数，即$$\mathcal{L}=\mathcal{L}(q,\dot{q},t)$$实际运用中因为$\dot{q}$会导致方程中出现高阶微分项，给计算带来很大不变，所以我们需要通过Legendre变换把自变量从$\dot{q}$变成$p$。
+固定$q,t$看$\mathcal{L}-\dot{q}$曲线，自变量$\dot{q}$的共轭变量正是$\dfrac{ \partial  \mathcal{L} }{ \partial \dot{q} }=p$，所以对应Legendre变换公式，构造出Hamilton量$$\mathcal{H}=pq-\mathcal{L}$$它是一个关于$q,p,t$的函数，即$\mathcal{H}=\mathcal{H}(q,p,t)$。
