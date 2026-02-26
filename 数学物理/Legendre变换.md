@@ -19,3 +19,4 @@ Legendre变换的两个变量之间有如下关系$$\begin{equation}
 # 热力学的应用
 热力学中内能的自然变量是$S,V$，即$U=U(S,V)$，但实验中控制$T$比控制$S$要容易，为了将自变量从$S$改为$T$，就需要用到Legendre变换。
 固定$V$看$U-S$曲线，自变量$S$的共轭变量正是$\left. \dfrac{ \partial   U}{ \partial  S} \right|_{V}=T$，所以对应Legendre变换公式，构造出Helmholtz自由能$$F=TS-U$$它是一个关于$V,T$的函数，即$F=F(T,V)$。
+# 经典力学的应用
