@@ -1,0 +1,25 @@
+#经典力学 #热力学 
+# Legendre变换
+Legendre变换是一种改变函数自变量的技巧。
+要想描述函数$y=f(x)=x^2$，最普遍的做法是使用它的横坐标-纵坐标构成的元组集合$\{ (x,y) \}$，也就是类似$(1,1),(2,4),(3,9)$这样的一些直角坐标。
+然而上面那种方法并不是唯一的，我们其实可以在这个函数上每一个点都画一条切线，我们靠切线的斜率$p$、切线与$y$轴的截距$t$组成的元组集合$\{ (p,t) \}$，也是可以完全描述这个函数。因为这些斜率、截距构成的切线集其包络完全就对应原来的函数，因此这个集合包含了原来函数的所有信息。
+函数上任意一点$x_{0}$的斜率为$f'(x_{0})=p$，对应的切线方程是$$y=f'(x_{0})(x-x_{0})+f(x_{0})$$那截距就是$$t(x_{0})=-f'(x_{0})x_{0}+f(x_{0})=-px_{0}+f(x_{0})$$把斜率写成关于$p$的函数，就是$$t(p)=-px(p)+f(x(p))$$这样我们就可以靠$t$和$p$之间的关系来描述原来的函数了。
+不过既然要求有$x(p)=f'^{-1}(p)$，那就说明函数必须单调。
+![[勒让德变换.png]]
+更一般地，我们定义：
+设$f(x)$是关于$x$的一个凸函数，定义共轭变量$$p=\frac{ \partial  f }{ \partial  x} $$反解得到$x=x(p)$，则$f(x)$的*Legendre变换*为$$f^*(p)=px-f(x)$$
+有些地方的定义相差一个负号$$f^*(p)=f(x)-px$$
+Legendre变换的两个变量之间有如下关系$$\begin{equation}
+\left\{
+\begin{aligned}
+&p=\frac{ \partial  f }{ \partial  x} \\
+&x=\frac{ \partial  f^* }{ \partial  p} 
+\end{aligned}
+\right.
+\end{equation}$$
+# 热力学的应用
+热力学中内能的自然变量是$S,V$，即$U=U(S,V)$，但实验中控制$T$比控制$S$要容易，为了将自变量从$S$改为$T$，就需要用到Legendre变换。
+固定$V$看$U-S$曲线，自变量$S$的共轭变量正是$\left. \dfrac{ \partial   U}{ \partial  S} \right|_{V}=T$，所以对应Legendre变换公式，构造出Helmholtz自由能$$F=TS-U$$它是一个关于$V,T$的函数，即$F=F(T,V)$。
+# 经典力学的应用
+用Lagrange量来描述力学规律时，使用的变量是广义坐标和广义坐标的一阶导数，即$$\mathcal{L}=\mathcal{L}(q,\dot{q},t)$$实际运用中因为$\dot{q}$会导致方程中出现高阶微分项，给计算带来很大不变，所以我们需要通过Legendre变换把自变量从$\dot{q}$变成$p$。
+固定$q,t$看$\mathcal{L}-\dot{q}$曲线，自变量$\dot{q}$的共轭变量正是$\dfrac{ \partial  \mathcal{L} }{ \partial \dot{q} }=p$，所以对应Legendre变换公式，构造出Hamilton量$$\mathcal{H}=pq-\mathcal{L}$$它是一个关于$q,p,t$的函数，即$\mathcal{H}=\mathcal{H}(q,p,t)$。
