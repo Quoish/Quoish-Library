@@ -10,5 +10,5 @@
 ### 输出过程的均值和相关函数
 1. 求稳态输出
 由于积分和均值可以换序，所以$$\mu_{Y}(t)=\int_{-\infty}^{+\infty}E[X(\tau)]h(t-\tau)\mathrm{d}\tau$$
-若$X(t)$是平稳过程，则$$\mu_{Y}(t)=\int_{}$$
+若$X(t)$是平稳过程，则$$\mu_{Y}(t)=\mu_{X}\int_{-\infty}^{+\infty}h(\tau)\mathrm{d}\tau$$
 2. 求暂态输出
