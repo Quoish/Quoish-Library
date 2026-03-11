@@ -9,6 +9,6 @@
 - 对于右侧信号输入，也就是$X(t)=0,t<0$，信号只有在$t>0$的时候有值，这个时候需要关注暂态相应。
 ### 输出过程的均值和相关函数
 1. 求稳态输出
-由于积分和均值可以换序，所以$$\mu_{Y}(t)=\int_{-\infty}^{+\infty}E[X(\tau)]h(t-\tau)\mathrm{d}\tau$$
+由于积分和均值可以换序，所以$$\mu_{Y}(t)=\int_{-\infty}^{+\infty}E[X(\tau)]h(t-\tau)\mathrm{d}\tau$$$$R_{X}(t)$$
 若$X(t)$是平稳过程，则$$\mu_{Y}(t)=\mu_{X}\int_{-\infty}^{+\infty}h(\tau)\mathrm{d}\tau$$
 2. 求暂态输出
