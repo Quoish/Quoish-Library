@@ -1,0 +1,17 @@
+#随机过程 #信号与系统 
+# 随机过程通过连续时间系统
+## 冲激响应法
+### 随机过程的冲激响应
+确知信号$x(t)$经过冲激响应为$h(t)$的LTI系统时，相应输出的信号是$y(t)=x(t)*h(t)$。对于随机过程$X(t)$来说，每一个样本都会产生一个这样的输出与之对应，所以输出信号$Y(t)$也是随机过程，且满足$$Y(t)=X(t)*h(t)=\int_{-\infty}^{+\infty}X(t-\tau)h(\tau)\mathrm{d}\tau$$
+对于具体的$X(t)$和$h(t)$，积分限要做不同的调整。
+- 对于因果系统来说，$h(t)=0,t<0$。
+- 对于双侧信号输入，也就是$X(t)$在$-\infty<t<+\infty$都有值，相当于信号早就通入系统了，此时只需要关注系统的稳态响应。
+- 对于右侧信号输入，也就是$X(t)=0,t<0$，信号只有在$t>0$的时候有值，这个时候需要关注暂态相应。
+### 输出过程的均值和相关函数
+1. 求稳态输出
+由于积分和均值可以换序，所以$$\mu_{Y}(t)=\int_{-\infty}^{+\infty}E[X(t-\tau)]h(\tau)\mathrm{d}\tau$$$$R_{X}(t_{1},t_{2})=\iint_{\mathbb{R}^2}R_{X}(t_{1}-u,t_{2}-v)h(u)h(v)\mathrm{d}u\mathrm{d}v$$
+若$X(t)$是平稳过程，则$$\mu_{Y}(t)=\int_{-\infty}^{+\infty}\mu_{X}(t-\tau)h(\tau)\mathrm{d}\tau=\mu_{X}\int_{0}^{+\infty}h(\tau)\mathrm{d}\tau$$$$R_{X}(\tau)=\int_{0}^{+\infty}\int_{0}^{+\infty}R_{X}(\tau+u-v)h(u)h(v)\mathrm{d}u\mathrm{d}v$$可见，**平稳输入的稳态响应一定是平稳输出**。
+2. 求暂态输出
+非平稳过程的跟之前一样。
+若$X(t)$是平稳过程，则$$\mu_{Y}(t)=\int_{-\infty}^{+\infty}\mu_{X}(t-\tau)h(\tau)\mathrm{d}\tau=\mu_{X}\int_{0}^{t}h(\tau)\mathrm{d}\tau$$$$R_{X}(t_{1},t_{2})=\int_{0}^{t_{1}}\int_{0}^{t_{2}}R_{X}(\tau+u-v)h(u)h(v)\mathrm{d}u\mathrm{d}v$$可见，**平稳输入的暂态相应却不一定是平稳输出**。
+## 频谱法
