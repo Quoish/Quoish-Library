@@ -6,7 +6,7 @@
 # 离散时间Fourier变换
 # 离散Fourier级数
 # 离散Fourier变换
-$$$$
+$$f(n)= \frac{1}{N}\sum_{n=0}^{N-1}F(jk\Omega)e^{ jk\Omega n }$$$$F(jk\Omega)=\sum_{n=0}^{N-1}$$
 # 快速Fourier变换
 
 # 短时Fourier变换
