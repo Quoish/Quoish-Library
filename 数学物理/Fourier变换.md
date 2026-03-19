@@ -1,7 +1,7 @@
 #信号处理 #数理方法 
 # Fourier级数
-$$f(t)=\sum_{k=-\infty}^{+\infty}F(jk\omega)e^{ jk\Omega t }$$
-$$F(jk\Omega)=\int_{-\infty}^{+\infty}f(t)e^{ -jk\Omega t }\mathrm{d}t$$
+$$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$
+$$F(jk\Omega)T=\int_{-\infty}^{+\infty}f(t)e^{ -jk\Omega t }\mathrm{d}t$$
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
