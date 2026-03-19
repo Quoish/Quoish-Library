@@ -1,10 +1,11 @@
 #信号处理 #数理方法 
 # Fourier级数
-
+$$F(jn\Omega)=\int_{-\infty}^{+\infty}$$
 # Fourier变换
+$$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
 # 离散时间Fourier变换
-$$f(n)=\int_{-\infty}^{+\infty}\tilde{F}(j\omega)$$
+$$f(n)=\int_{-\infty}^{+\infty}\tilde{F}(j\omega)e^{ j\omega n } \frac{\mathrm{d}\omega}{2\pi}$$
 $$\tilde{F}(j\omega)=\sum_{n=-\infty}^{+\infty}f(n)e^{ -j\omega n }$$
 # 离散Fourier级数
 $$\tilde{f}(n)= \frac{1}{N}\sum_{k=0}^{N-1}F(jk\Omega)e^{ jk\Omega n }$$$$\tilde{F}(jk\Omega)=\sum_{n=0}^{N-1}f(n)e^{ -jk\Omega n }$$
