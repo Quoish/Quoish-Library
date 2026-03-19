@@ -4,8 +4,10 @@
 # Fourier变换
 ## 微分特性
 # 离散时间Fourier变换
+$$f(n)=\int_{-\infty}^{+\infty}\tilde{F}(j\omega)$$
+$$\tilde{F}(j\omega)=\sum_{n=-\infty}^{+\infty}f(n)e^{ -j\omega n }$$
 # 离散Fourier级数
-$$$$
+$$\tilde{f}(n)= \frac{1}{N}\sum_{k=0}^{N-1}F(jk\Omega)e^{ jk\Omega n }$$$$\tilde{F}(jk\Omega)=\sum_{n=0}^{N-1}f(n)e^{ -jk\Omega n }$$
 # 离散Fourier变换
 $$f(n)= \frac{1}{N}\sum_{k=0}^{N-1}F(jk\Omega)e^{ jk\Omega n }$$$$F(jk\Omega)=\sum_{n=0}^{N-1}f(n)e^{ -jk\Omega n }$$
 # 快速Fourier变换
