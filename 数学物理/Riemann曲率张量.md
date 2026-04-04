@@ -8,7 +8,7 @@
 >导数算符$\nabla_{a}$的*Riemann曲率张量*定义为$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})\omega_{c}=R_{abc}^d\omega_{d},\quad \forall \omega_{c}\in \mathscr{F}_{M}(0,1)$$
 
 - Riemann曲率张量对矢量的作用为$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})v^{c}=-R_{abd}^dv^{c},\quad \forall v^{c}\in \mathscr{F}_{M}(1,0)$$
-- Riemann曲率张量对$(k,l)$型张量为$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})T^{c_{1}\dots c_{k}}_{d_{1}\dots d_{l}}=\sum_{i}C^{b_{i}}_{ad}T^{b_{1}\dots d\dots b_{k}}_{c_{1}\dots c_{l}}-\sum_{i}C^e_{abd_{i}}T^{b_{1}\dots b_{k}}_{c_{1}\dots d\dots c_{l}}$$
+- Riemann曲率张量对$(k,l)$型张量为$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})T^{c_{1}\dots c_{k}}_{d_{1}\dots d_{l}}=-\sum_{i}R^{c_{i}}_{abe}T^{c_{1}\dots e\dots c_{k}}_{d_{1}\dots d_{l}}+\sum_{i}R^e_{abd_{i}}T^{c_{1}\dots c_{k}}_{d_{1}\dots e\dots d_{l}}$$
 Riemann曲率张量反应了导数算符的非对易性，是描述$(M,\nabla_{a})$内禀性质的张量场。
 对于配备了度规$g_{ab}$的流形，也可以说与度规相适配的导数算符诱导的Riemann曲率张量，因此也可以叫$g_{ab}$的Riemann曲率张量。
 Riemann张量为0的度规称为*平直度规*（Flat Metric）。
