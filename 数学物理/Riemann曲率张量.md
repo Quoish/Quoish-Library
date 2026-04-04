@@ -5,5 +5,7 @@
 - 设$\omega_{c},\omega'_{c} \in \mathscr{F}_{M}(0,1)$且$\omega_{c}|_{p}=\omega_{c}'|_{p}$，则$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})\omega_{c}|_{p}=(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})\omega'_{c}|_{p}$$
 
 上面两条定理说明$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})$对应一个$(1,3)$型张量$R_{abd}^d$，称为**Riemann曲率张量**。
->导数算符$\nabla_{a}$的Riemann曲率张量定义为$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})\omega_{c}=R_{abc}^d\omega_{d},\quad \forall \omega_{c}\in \mathscr{F}_{M}(0,1)$$
+>导数算符$\nabla_{a}$的*Riemann曲率张量*定义为$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})\omega_{c}=R_{abc}^d\omega_{d},\quad \forall \omega_{c}\in \mathscr{F}_{M}(0,1)$$
 
+Riemann曲率张量反应了导数算符的非对易性，是描述$(M,\nabla_{a})$内禀性质的张量场。
+对于配备了度规$g_{ab}$的流形，也可以说
