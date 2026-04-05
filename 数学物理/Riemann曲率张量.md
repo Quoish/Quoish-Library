@@ -36,5 +36,16 @@ Riemann张量为0的度规称为*平直度规*（Flat Metric）。
 # Ricci张量和Weyl张量
 ## Ricci张量
 和矩阵一样，我们想关注Riemann张量中可交换、与坐标无关的量，这就是迹。
-让Riemann张量$R_{abc}^d$用度规$g_{ab}$升降指标，得到$(0,4)$型张量$R_{abcd}$，可以通过缩并得到6种迹：$$g^{ab}R_{abcd},g^{ac}R_{abcd},g^{ad}R_{abcd},g^{bc}R_{abcd},g^{bd}R_{abcd},g^{cd}R_{abcd}$$每一种都是一个$(0,2)$型张量。但根据对称括号的性质，所以$g^{(ab)}R_{[ab]cd},g^{(cd)}R_{ab[cd]}$为0，$g^{ac}R_{abcd}$和$g^{bd}R_{abcd}$、$g^{ad}R_{abcd}$和$g^{bc}R_{abcd}$是同一回事。
+让Riemann张量$R_{abc}^d$用度规$g_{ab}$升降指标，得到$(0,4)$型张量$R_{abcd}$，可以通过缩并得到6种迹：$$g^{ab}R_{abcd},g^{ac}R_{abcd},g^{ad}R_{abcd},g^{bc}R_{abcd},g^{bd}R_{abcd},g^{cd}R_{abcd}$$每一种都是一个$(0,2)$型张量。但根据对称括号的性质，所以$g^{(ab)}R_{[ab]cd},g^{(cd)}R_{ab[cd]}$为0，$g^{ac}R_{abcd}$和$g^{bd}R_{abcd}$、$g^{ad}R_{abcd}$和$g^{bc}R_{abcd}$是同一回事，这两对之间又是负号关系，所以这六个缩并中只有一个独立。
+例如可以记$g^{bd}R_{abcd}=R_{abc}^{b}$为$R_{ac}$，称为*Ricci张量*。
+Ricci张量$R_{ac}$还能利用度规求迹，记$R=g^{ac}R_{ac}$，称为*标量曲率*（Scalar Curvature）。
+注意：Ricci张量不需要依赖度规也可以靠定义Riemann张量的缩并定义，而标量曲率必须依赖度规定义。
+## Weyl张量
+Riemann张量的无迹部分称为Weyl张量，其定义如下：
+>对$\dim M\geq 3$的广义Riemann空间，Weyl张量$C_{abcd}$定义为$$C_{abcd}:=R_{abcd}- \frac{2}{n-2}(g_{a[c}R_{d]b}-g_{b[c}R_{d]a})+\frac{2}{(n-1)(n-2)}Rg_{a[c}g_{d]b}$$
+
+其具有以下性质：
+- $C_{abcd}=-C_{bacd}=-C_{abdc}=C_{cdab}$。
+- $C_{[abc]d}=0$。
+- $C_{abcd}$的各种迹都为0。
 
