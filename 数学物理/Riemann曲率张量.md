@@ -48,4 +48,7 @@ Riemann张量的无迹部分称为Weyl张量，其定义如下：
 - $C_{abcd}=-C_{bacd}=-C_{abdc}=C_{cdab}$。
 - $C_{[abc]d}=0$。
 - $C_{abcd}$的各种迹都为0。
+## Einstein张量
+>广义Riemann空间的Einstein张量定义为$$G_{ab}:=R_{ab}-\frac{1}{2}Rg_{ab}$$
 
+- $\nabla^aG_{bc}=0$。
