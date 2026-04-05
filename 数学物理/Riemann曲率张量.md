@@ -22,4 +22,4 @@ Riemann张量为0的度规称为*平直度规*（Flat Metric）。
 5. Bianchi恒等式$\nabla_{[a}R_{bc]d}^e=0$。
 
 这里只证明循环恒等式：
-因为$R_{[abc]}^d\omega_{d}=\nabla_{[a}\nabla_{b}\omega_{c]}-\nabla_{[b}\nabla_{a}\omega_{c]}=2\nabla_{[a}\nabla_{b}\omega_{c]}$，所以我们只需要看$$\nabla_{a}(\nabla_{b}\omega_{c})=$$
+因为$R_{[abc]}^d\omega_{d}=\nabla_{[a}\nabla_{b}\omega_{c]}-\nabla_{[b}\nabla_{a}\omega_{c]}=2\nabla_{[a}\nabla_{b}\omega_{c]}$，所以我们只需要看$$\nabla_{a}(\nabla_{b}\omega_{c})=\partial_{a}(\nabla_{a}\omega_{c})-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d}=\partial_{}$$
