@@ -13,3 +13,11 @@ Riemann曲率张量反应了导数算符的非对易性，是描述$(M,\nabla_{a
 对于配备了度规$g_{ab}$的流形，也可以说与度规相适配的导数算符诱导的Riemann曲率张量，因此也可以叫$g_{ab}$的Riemann曲率张量。
 Riemann张量为0的度规称为*平直度规*（Flat Metric）。
 - Euclidean空间$(\mathbb{R}^n,\delta_{ab})$和Minkowski空间$(\mathbb{R}^n,\eta_{ab})$的Riemann曲率张量为零。
+
+若流形上有度规场$g_{ab}$，可定义$R_{abcd}=R_{abc}^eg_{ed}$，Riemann曲率张量满足以下性质：
+1. 前两个指标反对称$R_{abc}^d=-R_{bac}^d$。
+2. 后两个指标反对称$R_{abcd}=-R_{abdc}$。
+3. 前两个指标和后两个指标对称$R_{abcd}=R_{cdab}$。
+4. 循环恒等式$R_{[abc]}^c=0$。
+5. Bianchi恒等式$\nabla_{[a}R_{bc]d}^e=0$。
+
