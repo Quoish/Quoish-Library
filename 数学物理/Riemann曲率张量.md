@@ -52,4 +52,5 @@ Riemann张量的无迹部分称为Weyl张量，其定义如下：
 >广义Riemann空间的Einstein张量定义为$$G_{ab}:=R_{ab}-\frac{1}{2}Rg_{ab}$$
 
 - $\nabla^aG_{bc}=0$。
-# 
+# 用度规计算Riemann张量
+由Riemann张量定义有$\nabla_{a}(\nabla_{b}\omega_{c})=R_{abc}^d\omega_{d}=2\nabla_{[a}\nabla_{b]}\omega_{c}$，根据$$\nabla_{a}(\nabla_{b}\omega_{c})=\partial_{a}\partial_{b}\omega_{c}-\Gamma^e_{bc}\partial_{a}\omega_{e}-\omega_{e}\partial_{a}\Gamma_{bc}^e-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d}$$用一样的对称性括号性质可以得到$$$$
