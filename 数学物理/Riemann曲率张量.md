@@ -22,4 +22,8 @@ Riemann张量为0的度规称为*平直度规*（Flat Metric）。
 5. Bianchi恒等式$\nabla_{[a}R_{bc]d}^e=0$。
 
 这里只证明循环恒等式：
-因为$R_{[abc]}^d\omega_{d}=\nabla_{[a}\nabla_{b}\omega_{c]}-\nabla_{[b}\nabla_{a}\omega_{c]}=2\nabla_{[a}\nabla_{b}\omega_{c]}$，所以我们只需要看$$\nabla_{a}(\nabla_{b}\omega_{c})=\partial_{a}(\nabla_{a}\omega_{c})-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d}=\partial_{a}\partial_{b}\omega_{c}-\Gamma^e_{bc}\partial_{a}\omega_{e}-\omega_{e}\partial_{a}\Gamma_{bc}^e$$
+因为$R_{[abc]}^d\omega_{d}=\nabla_{[a}\nabla_{b}\omega_{c]}-\nabla_{[b}\nabla_{a}\omega_{c]}=2\nabla_{[a}\nabla_{b}\omega_{c]}$，所以我们只需要看$$
+\begin{align}
+\nabla_{a}(\nabla_{b}\omega_{c})&=\partial_{a}(\nabla_{a}\omega_{c})-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d} \\
+&=\partial_{a}\partial_{b}\omega_{c}-\Gamma^e_{bc}\partial_{a}\omega_{e}-\omega_{e}\partial_{a}\Gamma_{bc}^e-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d}
+\end{align}$$故$$\nabla_{[a}\nabla_{b}\omega_{c]}=\partial_{[a}\partial_{b]}\omega_{c}-\Gamma^e_{[bc}\partial_{a]}\omega_{e}-\omega_{e}\partial_{[a}\Gamma_{bc]}^e-\Gamma_{[ab}^{d}\nabla_{|d|}\omega_{c]}-\Gamma_{[ac}^{d}\nabla_{b]}\omega_{d}$$
