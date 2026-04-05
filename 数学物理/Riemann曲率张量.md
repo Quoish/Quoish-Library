@@ -1,4 +1,5 @@
 #微分几何 
+# Riemann张量
 我们之前根据$$\omega_{b}|_{p}=\omega'_{b}|_{p}\implies(\nabla_{a}-\tilde{\nabla}_{a})\omega_{b}|_{p}=(\nabla_{a}-\tilde{\nabla}_{a})\omega_{b}'|_{p}$$发现$(\nabla_{a}-\tilde{\nabla}_{a})$的作用只和$p$点有关，并且满足线性性，故引入了[[导数算符#Christoff符号]]。
 称$\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a}$是$\nabla_{a}$的对易子，我们会发现它也有类似的性质。
 - 设$f \in \mathscr{F}_{M},\omega_{a}\in \mathscr{F}_{M}(0,1)$，则$$(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})f\omega_{b}=f(\nabla_{a}\nabla_{b}-\nabla_{b}\nabla_{a})\omega_{b}$$
@@ -31,4 +32,7 @@ Riemann张量为0的度规称为*平直度规*（Flat Metric）。
 &=\partial_{[(a}\partial_{b)]}\omega_{c}-\Gamma^e_{[(bc)}\partial_{a]}\omega_{e}-\omega_{e}\partial_{[a}\Gamma_{(bc)]}^e-\Gamma_{[(ab)}^{d}\nabla_{|d|}\omega_{c]}-\Gamma_{[(ac)}^{d}\nabla_{b]}\omega_{d} \\
 &=0
 \end{align}$$这是根据括号内带异种括号的性质。
+- 设$\dim M=n$，则$R_{abc}^d$的分量应该有$n^4$的，但是根据上面的对称性，其中独立的分量只有$N=n^2(n^2-1)/12$个。
+# Ricci张量和Weyl张量
+
 
