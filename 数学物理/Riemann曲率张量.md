@@ -26,4 +26,9 @@ Riemann张量为0的度规称为*平直度规*（Flat Metric）。
 \begin{align}
 \nabla_{a}(\nabla_{b}\omega_{c})&=\partial_{a}(\nabla_{a}\omega_{c})-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d} \\
 &=\partial_{a}\partial_{b}\omega_{c}-\Gamma^e_{bc}\partial_{a}\omega_{e}-\omega_{e}\partial_{a}\Gamma_{bc}^e-\Gamma_{ab}^{d}\nabla_{d}\omega_{c}-\Gamma_{ac}^{d}\nabla_{b}\omega_{d}
-\end{align}$$故$$\nabla_{[a}\nabla_{b}\omega_{c]}=\partial_{[a}\partial_{b]}\omega_{c}-\Gamma^e_{[bc}\partial_{a]}\omega_{e}-\omega_{e}\partial_{[a}\Gamma_{bc]}^e-\Gamma_{[ab}^{d}\nabla_{|d|}\omega_{c]}-\Gamma_{[ac}^{d}\nabla_{b]}\omega_{d}$$
+\end{align}$$故$$\begin{align}
+\nabla_{[a}\nabla_{b}\omega_{c]}&=\partial_{[a}\partial_{b]}\omega_{c}-\Gamma^e_{[bc}\partial_{a]}\omega_{e}-\omega_{e}\partial_{[a}\Gamma_{bc]}^e-\Gamma_{[ab}^{d}\nabla_{|d|}\omega_{c]}-\Gamma_{[ac}^{d}\nabla_{b]}\omega_{d} \\
+&=\partial_{[(a}\partial_{b)]}\omega_{c}-\Gamma^e_{[(bc)}\partial_{a]}\omega_{e}-\omega_{e}\partial_{[a}\Gamma_{(bc)]}^e-\Gamma_{[(ab)}^{d}\nabla_{|d|}\omega_{c]}-\Gamma_{[(ac)}^{d}\nabla_{b]}\omega_{d} \\
+&=0
+\end{align}$$这是根据括号内带异种括号的性质。
+
