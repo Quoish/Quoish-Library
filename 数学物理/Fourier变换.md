@@ -1,7 +1,11 @@
 #信号处理 #数理方法 
 # Fourier级数
-$$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$
-$$F(jk\Omega)T=\int_{-\infty}^{+\infty}f(t)e^{ -jk\Omega t }\mathrm{d}t$$
+## Fourier级数的三角表示
+$$f(t)=\frac{a_{0}}{2}+\sum_{k=1}^{+\infty}[a_{k}\cos(k\Omega t)+b_{k}\sin(k\Omega t)]$$
+$$a_{k}=\frac{2}{T}\int_{-T/2}^{+T/2}f(t)\cos(k\Omega t)\mathrm{d}t$$
+$$b_{k}=\frac{2}{T}\int_{+T/2}^{-T/2}f(t)\sin(k\Omega t)\mathrm{d}t$$
+## Fourier级数的复指数表示
+$$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk\Omega)T=\int_{t_{0}}^{t_{0}+T}f(t)e^{ -jk\Omega t }\mathrm{d}t$$更一般的表达式为$$f(t)=\sum_{k=-\infty}^{+\infty}F(jk\omega)e^{ jk\Omega t }$$$$F(jk\Omega)=\frac{1}{T}\int_{t_{0}}^{t_{0}+T}f(t)e^{ -jk\Omega t }\mathrm{d}t$$
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
