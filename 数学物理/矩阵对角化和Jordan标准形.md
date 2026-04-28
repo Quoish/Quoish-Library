@@ -7,7 +7,7 @@
 ## 矩阵对角化的充要条件
 域$F$上$n$维线性空间$V$上的线性变换$\mathbf{A}$可对角化的六大充要条件：
 1. $\mathbf{A}$有$n$个线性无关的特征向量$\xi_{1},\xi_{2},\cdots,\xi_{n}$，使得$\mathbf{A}$在这些向量构成的基下矩阵为对角矩阵。
-2. $\mathbf{A}$的特征向量构成的一个基。
+2. $n$维线性空间$V$中有$\mathbf{A}$的特征向量构成的一个基。
 3. $\mathbf{A}$的属于不同特征值的特征子空间$V_{\lambda_{i}}$的维数之和等于线性空间$V$的维数$n$，即$\dim V = \dim V_{\lambda_{1}}+\dim V_{\lambda_{2}}+\cdots+\dim V_{\lambda_{n}}$。
 4. $n$维线性空间$V$可以分解为$\mathbf{A}$的特征子空间的直和$V=V_{\lambda_{1}}\oplus V_{\lambda_{2}} \oplus \cdots \oplus V_{\lambda_{s}}$。
 5. $\mathbf{A}$的特征多项式$|A-\lambda I|$在$F$下可以分解为不同的一次因式的乘积，即$f(\lambda)=(\lambda-\lambda_{1})^{r_{1}}(\lambda-\lambda_{2})^{r_{2}}\cdots(\lambda-\lambda_{n})^{r_{n}}$，且**代数重数=几何重数**。
