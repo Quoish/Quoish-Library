@@ -54,8 +54,42 @@
 - 若特征多项式$f(λ)$可分解成若干的一次因式的积（代数基本定理保证了这在复数域一定做得到），则有下式$$V =\mathrm{Ker}((\mathbf{A}-\lambda I)^{r_1}) \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_2}) \oplus \cdots \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_s})(\mathbf{A}))$$其中各核是特殊的不变子空间，被称作$\mathbf{A}$的*根子空间*。
 - 线性空间和最小多项式的分解：设$\mathbf{A}$是域$F$上线性空间$V$的一个线性变换，若$V$可以分解为若干非平凡不变子空间的直和$$V=W_1 \oplus W_2 \oplus \cdots \oplus W_s$$则$\mathbf{A}$的最小多项式为各非平凡不变子空间的最小多项式的最小公倍式$$m(\lambda)=[m_1(\lambda), m_2(\lambda),\cdots,m_s(\lambda)]$$其中$m_j(\lambda)$是限定在$W_j$上的线性变换$\mathbf{A}|_{W_j}$的最小多项式，$j=1,2,\cdots,s$。
 # Jordan标准形
-## 循环子空间
+## Jordan块
+>域$F$上$r$级矩阵若形如$$J_r(a)=
+\left(
+\begin{matrix}
+a&1&0&\cdots&0&0\\
+0&a&1&\cdots&0&0\\
+\vdots&\vdots&\vdots&&\vdots&\vdots\\
+0&0&0&\cdots&1&0\\
+0&0&0&\cdots&a&1\\
+0&0&0&\cdots&0&a\\
+\end{matrix}
+\right)$$则称之为主对角线为$a$的$n$级*Jordan块*。
 
+若干个约当块组成的分块对角矩阵称作*Jordan型矩阵*。
+## 循环子空间
+>设$\mathbf{A}$是域$F$上线性空间$V$的一个线性变换，若$\alpha \in V,t$是正整数,使得$\alpha,\mathbf{A}\alpha,\mathbf{A}^2\alpha,\cdots,\mathbf{A}^{t-1}\alpha$线性无关。
+>当满足条件1：$$\mathbf{A}^{r}\alpha\in<\alpha,\mathbf{A}\alpha,\mathbf{A}^2\alpha,\cdots,\mathbf{A}^{t-1}\alpha>,r\in\mathbb{Z}^+$$则称$<\alpha,\mathbf{A}\alpha,\mathbf{A}^2\alpha,\cdots,\mathbf{A}^{t-1}\alpha>$是一个循环子空间。
+>当满足条件2：$$\mathbf{A}^{t}\alpha=0$$则称$<\alpha,\mathbf{A}\alpha,\mathbf{A}^2\alpha,\cdots,\mathbf{A}^{t-1}\alpha>$是一个强循环子空间。
+
+- 设$\mathbf{B}$是域$F$上$r$维线性空间$W$的一个幂零变换，其幂零指数为$l$，即$\mathbf{B}^l =\mathbf{0},\mathbf{B}^{l-1}\neq \mathbf{0}$，$\forall\xi \in W$，则$\xi,\mathbf{B}\xi,\mathbf{B}^{2}\xi,\cdots,\mathbf{B}^{l-1}\xi$线性无关，必然$l\leqslant \dim W=r$。这些向量可以张成一个不变子空间。
+- 若$<\mathbf{A}^{t-1}\alpha,\cdots,\mathbf{A}^2\alpha,\mathbf{A}\alpha,\alpha>$是关于$\mathbf{A}$的强循环子空间，则$\mathbf{A}$在这个子空间上的限制在基$\mathbf{A}^{t-1}\alpha,\cdots,\mathbf{A}^2\alpha,\mathbf{A}\alpha,\alpha$下的矩阵是主对角线为0的$t$级约当块$$\left(
+\begin{matrix}
+0&1&0&\cdots&0&0\\
+0&0&1&\cdots&0&0\\
+\vdots&\vdots&\vdots&&\vdots&\vdots\\
+0&0&0&\cdots&1&0\\
+0&0&0&\cdots&0&1\\
+0&0&0&\cdots&0&0\\
+\end{matrix}
+\right)$$
+- 幂零变换的强循环子空间分解：设$\mathbf{B}$是域$F$上$r$维线性空间$W$上的一个线性变换，其幂零指数为$l$，则$W$能分解为$\dim W_0$个关于$\mathbf{B}$的强循环子空间的直和，其中$W_0$是$\mathbf{B}$属于特征值0的特征子空间。
+## 线性变换的Jordan标准形
+设$\mathbf{A}$是域$F$上$n$维线性空间$V$上的一个线性变换，如果其最小多项式$m(\lambda)$在$F[\lambda]$中的标准分解式为$$m(\lambda)=(\lambda-\lambda_1)^{l_1}(\lambda-\lambda_2)^{l_2}\cdots(\lambda-\lambda_s)^{l_s}$$则$V$中存在一个基，使得$\mathbf{A}$在此基下的矩阵$B$为Jordan形矩阵，且：
+1. 其中每一个约当形矩阵主对角元是$\mathbf{A}$的全部特征值。
+2. 主对角元为$\lambda_j$的约当块总数为$$N_j=n-\mathrm{rank}\ (\mathbf{A}-\lambda_j\mathbf{I})$$
+3. 其中$t$级约当块$J_t(\lambda_j)$的个数为$$N_j(t)=\mathrm{rank}\ (\mathbf{\mathbf{A}-\lambda_j\mathbf{I}})^{t-1}+\mathrm{rank}\ (\mathbf{\mathbf{A}-\lambda_j\mathbf{I}})^{t+1}-2\mathrm{rank}\ (\mathbf{\mathbf{A}-\lambda_j\mathbf{I}})^{t}$$
 # 矩阵对角化
 >设$A$是数域$F$下的一个$n$级**方阵**，即$A\in M_{n}(F)$，若$A$相似于一个对角矩阵，则称$A$可对角化。
 
