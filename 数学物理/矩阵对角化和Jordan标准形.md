@@ -26,7 +26,8 @@
 >设$f(x)\in F[x],f(x)=b_nx^n+\cdots+b_1x+b_0$，若$f(\mathbf{A})=\mathbf{0}$，则$f(x)$称作$\mathbf{A}$的*零化多项式*。
 >其中$\mathbf{A}$的所有零化多项式中次数最低的首一零化多项式称为*最小多项式*。
 
-- Hamilton-Calay设A\in M_n(F),则A的特征多项式f(\lambda)是A的一个零化多项式
+- *Hamilton-Cayley定理*：设$A\in M_n(F)$，则$A$的特征多项式$f(\lambda)$是$A$的一个零化多项式。
+- 根据唯一因式分解定理，特征多项式可以因式分解为$$0=f(\lambda)=p_{1}^{r_1}(\lambda)p_{2}^{r_2}(\lambda)\cdots p_{s}^{r_s}(\lambda)$$两边取$\mathrm{Ker}$得到$$V=$$
 # 矩阵对角化
 >设$A$是数域$F$下的一个$n$级**方阵**，即$A\in M_{n}(F)$，若$A$相似于一个对角矩阵，则称$A$可对角化。
 
