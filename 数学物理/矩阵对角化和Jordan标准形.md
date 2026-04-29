@@ -14,6 +14,7 @@
 
 - 代数重数$≥$几何重数。
 # 线性空间的直和分解
+## 不变子空间
 >$V$是域$F$上的线性空间，$\mathbf{A}$是$V$上的一个线性变换，$V$的子空间$W$若满足任意$α∈W$，都有$Aα∈W$，则$W$是$\mathbf{A}$的一个*不变子空间*。
 
 不变子空间是特征子空间的推广。线性映射可对角化时，线性空间可以分解为特征子空间的直和；线性映射不可对角化时，线性空间可以分解为不变子空间的直和。
@@ -23,6 +24,7 @@
 - 设$F[x]$是数域$F$上的一元多项式环，$f \in F[x]$，则$\mathrm{Ker}f(\mathbf{A}),\mathrm{Im}f(\mathbf{A})$，$f(\mathbf{A})$的特征子空间都是$\mathbf{A}$的不变子空间。
 - $\mathbf{A}$各不变子空间的交和并仍是不变子空间。
 
+## 零化多项式与最小多项式
 >设$f(x)\in F[x],f(x)=b_nx^n+\cdots+b_1x+b_0$，若$f(\mathbf{A})=\mathbf{0}$，则$f(x)$称作$\mathbf{A}$的*零化多项式*。
 >其中$\mathbf{A}$的所有零化多项式中次数最低的首一零化多项式称为*最小多项式*。
 
@@ -45,7 +47,7 @@
 4. $n$维线性空间$V$可以分解为$\mathbf{A}$的特征子空间的直和$V=V_{\lambda_{1}}\oplus V_{\lambda_{2}} \oplus \cdots \oplus V_{\lambda_{s}}$。
 5. $\mathbf{A}$的特征多项式$|A-\lambda I|$在$F$下可以分解为不同的一次因式的乘积，即$f(\lambda)=(\lambda-\lambda_{1})^{r_{1}}(\lambda-\lambda_{2})^{r_{2}}\cdots(\lambda-\lambda_{n})^{r_{n}}$，且**代数重数=几何重数**。
 6. $\mathbf{A}$的最小多项式$m(λ)$可以在$F[λ]$中能分解成**不同的一次因式**的乘积。
-# 矩阵对角化的计算
+## 矩阵对角化的计算
 1. 求本征值。
 求解关于$\lambda$的方程$$\det(A-\lambda I)=0$$得到$A$的$n$个本征值。
 
@@ -64,17 +66,17 @@
 将各个本征向量按列排列，即是过渡矩阵$$P=\begin{pmatrix}
 x_{1} & x_{2} & \dots & x_{n}
 \end{pmatrix}$$注意：排列顺序应该和本征值一一对应。
-## 重根的情况
+### 重根的情况
 可对角化的矩阵，其**代数重数一定等于几何重数**，即$\det(A-\lambda)=0$的所有根$\lambda_{i}$若是$r$重根（代数重数），则其本征子空间也就是$(A-\lambda I)x=0$的解空间维数（几何重数）也一定是$r$。
 譬如$\lambda_{i}$是2重根的情况，那在对角矩阵中就需要把$\lambda_{i}$摆2次，该本征值对应的两个本征向量$\vec{x}_{i1},\vec{x}_{i 2}$需要在这两个位置对应的地方摆（顺序不唯一，只要摆在这个范围就行了）。
-# 正交对角化的计算
+## 正交对角化的计算
 1. 求解关于$\lambda$的方程$$|A-\lambda I|=0$$得到$A$的所有本征值。
 2. 对每一个特征值$\lambda_i$，求线性方程组$$(A-\lambda_iI)X=0$$的基础解系$α_{i_1},α_{i_2},…,α_{i_n}$。
 3. 将基向量Schmit正交化$$β_{i_1},β_{i_2},…,β_{i_n}$$
 4. 单位化为标准正交基$$η_{i_1},η_{i_2},…,η_{i_n}$$
 5. 构造过渡矩阵$$T=(η_{11},…,η_{1r_1},…,η_{s1},…,η_{sr_s})$$则$T$是正交矩阵，$$T^{-1}AT=
 \mathrm{diag}\{\underbrace{\lambda_{1},\cdots,\lambda_{1}}_{r_1个},\cdots,\underbrace{\lambda_{s},\cdots,\lambda_{s}}_{r_s个}\}$$
-# Schmitd正交化的计算
+## Schmitd正交化的计算
 取线性空间$V$中的一个基$α_1,α_2,…,α_n$，令：$$\beta_1=\alpha_1$$$$\beta_2=\alpha_2-\frac{(\alpha_2,\beta_1)}{(\beta_1,\beta_1)}\beta_1$$$$\beta_3=\alpha_3-\frac{(\alpha_3,\beta_1)}{(\beta_1,\beta_1)}\beta_1-\frac{(\alpha_3,\beta_2)}{(\beta_2,\beta_2)}\beta_2$$
 以此类推……
 $$\beta_n=\alpha_n-\sum_{j=1}^{n-1}\frac{(\alpha_n,\beta_j)}{(\beta_j,\beta_j)}\beta_j$$
