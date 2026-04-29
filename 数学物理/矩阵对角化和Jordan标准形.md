@@ -31,7 +31,7 @@
 - 若特征多项式$f(λ)$可分解成若干的一次因式的积（代数基本定理保证了这在复数域一定做得到），则有下式$$V =\mathrm{Ker}((\mathbf{A}-\lambda I)^{r_1}) \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_2}) \oplus \cdots \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_s})(\mathbf{A}))$$其中各核是特殊的不变子空间，被称作$\mathbf{A}$的*根子空间*。
 - 相似的矩阵有相同的最小多项式。
 - 即使数域扩大，$\mathbf{A}$的最小多项式也不会改变。
-- 
+- 线性空间和最小多项式的分解：设$\mathbf{A}$是域$F$上线性空间$V$的一个线性变换，若$V$可以分解为若干非平凡不变子空间的直和$$V=W_1 \oplus W_2 \oplus \cdots \oplus W_s$$则$\mathbf{A}$的最小多项式为各非平凡不变子空间的最小多项式的最小公倍式$$m(\lambda)=[m_1(\lambda), m_2(\lambda),\cdots,m_s(\lambda)]$$其中$m_j(\lambda)$是限定在$W_j$上的线性变换$\mathbf{A}|_{W_j}$的最小多项式，$j=1,2,\cdots,s$。
 # 矩阵对角化
 >设$A$是数域$F$下的一个$n$级**方阵**，即$A\in M_{n}(F)$，若$A$相似于一个对角矩阵，则称$A$可对角化。
 
