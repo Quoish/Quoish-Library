@@ -20,7 +20,7 @@
 - 零空间是不变子空间，被称为平凡不变子空间。
 - $\mathrm{Ker}\mathbf{A},\mathrm{Im}\mathbf{A}$是不变子空间。
 - $\mathbf{A}$的特征子空间是不变子空间。
-- 设$F[x]$是数域$F$上的一元
+- 设$F[x]$是数域$F$上的一元多项式环，$f \in F[x]$，则$\mathrm{Ker}f(\mathbf{A}),\mathrm{Im}f(\mathbf{A})$，$f(\mathbf{A})$的特征子空间都是不变子空间。
 # 矩阵对角化
 >设$A$是数域$F$下的一个$n$级**方阵**，即$A\in M_{n}(F)$，若$A$相似于一个对角矩阵，则称$A$可对角化。
 
