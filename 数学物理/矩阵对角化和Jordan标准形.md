@@ -27,7 +27,8 @@
 >其中$\mathbf{A}$的所有零化多项式中次数最低的首一零化多项式称为*最小多项式*。
 
 - *Hamilton-Cayley定理*：设$A\in M_n(F)$，则$A$的特征多项式$f(\lambda)$是$A$的一个零化多项式。
-- 根据唯一因式分解定理，特征多项式可以因式分解为$$0=f(\lambda)=p_{1}^{r_1}(\lambda)p_{2}^{r_2}(\lambda)\cdots p_{s}^{r_s}(\lambda)$$两边取$\mathrm{Ker}$得到$$V=$$
+- 根据唯一因式分解定理，特征多项式可以因式分解为$$0=f(\lambda)=p_{1}^{r_1}(\lambda)p_{2}^{r_2}(\lambda)\cdots p_{s}^{r_s}(\lambda)$$两边取$\mathrm{Ker}$得到$$\mathrm{Ker}\ \mathbf{0} = V =\mathrm{Ker}(p_{1}^{r_1}(\mathbf{A})) \oplus \mathrm{Ker}(p_{2}^{r_2}(\mathbf{A})) \oplus \cdots \oplus \mathrm{Ker}(p_{s}^{r_s}(\mathbf{A}))$$因此任意有限维线性空间$V$可以分解为$\mathbf{A}$的非平凡不变子空间的直和。
+- 若特征多项式$f(λ)$可分解成若干的一次项的积（代数基本定理保证了这在复数域一定做得到），则有下式$$V =\mathrm{Ker}((\mathbf{A}-\lambda I)^{r_1}) \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_2}) \oplus \cdots \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_s})(\mathbf{A}))$$其中各核是特殊的被称作$\mathbf{A}$的*根子空间*。
 # 矩阵对角化
 >设$A$是数域$F$下的一个$n$级**方阵**，即$A\in M_{n}(F)$，若$A$相似于一个对角矩阵，则称$A$可对角化。
 
