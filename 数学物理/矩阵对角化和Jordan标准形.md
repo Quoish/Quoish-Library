@@ -34,9 +34,12 @@
 - 即使数域扩大，$\mathbf{A}$的最小多项式也不会改变。
 
 部分特殊变换的最小多项式：
-- 
+- 幂零变换：$A$是幂零指数为$l$的幂零变换，最小多项式为$λ^l$。
+- 幂等变换：$A^2=A$，最小多项式为$λ^2-λ$。
+- 对合变化：$A^2=I$，最小多项式为$λ^2-1$。
+- 周期矩阵：$A^m=A$，最小多项式为$λ^m-1$。
+- 主对角线为$a$的$n$级约当块：$\mathbf{A}$在一个基下的矩阵是$J_n(a)\Leftrightarrow$最小多项式是$(\lambda-a)^n$。
 ## 线性空间分解为不变子空间
-
 - *Hamilton-Cayley定理*：设$A\in M_n(F)$，则$A$的特征多项式$f(\lambda)$是$A$的一个零化多项式。
 - 根据唯一因式分解定理，特征多项式可以因式分解为$$0=f(\lambda)=p_{1}^{r_1}(\lambda)p_{2}^{r_2}(\lambda)\cdots p_{s}^{r_s}(\lambda)$$两边取$\mathrm{Ker}$得到$$\mathrm{Ker}\ \mathbf{0} = V =\mathrm{Ker}(p_{1}^{r_1}(\mathbf{A})) \oplus \mathrm{Ker}(p_{2}^{r_2}(\mathbf{A})) \oplus \cdots \oplus \mathrm{Ker}(p_{s}^{r_s}(\mathbf{A}))$$因此任意有限维线性空间$V$可以分解为$\mathbf{A}$的非平凡不变子空间的直和。
 - 若特征多项式$f(λ)$可分解成若干的一次因式的积（代数基本定理保证了这在复数域一定做得到），则有下式$$V =\mathrm{Ker}((\mathbf{A}-\lambda I)^{r_1}) \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_2}) \oplus \cdots \oplus \mathrm{Ker}((\mathbf{A}-\lambda I)^{r_s})(\mathbf{A}))$$其中各核是特殊的不变子空间，被称作$\mathbf{A}$的*根子空间*。
