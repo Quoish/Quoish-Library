@@ -23,7 +23,8 @@
 - 设$F[x]$是数域$F$上的一元多项式环，$f \in F[x]$，则$\mathrm{Ker}f(\mathbf{A}),\mathrm{Im}f(\mathbf{A})$，$f(\mathbf{A})$的特征子空间都是$\mathbf{A}$的不变子空间。
 - $\mathbf{A}$各不变子空间的交和并仍是不变子空间。
 
->$f(x)\in F[x],f(x)=b_nx^n+\cdots+b_1x+b_0$,若f(\mathbf{A})=\mathbf{0},则f(x)称作\mathbf{A}的零化多项式
+>设$f(x)\in F[x],f(x)=b_nx^n+\cdots+b_1x+b_0$，若$f(\mathbf{A})=\mathbf{0}$，则$f(x)$称作$\mathbf{A}$的*零化多项式*。
+>其中$\mathbf{A}$的所有零化多项式中次数最低的首一
 # 矩阵对角化
 >设$A$是数域$F$下的一个$n$级**方阵**，即$A\in M_{n}(F)$，若$A$相似于一个对角矩阵，则称$A$可对角化。
 
