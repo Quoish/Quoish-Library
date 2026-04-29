@@ -39,6 +39,15 @@
 - 对合变化：$A^2=I$，最小多项式为$λ^2-1$。
 - 周期矩阵：$A^m=A$，最小多项式为$λ^m-1$。
 - 主对角线为$a$的$n$级约当块：$\mathbf{A}$在一个基下的矩阵是$J_n(a)\Leftrightarrow$最小多项式是$(\lambda-a)^n$。
+- 分块对角矩阵的最小多项式：域$F$上$n$级矩阵$$A=
+\left(
+\begin{matrix}
+    A_{1}&        &           &\\
+            &A_{2}&           &\\
+            &        &\ddots&\\
+            &        &           &A_{s}\\
+\end{matrix}
+\right)$$且$A_j$的最小多项式为$m_j(\lambda),j=1,2,\cdots,s$，则$A$的最小多项式$$m(\lambda)=[m_1(\lambda),m_2(\lambda),\cdots,m_s(\lambda)]$$
 ## 线性空间分解为不变子空间
 - *Hamilton-Cayley定理*：设$A\in M_n(F)$，则$A$的特征多项式$f(\lambda)$是$A$的一个零化多项式。
 - 根据唯一因式分解定理，特征多项式可以因式分解为$$0=f(\lambda)=p_{1}^{r_1}(\lambda)p_{2}^{r_2}(\lambda)\cdots p_{s}^{r_s}(\lambda)$$两边取$\mathrm{Ker}$得到$$\mathrm{Ker}\ \mathbf{0} = V =\mathrm{Ker}(p_{1}^{r_1}(\mathbf{A})) \oplus \mathrm{Ker}(p_{2}^{r_2}(\mathbf{A})) \oplus \cdots \oplus \mathrm{Ker}(p_{s}^{r_s}(\mathbf{A}))$$因此任意有限维线性空间$V$可以分解为$\mathbf{A}$的非平凡不变子空间的直和。
