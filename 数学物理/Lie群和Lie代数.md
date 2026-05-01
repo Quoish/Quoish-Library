@@ -8,13 +8,12 @@
 - $(M,g_{ab})$上的等度规映射关于映射乘法构成一个群，称为*等度规群*，并且是Lie群。
 
 Minkowski空间的等度规群是10维Lie群。有多少个Killing矢量场就对应着多少维的Lie群。
-## Lie群同态和同构
+
 >设$G$和$G'$是两个Lie群，如果$G$到$G'$存在一个映射$\sigma$，使得$$\forall a,b\in G,\quad \sigma(ab)=\sigma(a)\sigma(b)$$并且$\sigma \in C^{\infty}$，则称$\sigma$是*Lie群同态*。
 
 >设$G$和$G'$是两个Lie群，如果$G$到$G'$存在一个双射$\sigma$，使得$$\forall a,b\in G,\quad \sigma(ab)=\sigma(a)\sigma(b)$$并且$\sigma$是微分同胚（$\sigma ,\sigma^{-1} \in C^{\infty}$），则称$\sigma$是*Lie群同构*。
 
+>若$H$既是$G$的子流形，又是$G$的子群，则称$H$是*Lie子群*（Lie Subgroup）。
 
-设$G,G'$是两个Lie群，若存在映射$\mu:G\to G'$，满足：
-1. 保群乘法：$\mu(a\cdot b)=\mu(a)\cdot \mu(b),\forall a,b \in G$。
-2. 光滑：$\mu \in C^{\infty}$。
-则称$\mu$是Lie群*同态*。
+>$\forall g \in G$，映射$L_{g}:h\mapsto gh$，$\forall h \in G$，称为由$g$生成的左平移（Left Translation）。
+
