@@ -18,7 +18,8 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 ## Fourier级数的审敛法
 关于Fourier级数的收敛性有以下定理：
 - 设$f(x)$在$[-\pi,\pi]$上可积或绝对可积，只要满以下两个条件其中一个，则$f(x)$的Fourier级数在$x$点收敛于$\dfrac{f(x_+)+f(x_-)}{2}$。
-- Dirichlet-Jordan判别法：$f(x)$在$x$的某个邻域$U(x,\delta)$上，是分段单调的有界函数，则其Fourier
+- *Dirichlet-Jordan判别法*：$f(x)$在$x$的某个邻域$U(x,\delta)$上，是分段单调的有界函数，则其Fourier级数收敛。
+- *Dini-Lipschitz判别法*：$f(x)$在点$x$的处满足，指数为$\alpha(0<\alpha\leq1)$的Hölder条件，则其Fourier级数收敛，所谓Hölder条件是指
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
