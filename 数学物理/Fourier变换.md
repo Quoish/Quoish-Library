@@ -4,7 +4,7 @@
 $$f(t)=\frac{a_{0}}{2}+\sum_{k=1}^{+\infty}[a_{k}\cos(k\Omega t)+b_{k}\sin(k\Omega t)]$$
 $$a_{k}=\frac{2}{T}\int_{-T/2}^{+T/2}f(t)\cos(k\Omega t)\mathrm{d}t$$
 $$b_{k}=\frac{2}{T}\int_{+T/2}^{-T/2}f(t)\sin(k\Omega t)\mathrm{d}t$$
->*Gibbs现象*：Fourier级数在n趋于无穷时在间断点依然会产生9%的偏差，但是在均方根意义上可以收敛到原函数。
+>*Gibbs现象*：Fourier级数在n趋于无穷时在间断点依然会产生9%的偏差，但是在均方根意义上可以收敛到原函数。 
 ## Fourier级数的特殊形式
 - 奇函数：只有正弦分量，没有余弦分量。所谓奇函数指的是$$f(t)=-f(t)$$
 - 偶函数：只有余弦分量，没有正弦分量。所谓偶函数指的是$$f(t)=f(-t)$$
