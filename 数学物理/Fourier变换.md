@@ -30,7 +30,31 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 	- Fourier级数可逐项积分（积分与求和可换序）。
 	- Fourier级数可逐项求导（导数与求和可换序）。
 # Fourier变换
-$$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
+Fourier正变换$$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$Fourier逆变换
+$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
+## 常用Fourier变换公式
+- 指数：
+	- $$e^{-\alpha t}\varepsilon(t)\longrightarrow \frac{1}{\alpha+j\omega}$$
+	- $$e^{-\alpha |t|}\varepsilon(t)\longrightarrow \frac{2\alpha}{\alpha^2+\omega^2}$$
+- 门函数：
+	- $$\text{gate}_{\tau}(t)\longrightarrow \tau\text{Sa}(\frac{\omega\tau}{2})$$
+- 幂函数：
+	- $$\delta(t)\longrightarrow 1$$
+	- $$\delta'(t)\longrightarrow j\omega$$
+	- $$\delta^{(n)}(t)\longrightarrow (j\omega)^n$$
+	- $$1\longrightarrow 2\pi\delta(\omega)$$
+	- $$t\longrightarrow 2\pi j\delta'(\omega)$$
+	- $$t^n\longrightarrow 2\pi j^n\delta^{(n)}(\omega)$$
+- 符号函数：
+	- $$\text{sgn}(t)\longrightarrow \frac{2}{j\omega}$$
+	- $$\varepsilon(t) \longrightarrow \pi\delta(\omega)+\frac{1}{j\omega}$$
+	- $$|t|\longrightarrow -\frac{4\pi}{\omega^2}$$
+- 周期函数：
+	- $$e^{j\omega_0t}\longrightarrow 2\pi\delta(\omega-\omega_0)$$
+	- $$\cos(\omega_0t)\longrightarrow \pi\left(\delta(\omega-\omega_0) + \delta(\omega+\omega_0)\right)$$
+	- $$\sin(\omega_0t)\longrightarrow \frac{\pi}{j}\left(\delta(\omega-\omega_0) - \delta(\omega+\omega_0)\right)$$
+- Dirac梳状函数：
+	- $$\sum_{n=-\infty}^{+\infty}\delta(t-nT)\longrightarrow \Omega\cdot\sum_{k=-\infty}^{+\infty}\delta(\omega-k\Omega),$$其中$\Omega=\dfrac{2\pi}{T}$。
 ## 微分特性
 # 离散时间Fourier变换
 $$f(n)=\int_{-\infty}^{+\infty}\tilde{F}(j\omega)e^{ j\omega n } \frac{\mathrm{d}\omega}{2\pi}$$
