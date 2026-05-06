@@ -15,6 +15,10 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 它与三角形式的关系为$$F_n=\frac{1}{2}A_n e^{j\varphi_n}=\frac{1}{2}(a_n-jb_n)$$其中$A_{n}$称为*幅频特性*，$\varphi_{n}$称为*相频特性*。
 - 幅频特性的偶函数性$$|F_n|=|F_{-n}|$$
 - 相频特性的奇函数性$$\varphi_n=-\varphi_{-n}$$
+## Fourier级数的审敛法
+关于Fourier级数的收敛性有以下定理：
+- 设f(x)在[-\pi,\pi]上可积或绝对可积,只要满以下两个条件其中一个，则f(x)的\text{Fourier}级数在x点收敛于\frac{f(x_+)+f(x_-)}{2}
+
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
