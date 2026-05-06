@@ -1,11 +1,18 @@
 #信号处理 #数理方法 
 # Fourier级数
-## Fourier级数的三角表示
+## Fourier级数的三角形式
 $$f(t)=\frac{a_{0}}{2}+\sum_{k=1}^{+\infty}[a_{k}\cos(k\Omega t)+b_{k}\sin(k\Omega t)]$$
 $$a_{k}=\frac{2}{T}\int_{-T/2}^{+T/2}f(t)\cos(k\Omega t)\mathrm{d}t$$
 $$b_{k}=\frac{2}{T}\int_{+T/2}^{-T/2}f(t)\sin(k\Omega t)\mathrm{d}t$$
-## Fourier级数的复指数表示
+>*Gibbs现象*：Fourier级数在n趋于无穷时在间断点依然会产生9%的偏差，但是在均方根意义上可以收敛到原函数。
+## Fourier级数的特殊形式
+- 奇函数：只有正弦分量，没有余弦分量。所谓奇函数指的是$$f(t)=-f(t)$$
+- 偶函数：只有余弦分量，没有正弦分量。所谓偶函数指的是$$f(t)=f(-t)$$
+- 奇谐函数：只有奇次谐波，没有偶次谐波。所谓奇谐函数指的是$$f(t)=-f(t+\frac{T}{2})$$
+- 偶谐函数：只有偶次谐波，没有奇次谐波。所谓偶谐函数指的是$$f(t)=f(t+\frac{T}{2})$$
+## Fourier级数的复指数形式
 $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk\Omega)T=\int_{t_{0}}^{t_{0}+T}f(t)e^{ -jk\Omega t }\mathrm{d}t$$更一般的表达式为$$f(t)=\sum_{k=-\infty}^{+\infty}F(jk\omega)e^{ jk\Omega t }$$$$F(jk\Omega)=\frac{1}{T}\int_{t_{0}}^{t_{0}+T}f(t)e^{ -jk\Omega t }\mathrm{d}t$$
+它与三角形式的关系为$$$$
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
