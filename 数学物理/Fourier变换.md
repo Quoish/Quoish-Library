@@ -23,8 +23,12 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 	- *Hölder条件*：设点$x$是$f(x)$的第一类间断点，并设$p,q$，对于一个充分小的$\delta$，有$x-\delta<p<x<q<x+\delta$，若存在常数$L$和$\alpha\in(0,1]$，使得成立$$|f(p)-f(q)|<L|p-q|^\alpha$$则称$f(x)$满足指数为$\alpha$的Hölder条件，当$\alpha=1$时,也称为*Lipschitz条件*。
 	- 单侧导数存在强于Lipschitz条件。
 ## Fourier级数的性质
-- Fourier级数是$n$阶三角正交基下对$f(x)$的最佳平方逼近$$S_n(x)=\frac{a_0}{2}+\sum_{k=1}^{\infty}(a_k \cos kx+b_k\sin kx)$$逼近余项为$$||f(x)-S_n(x)||^2=\frac{1}{\pi}\int^\pi_{-\pi}f^2(x)\text{d}x-\left [ \frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2) \right ]$$其中范数定义为$$(f,g)=\frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)\text{d}x,||f||=\sqrt{(f,f)}$$
-- 
+- Fourier级数是$n$阶三角正交基下对$f(x)$的**最佳平方逼近**$$S_n(x)=\frac{a_0}{2}+\sum_{k=1}^{\infty}(a_k \cos kx+b_k\sin kx)$$逼近余项为$$||f(x)-S_n(x)||^2=\frac{1}{\pi}\int^\pi_{-\pi}f^2(x)\text{d}x-\left [ \frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2) \right ]$$其中范数定义为$$(f,g)=\frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)\text{d}x,||f||=\sqrt{(f,f)}$$
+- *Bassel不等式*：设$V$是一个内积空间，$\{e_n\}_{n=1}^{\infty}$是$V$中的一个正交归一基，则对任意向量$x \in V$，其Fourier系数$c_n = \langle x, e_n \rangle$ 满足：$$\sum_{n=1}^{\infty} |c_n|^2 \leq \|x\|^2$$
+- *Parseval等式*：设$V$是一个**完备的**内积空间，$\{e_n\}_{n=1}^{\infty}$是$V$中的一个正交归一基，则对任意向量$x \in V$，其Fourier系数$c_n = \langle x, e_n \rangle$ 满足：$$\sum_{n=1}^{\infty} |c_n|^2 = \|x\|^2$$三角基的情况下，它表现为$$\frac{1}{\pi}\int^\pi_{-\pi}f^2(x)\text{d}x=\left [ \frac{a_0^2}{2}+\sum_{k=1}^{\infty}(a_k^2+b_k^2) \right ]$$
+- *Weierstrass第二逼近定理*：对于周期为$2\pi$的任意一个连续函数$f(x)$都存在三角函数序列$$S_n(x)=\frac{a_0}{2}+\sum_{k=1}^{\infty}(a_k \cos kx+b_k\sin kx)$$使得$S_n(x)$**一致收敛**于$f(x)$。一致收敛意味着：
+	- Fourier级数可逐项积分（积分与求和可换序）。
+	- Fourier级数可逐项求导（导数与求和可换序）。
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
