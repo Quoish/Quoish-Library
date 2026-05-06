@@ -55,6 +55,7 @@ $$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 	- $$\sin(\omega_0t)\longrightarrow \frac{\pi}{j}\left(\delta(\omega-\omega_0) - \delta(\omega+\omega_0)\right)$$
 - Dirac梳状函数：
 	- $$\sum_{n=-\infty}^{+\infty}\delta(t-nT)\longrightarrow \Omega\cdot\sum_{k=-\infty}^{+\infty}\delta(\omega-k\Omega),$$其中$\Omega=\dfrac{2\pi}{T}$。
+	- 重要恒等式：分布意义下$$\sum_{k=-\infty}^{+\infty} e^{j k \omega_0 t} = \frac{2\pi}{\omega_0} \sum_{n=-\infty}^{+\infty} \delta\left(t - \frac{2\pi n}{\omega_0}\right)$$
 ## 微分特性
 # 离散时间Fourier变换
 $$f(n)=\int_{-\infty}^{+\infty}\tilde{F}(j\omega)e^{ j\omega n } \frac{\mathrm{d}\omega}{2\pi}$$
