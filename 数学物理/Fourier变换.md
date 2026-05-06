@@ -22,6 +22,9 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 - *Dini-Lipschitz判别法*：$f(x)$在点$x$的处满足，指数为$\alpha(0<\alpha\leq1)$的Hölder条件，则其Fourier级数收敛。
 	- *Hölder条件*：设点$x$是$f(x)$的第一类间断点，并设$p,q$，对于一个充分小的$\delta$，有$x-\delta<p<x<q<x+\delta$，若存在常数$L$和$\alpha\in(0,1]$，使得成立$$|f(p)-f(q)|<L|p-q|^\alpha$$则称$f(x)$满足指数为$\alpha$的Hölder条件，当$\alpha=1$时,也称为*Lipschitz条件*。
 	- 单侧导数存在强于Lipschitz条件。
+## Fourier级数的性质
+- Fourier级数是$n$阶三角正交基下对$f(x)$的最佳平方逼近$$S_n(x)=\frac{a_0}{2}+\sum_{k=1}^{\infty}(a_k \cos kx+b_k\sin kx)$$逼近余项为$$||f(x)-S_n(x)||^2=\frac{1}{\pi}\int^\pi_{-\pi}f^2(x)\text{d}x-\left [ \frac{a_0^2}{2}+\sum_{k=1}^n(a_k^2+b_k^2) \right ]$$其中范数定义为$$(f,g)=\frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)\text{d}x,||f||=\sqrt{(f,f)}$$
+- 
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
