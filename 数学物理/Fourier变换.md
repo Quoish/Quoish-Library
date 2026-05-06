@@ -17,8 +17,8 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 - 相频特性的奇函数性$$\varphi_n=-\varphi_{-n}$$
 ## Fourier级数的审敛法
 关于Fourier级数的收敛性有以下定理：
-- 设f(x)在[-\pi,\pi]上可积或绝对可积,只要满以下两个条件其中一个，则f(x)的\text{Fourier}级数在x点收敛于\frac{f(x_+)+f(x_-)}{2}
-
+- 设$f(x)$在$[-\pi,\pi]$上可积或绝对可积，只要满以下两个条件其中一个，则$f(x)$的Fourier级数在$x$点收敛于$\dfrac{f(x_+)+f(x_-)}{2}$。
+- Dirichlet-Jordan判别法：$f(x)$在$x$的某个邻域$U(x,\delta)$上，是分段单调的有界函数，则其Fourier
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
