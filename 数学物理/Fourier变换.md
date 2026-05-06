@@ -12,7 +12,9 @@ $$b_{k}=\frac{2}{T}\int_{+T/2}^{-T/2}f(t)\sin(k\Omega t)\mathrm{d}t$$
 - 偶谐函数：只有偶次谐波，没有奇次谐波。所谓偶谐函数指的是$$f(t)=f(t+\frac{T}{2})$$
 ## Fourier级数的复指数形式
 $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk\Omega)T=\int_{t_{0}}^{t_{0}+T}f(t)e^{ -jk\Omega t }\mathrm{d}t$$更一般的表达式为$$f(t)=\sum_{k=-\infty}^{+\infty}F(jk\omega)e^{ jk\Omega t }$$$$F(jk\Omega)=\frac{1}{T}\int_{t_{0}}^{t_{0}+T}f(t)e^{ -jk\Omega t }\mathrm{d}t$$
-它与三角形式的关系为$$$$
+它与三角形式的关系为$$F_n=\frac{1}{2}A_n e^{j\varphi_n}=\frac{1}{2}(a_n-jb_n)$$其中$A_{n}$称为*幅频特性*，$\varphi_{n}$称为*相频特性*。
+- 幅频特性的偶函数性$$|F_n|=|F_{-n}|$$
+- 相频特性的奇函数性$$\varphi_n=-\varphi_{-n}$$
 # Fourier变换
 $$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$$$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## 微分特性
