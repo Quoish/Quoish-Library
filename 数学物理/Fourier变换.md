@@ -56,6 +56,8 @@ $$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 - Dirac梳状函数：
 	- $$\sum_{n=-\infty}^{+\infty}\delta(t-nT)\longrightarrow \Omega\cdot\sum_{k=-\infty}^{+\infty}\delta(\omega-k\Omega),$$其中$\Omega=\dfrac{2\pi}{T}$。
 	- 重要恒等式：分布意义下$$\sum_{k=-\infty}^{+\infty} e^{j k \Omega t} = T\cdot \sum_{n=-\infty}^{+\infty} \delta\left(t - nT\right)$$$$\sum_{n=-\infty}^{+\infty}e^{ jk\omega T }=\Omega\cdot$$
+## Fourier变换计算方法
+
 ## 微分特性
 # 离散时间Fourier变换
 $$f(n)=\int_{-\infty}^{+\infty}\tilde{F}(j\omega)e^{ j\omega n } \frac{\mathrm{d}\omega}{2\pi}$$
