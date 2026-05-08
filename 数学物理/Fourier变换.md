@@ -36,7 +36,7 @@ $$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 计算Fourier变换时，很少靠直接计算积分求得，常常是通过以下几种方法计算：
 1. 通过固定的几个公式，然后通过Fourier变换的各种性质来推导出来。
 2. 对单边信号利用符号函数分解为奇分量和偶分量的部分，例如$$\cos (\omega_{0}t)\varepsilon(t)=\frac{1}{2}\cos(\omega_{0}t)+\frac{1}{2}\mathrm{sgn}(t)$$
-3. 利用Laplace变换求极限$$\lim_{ \sigma \to 0 } $$
+3. 利用Laplace变换求极限$$\lim_{ \sigma \to 0 } F(s)=F(j\omega)$$注意极点在虚轴的情况下$$\lim_{ \sigma \to 0 }  \frac{1}{\sigma+j(\omega-\omega_{k})}=\frac{1}{j(\omega-\omega_{k})}+\pi \delta(\omega-\omega_{k})$$
 >注意：
 ### 常用Fourier变换公式
 - 指数：
