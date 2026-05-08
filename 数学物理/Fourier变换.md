@@ -37,7 +37,7 @@ $$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 1. 通过固定的几个公式，然后通过Fourier变换的各种性质来推导出来。
 2. 对单边信号利用符号函数分解为奇分量和偶分量的部分，例如$$\cos (\omega_{0}t)\varepsilon(t)=\frac{1}{2}\cos(\omega_{0}t)+\frac{1}{2}\mathrm{sgn}(t)$$
 3. 利用Laplace变换求极限$$\lim_{ \sigma \to 0 } F(s)=F(j\omega)$$注意极点在虚轴的情况下，有Sokhotski–Plemelj公式$$\lim_{ \sigma \to 0 }  \frac{1}{\sigma+j(\omega-\omega_{k})}=\frac{1}{j(\omega-\omega_{k})}+\pi \delta(\omega-\omega_{k})$$
->注意：不同敛散性的Fourier公式不能直接代入转化。例如$e^{ -\alpha t }\varepsilon(t)\to \dfrac{1}{\alpha+j\omega}$，不能仅仅靠$\alpha=0$就得到$\varepsilon(t)\to \dfrac{1}{j\omega}$，因为$e^{ -\alpha t }\varepsilon(t)$是可积的，而$\varepsilon(t)$是不可积的，后者的Fourier变换中必然包含Dirac函数项。
+>注意：不同敛散性的Fourier公式不能直接代入转化。例如$e^{ -\alpha t }\varepsilon(t)\to \dfrac{1}{\alpha+j\omega}$，不能仅仅靠$\alpha=0$就得到$\varepsilon(t)\to \dfrac{1}{j\omega}$，因为$e^{ -\alpha t }\varepsilon(t)$是可积的，而$\varepsilon(t)$是不可积的，后者的Fourier变换中必然包含Dirac函数项。直接代入会忽略掉$\delta$项的部分。
 ### 常用Fourier变换公式
 - 指数：
 	- $$e^{-\alpha t}\varepsilon(t)\longrightarrow \frac{1}{\alpha+j\omega}$$
