@@ -33,7 +33,9 @@ $$f(t)=\frac{1}{T}\sum_{k=-\infty}^{+\infty}F(jk\omega)Te^{ jk\Omega t }$$$$F(jk
 Fourier正变换$$f(t)=\int_{-\infty}^{+\infty}F(j\omega)e^{ j\omega t } \frac{\mathrm{d}\omega}{2\pi}$$Fourier逆变换
 $$F(j\omega)=\int_{-\infty}^{+\infty}f(t)e^{ -j\omega t }\mathrm{d}t$$
 ## Fourier变换的计算方法
-## 常用Fourier变换公式
+计算Fourier变换时，很少靠直接计算积分求得，常常是先通过固定的几个公式，然后在通过Fourier变换的各种性质来推导出来的。
+
+### 常用Fourier变换公式
 - 指数：
 	- $$e^{-\alpha t}\varepsilon(t)\longrightarrow \frac{1}{\alpha+j\omega}$$
 	- $$e^{-\alpha |t|}\varepsilon(t)\longrightarrow \frac{2\alpha}{\alpha^2+\omega^2}$$
