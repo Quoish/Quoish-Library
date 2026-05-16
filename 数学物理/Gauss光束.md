@@ -80,4 +80,10 @@ $w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
 &L=z_{2}-z_{1}
 \end{aligned}
 \right.
+\end{equation}$$解得$$\begin{equation}
+\left\{
+\begin{aligned}
+&z_{1}=L\cdot 
+\end{aligned}
+\right.
 \end{equation}$$
