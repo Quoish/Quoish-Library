@@ -23,7 +23,9 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 &\times\exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]&传播特性
 \end{aligned}
 \right.
-\end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\sqrt{ \frac{2}{\pi} } \frac{w_{0}}{w(z)}\exp\left( - ik \frac{x^2+y^2}{q(z)} \right)\exp\left[ -ikz+i\psi(z) \right]$$
+\end{equation}$$
+## 基模Gauss光束
+我们着重考察基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\sqrt{ \frac{2}{\pi} } \frac{w_{0}}{w(z)}\exp\left( - ik \frac{x^2+y^2}{q(z)} \right)\exp\left[ -ikz+i\psi(z) \right]$$
 其中：
 1. Gauss光束共焦参数$f_{e}$：
 	- 对称共焦反射镜焦距（也叫Rayleigh半径$z_{R}$）$$f_{e}=\frac{R}{2}=\frac{L}{2}=\frac{\pi w_{0}^2}{\lambda}$$
@@ -34,5 +36,5 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 	- 光束复曲率$q(z)$：$$\frac{1}{q(z)}=\frac{1}{R(z)}-i \frac{\lambda}{\pi w^2(z)}$$
 3. Gouy相移$\psi(z)$：$$\psi(z)=\arctan\left( \frac{z}{f_{e}} \right)$$
 ## 振幅分布与光斑尺寸
-对场函数取模就能得到振幅分布$$|u_{00}(x,y,z)|=u_{0} \frac{w_{0}}{w(z)}\exp\left[ - \frac{r^2}{2w^2(z)} \right]$$可见
+对场函数取模就能得到振幅分布$$|u_{00}(x,y,z)|=u_{0} \frac{w_{0}}{w(z)}\exp\left[ - \frac{r^2}{2w^2(z)} \right]$$可见基模Gauss光束
 ![[对称共焦腔内基模高斯光束.png]]
