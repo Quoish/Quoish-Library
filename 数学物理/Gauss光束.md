@@ -25,3 +25,4 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 \end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\sqrt{ \frac{2}{\pi} } \frac{w_{0}}{w(z)}\exp\left( - \frac{x^2+y^2}{w^2(z)} \right)\exp\left[ -ikz- ik \frac{x^2+y^2}{q(z)}+i\psi(z) \right]$$
 其中：
 - 光束复曲率：$$\frac{1}{q(z)}=\frac{1}{R(z)}-i \frac{\lambda}{\pi w^2(z)}$$
+- 共焦参数/Rayleigh半径$z_{R}$或$f_{e}$
