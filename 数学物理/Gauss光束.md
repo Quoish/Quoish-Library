@@ -22,6 +22,6 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 &\times\exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]&传播特性
 \end{aligned}
 \right.
-\end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\frac{2}{\sqrt{ \lambda L }} \frac{w_{0}}{w(z)}$$
+\end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\sqrt{ \frac{2}{\pi} } \frac{w_{0}}{w(z)}\exp\left( - \frac{x^2+y^2}{w^2(z)} \right)\exp[-ikz]$$
 其中：
 - 束腰半径：$$$$
