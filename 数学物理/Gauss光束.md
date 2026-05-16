@@ -22,6 +22,6 @@ u_{pl}(r,\phi,z) &= \frac{1}{p!} \sqrt{\frac{2}{\pi\lambda L}} \; \frac{w_0}{w(z
 &\times\exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]
 \end{aligned}
 \right.
-\end{equation}$$对于基模$\text{TEM}_{00}$$$$$
+\end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\frac{2}{\sqrt{ \lambda L }} \frac{w_{0}}{w(z)}$$
 其中：
 - 束腰半径：$$$$
