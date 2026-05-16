@@ -1,5 +1,6 @@
 #激光原理 #光学 
 # Gauss光束行波场
+## Gauss行波场表达式
 在[[开式光腔#对称共焦腔的自再现模]]中我们已经知道了腔内的自再现模，使用Kirchhofer衍射公式就可以得到对称共焦腔内外任意一点的光场分布。
 如果让自再现模从$z=-L/2$始向$z$正方向传播，那$u_{mn}(x,y,z=-L/2)=u_{mn}(x,y)$，根据衍射公式（纵方向走过$z+L$替换掉公式里的$L$）有$$u_{mn}(x,y,z)=\frac{ie^{ -ik(z+L/2) }}{\lambda(z+L/2)}\iint u_{mn}\left( x',y',-\frac{L}{2} \right)e^{ -ik[(x-x')^2+(y-y')^2]/2(z+L/2) }\mathrm{d}x'\mathrm{d}y'$$在Fresnel数很大时，因为$u_{mn}(x,y)$是本征矢，代入积分式中就是该本征矢乘上特征值。
 Boyd和Gordon证明，可以经过一系列复杂的变量代换把最终的结果表示为
@@ -22,11 +23,15 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 &\times\exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]&传播特性
 \end{aligned}
 \right.
-\end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\sqrt{ \frac{2}{\pi} } \frac{w_{0}}{w(z)}\exp\left( - \frac{x^2+y^2}{w^2(z)} \right)\exp\left[ -ikz- ik \frac{x^2+y^2}{q(z)}+i\psi(z) \right]$$
+\end{equation}$$对于基模$\text{TEM}_{00}$$$u_{00}(x,y,z)=\sqrt{ \frac{2}{\pi} } \frac{w_{0}}{w(z)}\exp\left( - ik \frac{x^2+y^2}{q(z)} \right)\exp\left[ -ikz+i\psi(z) \right]$$
 其中：
 1. Gauss光束共焦参数$f_{e}$：
-	- 对称共焦反射镜焦距$$f_{e}=\frac{R}{2}=\frac{L}{2}=\frac{\pi w_{0}^2}{\lambda}$$
+	- 对称共焦反射镜焦距（也叫Rayleigh半径$z_{R}$）$$f_{e}=\frac{R}{2}=\frac{L}{2}=\frac{\pi w_{0}^2}{\lambda}$$
 	- 基模Gauss光束束腰半径$$w_{0}=\sqrt{ \frac{\lambda f_{e}}{\pi} }=\sqrt{ \frac{\lambda L}{2\pi} }=\sqrt{ \frac{\lambda R}{2\pi} }$$
-2. 光斑尺寸$w(z)$：$$w(z)=w_{0} \sqrt{1+ \left( \frac{z}{f_{e}}  \right)^2}$$
-3. 等相位面曲率半径$R(z)$：$$R(z)=z\left( 1+\frac{f_{e}^2}{z^2} \right)$$
+2. 光束复曲率$q(z)$：
+	- 光斑尺寸$w(z)$：$$w(z)=w_{0} \sqrt{1+ \left( \frac{z}{f_{e}}  \right)^2}$$
+	- 等相位面曲率半径$R(z)$：$$R(z)=z\left( 1+\frac{f_{e}^2}{z^2} \right)$$
+	- 光束复曲率$q(z)$：$$\frac{1}{q(z)}=\frac{1}{R(z)}-i \frac{\lambda}{\pi w^2(z)}$$
+3. Gouy相移$\psi(z)$：$$\psi(z)=\arctan\left( \frac{z}{f_{e}} \right)$$
+## 振幅分布与光斑尺寸
 
