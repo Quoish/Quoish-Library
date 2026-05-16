@@ -109,4 +109,8 @@ $w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
 - 方镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
 - 圆镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+2n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
 ### 平均单程损耗
-在[[开式光腔#对称共焦腔自再现模的特性#单程损耗]]中我们已经知道，对称共焦腔中，单程损耗与Fresnel数$N_{F}$息息相关，Fresnel可以表示为$N_{F}=\frac{a^2}{\lambda L}=\frac{a^2}{2\lambda f}$。
+在[[开式光腔#对称共焦腔自再现模的特性#单程损耗]]中我们已经知道，对称共焦腔中，单程损耗与Fresnel数$N_{F}$息息相关，Fresnel可以表示为$N_{F}=\dfrac{a^2}{\lambda L}=\dfrac{a^2}{\pi w_{0s}^2}$。
+可以定义两个反射镜的*有效Fresnel数*为$$N_{F1\mathrm{eff}}=\frac{a^2}{\pi w_{s1}^2}=N_{F 0}\sqrt{ \frac{g_{1}}{g_{2}}(1-g_{1}g_{2}) }$$$$N_{F1\mathrm{eff}}=\frac{a^2}{\pi w_{s2}^2}=N_{F 0}\sqrt{ \frac{g_{2}}{g_{1}}(1-g_{1}g_{2}) }$$
+这两个Fresnel数可以使用原来对称共焦腔的$N_{F}-\delta$对应表，查到对应的$\delta_{mn}^1$和$\delta_{mn}^2$，它们分别代表了在镜$M_{1}$和镜$M_{2}$的衍射损耗。
+而一般稳定腔的单程平均损耗为$$\delta= \frac{1}{2}(\delta_{mn}^1+\delta_{mn}^2)$$
+# Gauss光束的传输与变换
