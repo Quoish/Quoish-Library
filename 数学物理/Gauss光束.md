@@ -8,8 +8,8 @@ Boyd和Gordon证明，可以经过一系列复杂的变量代换把最终的结�
 \left.
 \begin{aligned}
 u_{mn}(x,y,z)=
-&\frac{1}{2^{m+n}m!n!} \frac{2}{\sqrt{ \lambda L }} \frac{w_{0}}{w(z)}
-\\
+&\sqrt{\frac{2}{\pi w_0^2} \frac{1}{2^{m+n}m!n!}} \frac{2}{\sqrt{ \lambda L }} \frac{w_{0}}{w(z)}
+\\&
 &\times H_{m}\left( \frac{\sqrt{ 2 }}{w(z)}x \right)H_{n}\left( \frac{\sqrt{ 2 }}{w(z)}y \right)\exp\left( -\frac{x^2+y^2}{w^2(z)} \right)\\
 &\times \exp\!\left[ -ikz - ik\frac{ x^2+y^2}{2R(z)} + i(m+n+1)\psi(z) \right]
 \end{aligned}
@@ -17,7 +17,7 @@ u_{mn}(x,y,z)=
 \end{equation}$$对于圆形镜$$\begin{equation}
 \left.
 \begin{aligned}
-u_{pl}(r,\phi,z) &= \frac{1}{p!} \sqrt{\frac{2}{\pi\lambda L}} \; \frac{w_0}{w(z)}\\
+u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}\\
 &\times\left( \frac{\sqrt{2}\,r}{w(z)} \right)^{\!l} L_p^{\,l}\!\left( \frac{2r^2}{w^2(z)} \right) e^{ il\phi }\exp\!\left( -\frac{r^2}{w^2(z)} \right)\\
 &\times\exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]
 \end{aligned}
