@@ -34,4 +34,5 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 	- 光束复曲率$q(z)$：$$\frac{1}{q(z)}=\frac{1}{R(z)}-i \frac{\lambda}{\pi w^2(z)}$$
 3. Gouy相移$\psi(z)$：$$\psi(z)=\arctan\left( \frac{z}{f_{e}} \right)$$
 ## 振幅分布与光斑尺寸
-
+对场函数取模就能得到振幅分布$$|u_{00}(x)|$$
+![[对称共焦腔内基模高斯光束.png]]
