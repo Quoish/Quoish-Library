@@ -101,4 +101,5 @@ $w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
 	- 圆镜：$$V_{mn}=(2p+l+1)V_{00}$$
 3. 等相位面：不能由$R$或$L$确定了，只能由$f_{e}$确定$$R(z)=z+\frac{f^2_{e}}{z}$$
 4. 谐振频率：由Gouy相移影响
-	- 方镜$$\nu_{mnq}=\frac{c}{2L}\left( q+\frac{1}{\pi}() \right)$$
+	- 方镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
+	- 圆镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+2n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
