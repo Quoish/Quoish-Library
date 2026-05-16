@@ -45,5 +45,5 @@ $w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
 - Hermite-Gauss光束$$w_{m}=\sqrt{ 2m+1 }w_{0},\quad w_{n}=\sqrt{ 2n+1 }w_{0}$$
 - Laguerre-Gauss光束$$w_{pl}=\sqrt{ m+2n+1 }w_{0}$$
 ### 等相位面分布
-
+基模Gauss光束的等相位面是变心球面波，$z$处的曲率半径为$$R(z)=z+\frac{f^2_{e}}{z}$$
 
