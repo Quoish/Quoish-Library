@@ -15,11 +15,13 @@ u_{mn}(x,y,z)=
 \end{aligned}
 \right.
 \end{equation}$$对于圆形镜$$\begin{equation}
-\left\{
+\left.
 \begin{aligned}
-
+u_{pl}(r,\phi,z) &= \frac{1}{p!} \sqrt{\frac{2}{\pi\lambda L}} \; \frac{w_0}{w(z)}\\
+&\left( \frac{\sqrt{2}\,r}{w(z)} \right)^{\!l} L_p^{\,l}\!\left( \frac{2r^2}{w^2(z)} \right) e^{ il\phi }\exp\!\left( -\frac{r^2}{w^2(z)} \right)\\
+& \times\exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]
 \end{aligned}
 \right.
-\end{equation}u_{pl}(r,\phi,z) = \frac{1}{p!} \sqrt{\frac{2}{\pi\lambda L}} \; \frac{w_0}{w(z)} \left( \frac{\sqrt{2}\,r}{w(z)} \right)^{\!l} L_p^{\,l}e^{ il\phi }\!\left( \frac{2r^2}{w^2(z)} \right) \exp\!\left( -\frac{r^2}{w^2(z)} \right)  \cdot \exp\!\left[ -ikz - ik\frac{ r^2}{2R(z)} + i(2p+l+1)\psi(z) \right]$$对于基模$\text{TEM}_{00}$，
+\end{equation}$$对于基模$\text{TEM}_{00}$，
 其中：
 - 束腰半径：$$$$
