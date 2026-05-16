@@ -91,15 +91,22 @@ $w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
 \end{equation}$$
 由此就能借$w_{0}=\sqrt{ \dfrac{\lambda f_{e}}{\pi} }$确定Gauss光束的所有光束。
 ## 一般稳定腔Gauss光束参数
-1. 镜面光斑尺寸
-	-  腔内光斑尺寸$$w(z)=w_{0} \sqrt{1+ \left( \frac{z}{f_{e}}  \right)^2}$$
-	- 镜$M_{1}$上的光斑半径$$w_{s1}=w(z_{1})=w_{0s}\sqrt[4]{ \frac{g_{2}}{g_{1}(1-g_{1}g_{2})} }$$
-	- 镜$M_{2}$上的光斑半径$$w_{s 2}=w(z_{2})=w_{0s}\sqrt[4]{ \frac{g_{1}}{g_{2}(1-g_{1}g_{2})} }$$
-2. 模体积
-	- 基模$$V_{00}=\frac{1}{2}L\pi\left( \frac{w_{s 1}+w_{s 2}}{2} \right)^2$$
-	- 方镜：$$V_{mn}=(2m+1)(2n+1)V_{00}$$
-	- 圆镜：$$V_{mn}=(2p+l+1)V_{00}$$
-3. 等相位面：不能由$R$或$L$确定了，只能由$f_{e}$确定$$R(z)=z+\frac{f^2_{e}}{z}$$
-4. 谐振频率：由Gouy相移影响
-	- 方镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
-	- 圆镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+2n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
+### 镜面光斑尺寸
+
+-  腔内光斑尺寸$$w(z)=w_{0} \sqrt{1+ \left( \frac{z}{f_{e}}  \right)^2}$$
+- 镜$M_{1}$上的光斑半径$$w_{s1}=w(z_{1})=w_{0s}\sqrt[4]{ \frac{g_{2}}{g_{1}(1-g_{1}g_{2})} }$$
+- 镜$M_{2}$上的光斑半径$$w_{s 2}=w(z_{2})=w_{0s}\sqrt[4]{ \frac{g_{1}}{g_{2}(1-g_{1}g_{2})} }$$
+### 模体积
+- 基模$$V_{00}=\frac{1}{2}L\pi\left( \frac{w_{s 1}+w_{s 2}}{2} \right)^2$$
+- 方镜：$$V_{mn}=(2m+1)(2n+1)V_{00}$$
+- 圆镜：$$V_{mn}=(2p+l+1)V_{00}$$
+
+一般来说，在稳定图稳定区的内部，模体积跟对称共焦腔没太大差别。只有在靠近稳定区边界时，模体积会急剧增大。
+### 等相位面
+一般稳定腔的等相位面不能由$R$或$L$确定了，只能由$f_{e}$确定$$R(z)=z+\frac{f^2_{e}}{z}$$
+### 谐振频率
+一般稳定腔的谐振频率为Gouy相移所影响
+- 方镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
+- 圆镜$$\nu_{mnq}=\frac{c}{2L}\left[ q+\frac{1}{\pi}\left(  m+2n+1\right) \arccos \sqrt{ g_{1}g_{2} }\right]$$
+### 平均单程损耗
+在[[开式光腔#对称共焦腔自再现模的特性#单程损耗]]中我们已经知道，对称共焦腔中，单程损耗与Fresnel数$N_{F}$息息相关，Fresnel可以表示为$N_{F}=\frac{a^2}{\lambda L}=\frac{a^2}{2\lambda f}$。
