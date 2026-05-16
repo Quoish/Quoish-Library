@@ -35,7 +35,15 @@ u_{pl}(r,\phi,z) &=   \sqrt{\frac{2p!}{\pi(p+l)!}} \frac{w_0}{w(z)}&光斑变化
 	- 等相位面曲率半径$R(z)$：$$R(z)=z\left( 1+\frac{f_{e}^2}{z^2} \right)$$
 	- 光束复曲率$q(z)$：$$\frac{1}{q(z)}=\frac{1}{R(z)}-i \frac{\lambda}{\pi w^2(z)}$$
 3. Gouy相移$\psi(z)$：$$\psi(z)=\arctan\left( \frac{z}{f_{e}} \right)$$
-## 振幅分布与光斑尺寸
+### 振幅分布与光斑尺寸
 对场函数取模就能得到振幅分布$$|u_{00}(x,y,z)|=u_{0} \frac{w_{0}}{w(z)}\exp\left[ - \frac{r^2}{2w^2(z)} \right]$$可见基模Gauss光束在横截面内（$z=\mathrm{Const}$）遵循Gauss分布。
-
+定义光强衰减到$1/e$的地方为光斑半径，则光斑半径就是$w(z)$。
+$w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
+基模Gauss光束的光斑半径按双曲线变化$$\frac{w^2(z)}{w_{0}^2}-\frac{z^2}{f^2_{e}}=1$$
 ![[对称共焦腔内基模高斯光束.png]]
+高阶模的情况：
+- Hermite-Gauss光束$$w_{m}=\sqrt{ 2m+1 }w_{0},\quad w_{n}=\sqrt{ 2n+1 }w_{0}$$
+- Laguerre-Gauss光束$$w_{pl}=\sqrt{ m+2n+1 }w_{0}$$
+### 等相位面分布
+
+
