@@ -178,4 +178,6 @@ $w(z)$在$z=0$处取最小值$w(0)=w_{0}$，称为*束腰半径*。
 我们希望通过光学系统同时获得小的束腰半径和小的衍射角，然而小的束腰半径就意味着大的衍射角，二者是不能兼得的。但二者的乘积是一个定值，在光学系统中始终不变，我们将其定义为光束衍射倍率因子$M^2$$$w_{0}\cdot 2\theta_{00}=w_{0}'\cdot 2\theta_{00}'= \frac{2\lambda}{\pi}=M^2  \frac{2\lambda}{\pi}$$
 它相当于是位置不确定量（$w_{0}$）和动量不确定量（$2\theta_{00}$）的乘积。
 对于高阶模：
-- Hermite-Gauss光束$$w_{m}\cdot 2\theta_{m}=(2m+1) \frac{2\lambda}{\pi},\quad w_{n}\cdot 2\theta_{n}=(2n+1) \frac{2\lambda}{\pi}$$
+- Hermite-Gauss光束$$w_{m}\cdot 2\theta_{m}=(2m+1) \frac{2\lambda}{\pi},\quad w_{n}\cdot 2\theta_{n}=(2n+1) \frac{2\lambda}{\pi}$$$$M^2=2m+1,\quad M^2=2n+1$$
+- Laguerre-Gauss光束$$w_{mn}\cdot 2\theta_{mn}=(m+2n+1) \frac{2\lambda}{\pi}$$$$M^2=m+2n+1$$
+
