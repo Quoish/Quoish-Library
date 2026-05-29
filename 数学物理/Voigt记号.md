@@ -16,6 +16,7 @@ $$        \begin{aligned}
         \end{aligned}$$
 由此将两个指标$ij$化为一个指标$\alpha$。
 在物理学中，这样的对称二阶张量的实例有应力$\sigma_{ij}=\sigma_{\alpha}$，应变$\varepsilon_{ij}=\varepsilon_{\alpha}$。
+广义Hook定律$$\sigma_{ij}=C_{ijkl}\varepsilon_{kl}$$其中$C_{ijkl}$是刚度张量。
 ## 因子2问题
 在文献中Voigt记号通常存在两种约定。
 学术中更多采用包含因子2的约定，即$$\begin{pmatrix}
