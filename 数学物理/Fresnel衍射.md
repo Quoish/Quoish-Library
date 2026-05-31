@@ -42,7 +42,7 @@ $$A_{N}\approx\begin{equation}
 \right.
 \end{equation}$$
 由此得出结论：*圆孔对$P_{0}$点露出的波带数$N$决定了$P_{0}$点衍射光的强弱*。
-经过一些近似计算，可以得到波带数$N$与衍射圆孔半径$\rho_{N}$的关系$$\rho_{N}^2=N\lambda \frac{r_{0}R}{r_{0}+R}$$
+经过一些近似计算，可以得到波带数$N$与衍射圆孔半径$\rho_{N}$的关系$$\rho_{N}^2=N\lambda \frac{r_{0}R}{r_{0}+R}$$也可以写作$$\frac{1}{r_{0}}+\frac{1}{R}=\frac{N\lambda}{\rho^2_{N}}$$
 当$r_{0}\to \infty$时，$N$取到最小值$N_{m}$，此时$N$不再随$r_{0}$变化，即$$N_{m}=\frac{\rho^2_{N}}{\lambda R}$$说明已经进入了[[Fraunhofer衍射]]区。这时的$N_{m}$被称作*Fresnel数*。
 当$r_{0}\to 0$时，$N$趋于无穷大，$\bar{r}_{N}$会趋于无穷大，$a_{N}$会趋于0，此时$A_{N}=\frac{a_{1}}{2}$，就相当于光直线传播的情况。
 ## Fresnel圆屏衍射
