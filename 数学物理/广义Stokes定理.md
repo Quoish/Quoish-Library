@@ -135,12 +135,12 @@ Nabla算子是外微分算子$\mathrm{d}$在三维Euclidean空间上呈现。其
 $$\nabla u=(\mathrm{d}u)^{\sharp},\quad \nabla \times \vec{A}=\star[\mathrm{d}(\vec{A}^{\flat})],\quad \nabla\cdot \vec{A}=\star[\mathrm{d(\star \vec{A}^{\flat})}]$$
 在三维Euclidean空间中，外微分可以写成如下形式
 
-| 微分形式阶数                            | 外微分的结果                                                                |
-| --------------------------------- | --------------------------------------------------------------------- |
-| **0-微分形式**$u$                     | $\mathrm{d}u = \nabla u \cdot \mathrm{d}\vec{r}$                      |
-| **1-微分形式**$\vec{A}^{\flat}$       | $\mathrm{d}\omega = (\nabla \times \vec{A}) \cdot \mathrm{d}\vec{S}$) |
-| **2-微分形式**$\star \vec{A}^{\flat}$ | $\mathrm{d}\omega = (\nabla \cdot \vec{A})\mathrm{d}V$                |
-| **3-微分形式**$u\mathrm{d}V$          | $\mathrm{d}\omega = 0$                                                |
+| 微分形式阶数                            | 外微分的结果                                                               |
+| --------------------------------- | -------------------------------------------------------------------- |
+| **0-微分形式**$u$                     | $\mathrm{d}u = \nabla u \cdot \mathrm{d}\vec{r}$                     |
+| **1-微分形式**$\vec{A}^{\flat}$       | $\mathrm{d}\omega = (\nabla \times \vec{A}) \cdot \mathrm{d}\vec{S}$ |
+| **2-微分形式**$\star \vec{A}^{\flat}$ | $\mathrm{d}\omega = (\nabla \cdot \vec{A})\mathrm{d}V$               |
+| **3-微分形式**$u\mathrm{d}V$          | $\mathrm{d}\omega = 0$                                               |
 # 广义Stokes定理
 设$M$是一个带有边界的定向$n$维可微流形，$\omega$是在$M$上定义的一个$(n-1)$-微分形式，且具有紧支撑或在边界上光滑，则：$$\int_{M}\mathrm{d}\omega=\int_{\partial M}\omega$$
 其中$\partial M$是$M$的边界流形，方向由$M$的方向诱导。这被称作*广义Stokes公式*。
