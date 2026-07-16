@@ -154,7 +154,7 @@ $$\int_{a}^b f'(x)\mathrm{d}x=f(b)-f(a)$$
 $$\oint_{\partial D}P\mathrm{d}x+Q\mathrm{d}y=\iint_{D}(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y})\mathrm{d}x\mathrm{d}y$$
 ### 三维流形(Gauss公式和Stokes公式)
 取$\omega = P\mathrm{d}y\mathrm{d}z + Q\mathrm{d}z\mathrm{d}x + R\mathrm{d}x\mathrm{d}y$，$M=\Omega$，即Gauss公式
-$$\iint_{\partial \Omega}P\mathrm{d}x+Q\mathrm{d}y+R\mathrm{d}z=\iiint_{\Omega}(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z})\mathrm{d}x\mathrm{d}y\mathrm{d}z$$
+$$\iint_{\partial \Omega} P\mathrm{d}y\mathrm{d}z + Q\mathrm{d}z\mathrm{d}x + R\mathrm{d}x\mathrm{d}y=\iiint_{\Omega}(\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z})\mathrm{d}x\mathrm{d}y\mathrm{d}z$$
 取$\omega = P\mathrm{d}x + Q\mathrm{d}y + R\mathrm{d}z$，$M=\Sigma$，即Stokes公式
 $$\int_{\partial \Sigma}P\mathrm{d}x+Q\mathrm{d}y+R\mathrm{d}z=\iint_{\Sigma}
 (\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z})\mathrm{d}y\mathrm{d}z+
