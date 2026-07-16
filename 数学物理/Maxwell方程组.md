@@ -1,5 +1,5 @@
 #电磁学 #场论
-Maxwell方程组、Lorentz力公式、[[物质的电磁特性#物质方程]]构成了经典电磁学的全部图景。
+Maxwell方程组、Lorentz力公式、[[物质的电磁特性#物质方程]]、[[电荷守恒定律]]构成了经典电磁学的全部图景。
 Maxwell方程组由四部分组成：
 - 积分形式：
 	- 电场Gauss定理：$$\iint_{\Sigma}\kern{-18.8pt}\subset\kern{-2pt}\supset \vec{D}\cdot \mathrm{d}\vec{S}=\sum q$$
