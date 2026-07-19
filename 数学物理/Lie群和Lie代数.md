@@ -30,7 +30,7 @@ Minkowski空间的等度规群是10维Lie群。有多少个Killing矢量场就�
 - $\mathbf{A}$是左不变矢量场的充要条件是$$\mathbf{A}|_{gh}=(L_{g*}\mathbf{A})|_{gh}=L_{g*}(\mathbf{A}|_{h})$$
 
 左不变矢量场乘上常数仍是左不变矢量场，左不变矢量场与左不变矢量场求和也仍是左不变矢量场，所以$G$上全体左不变矢量场构成一个线性空间$\mathcal{L}$。
-- $G$上全体左不变矢量场的集合$\mathcal{L}$与$G$的恒等元$e$的切空间$V_{e}$同构。
+- **$G$上全体左不变矢量场的集合$\mathcal{L}$与$G$的恒等元$e$的切空间$V_{e}$同构**。
 证明：对任意一个矢量$\vec{A} \in V_{e}$，用下面的方式定义左不变矢量场$\mathbf{A}$：$$\mathbf{A}|_{g}:= L_{g*}\vec{A},\quad \forall g \in G$$然后$$\mathbf{A}|_{gh}=L_{gh*}\vec{A}=(L_{g*}\circ L_{h*})\vec{A}=L_{g*}A|_{h}$$故而是左不变矢量场，之后可证明它是双射并且保运算，因此同构。
 # Lie代数
 设$V$是域$F$上的一个线性空间，定义一种运算称为*Lie括号*$[\cdot,\cdot]:V\times V\to V$，其满足：
