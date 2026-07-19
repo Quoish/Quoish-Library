@@ -88,20 +88,19 @@ Lie代数中的Lie括号则是衡量两类无穷小变换之间有何种程度�
 ### 一般线性群作为李群
 域$F$上$n$阶可逆矩阵的集合$GL_{n}(F)$对于矩阵乘法构成一般线性群。
 所有$n\times n$矩阵都可以用$n^2$个实数表示，因而它和$\mathbb{R}^{n^2}$一一对应，而一般线性群是行列式非零的$n\times n$矩阵，因而是$\mathbb{R}^{n^2}$的子集。行列式$\det:\mathbb{R}^{n^2}\to \mathbb{R}$是连续函数，一般线性群是$(-\infty,0)\cap(0,+\infty)$关于行列式映射的原像集，因而一般线性群是$\mathbb{R}^{n^2}$的开子集（**非连通的**）。拓扑流形要求与Euclidean空间同胚，所$\mathbb{R}^{n^2}$的任意开子集都必定是个流形，然后因为矩阵乘法、求逆的运算都是有理函数，所以它必定是光滑流形。一般线性群既是个群又是个流形，因而是Lie群，它是一个**非连通群**。
+### 一般线性群的李代数
+一般线性群的Lie代数的线性空间应当是它单位元的切空间，它的单位元是$I$。倘若以$I$为起点向外引出曲线$\gamma(t)$，这个曲线设为$$\gamma(t)=I+tA,\quad A\in M_{n}(F)$$在$t$比较小的时候，$\det\gamma(t)$一定不会距离1太远，所以这个曲线是落在$GL_{n}(F)$里面的，起码原点附近是。那么这个曲线在单位元附近的切矢就是$$\left. \frac{ \mathrm{d}   }{ \mathrm{d}  t}  \right| _{t=0}\gamma(t)=A$$这就是说，$GL_{n}(F)$的单位元处的切空间$V_{I}$实际上是$M_{n}(F)$，它是所有$n$阶方阵的集合，无论可逆或不可逆。准确来说有以下结论：
+- $GL_{n}(F)$的Lie代数$\mathcal{G}\mathcal{L}_{n}(F)$作为一个线性空间，它和全体$n$阶方阵的集合$M_{n}(F)$（包括行列式等于零的方阵）同构。
+
+接下来我们就可以定义$GL_{n}(F)$上的李代数了。
+- 在$M_{n}(F)$上定义矩阵的对易子$[A,B]=AB-BA$为Lie括号，则$\mathcal{G}\mathcal{L}_{n}(F)$与$M_{n}(F)$有Lie代数同构。
 ### 矩阵的指数
-引入矩阵的指数符号$$e^{A}:=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\dots$$可以证明
+引入矩阵的指数符号$$\mathrm{Exp}(A)=e^{A}:=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\dots$$可以证明
 - 级数收敛于一个$n\times n$矩阵。
 - 当$[A,B]=0$时，$e^{ A+B }=e^{ A }\cdot e^{ B }$。
 - 矩阵指数的行列式$$\det(e^{ A })=e^{ \mathrm{Tr}(A) }$$
 证明：设矩阵的特征值为$\lambda_{1},\lambda_{2},\dots,\lambda_{n}$，即使矩阵不可对角化，这些特征值依然存在于复数域。对于$A$的任意一个特征向量$v$，$$e^{ A }v=\left( I+A+\frac{1}{2!}A^2+\dots \right)v=\left( 1+\lambda+\frac{1}{2!}\lambda^2+\dots \right)v=e^{ \lambda v }$$所以$e^{ A }$的特征值就是$e^{ \lambda_{1} },e^{ \lambda_{2} },\dots,e^{ \lambda_{n} }$。
 而$$\det(e^{ A })=\prod_{i}e^{ \lambda_{i} }=e^{ \sum_{i}\lambda_{i} }=e^{ \mathrm{Tr}(A) }$$证毕。
-### 一般线性群的李代数
-一般线性群的Lie代数的线性空间应当是它单位元的切空间，它的单位元是$I$。倘若以$I$为起点向外引出曲线$\gamma(t)$，这个曲线设为$$\gamma(t)=I+tA,\quad A\in M_{n}(F)$$
-- $GL_{n}(F)$的Lie代数$\mathcal{G}\mathcal{L}_{n}(F)$作为一个线性空间，它和全体$n$阶方阵的集合$M_{n}(F)$（包括行列式等于零的方阵）同构。
+- 矩阵的指数就是一般线性群的指数映射$$\mathrm{Exp}(A)=\exp(A)$$今后都用$e^{ A }$表示。这是因为矩阵的指数的确可以视作一个$M_n(F)\to GL_{n}(F)$的映射，$$\forall A\in M_{n}(F),\quad\det (e^{ A })=e^{ \mathrm{Tr}(A) }>0\implies e^{ A }\in GL_{n}(F)$$
 
-
-- 在$M_{n}(F)$上定义矩阵的对易子为Lie括号，则$\mathcal{G}\mathcal{L}_{n}(F)$与$M_{n}(F)$有Lie代数同构。
-
-
-- $$\mathrm{Exp}(A)=\exp(\vec{A})$$
-
+从这一结论我们可以更深刻地看出为什么当初我们要将指数映射命名为指数映射。当Lie群为一般线性群的时候，指数映射就相当于是对矩阵做像实数指数的运算。
