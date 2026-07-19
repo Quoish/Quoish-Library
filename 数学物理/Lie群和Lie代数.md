@@ -31,7 +31,7 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 
 >若$G$上的矢量场$\mathbf{A}$满足$$L_{g*}\mathbf{A}=\mathbf{A}$$其中$L_{g*}$是由$L_{g}$诱导的推前映射，则称$\mathbf{A}$是*左不变的*（Left Invariant）。
 
-一个例子就是实数加法群$G=(\mathbb{R},+)$，左不变映射就是平移$L_{a}f(x)=f(x+a)$，设有一个矢量场$f(x)\dfrac{ \partial   }{ \partial  x}$，它如果要是左不变矢量场，那就必须$$L_{a}f(x)\dfrac{ \partial   }{ \partial  x}=f(x+a)\dfrac{ \partial   }{ \partial  x}=f(x)\dfrac{ \partial   }{ \partial  x}$$这只有是常函数$f(x)=c$，所以$c\dfrac{ \partial   }{ \partial  x}$是$(\mathbb{R},+)$的一个左不变矢量场。
+一个例子就是实数加法群$G=(\mathbb{R},+)$，左不变映射就是平移$L_{a}f(x)=f(x+a)$，设有一个矢量场$f(x)\dfrac{ \mathrm{d}   }{ \mathrm{d}  x}$，它如果要是左不变矢量场，那就必须$$L_{a}f(x)\dfrac{ \mathrm{d}   }{ \mathrm{d}  x} =f(x+a)\frac{ \mathrm{d}   }{ \mathrm{d}  x} =f(x)\frac{ \mathrm{d}   }{ \mathrm{d}  x} $$这只有是常函数$f(x)=c$，所以$c\dfrac{ \mathrm{d}   }{ \mathrm{d}  x}$是$(\mathbb{R},+)$的一个左不变矢量场。
 - 左不变矢量场一定是光滑的。
 - $\mathbf{A}$是左不变矢量场的充要条件是$$\mathbf{A}|_{gh}=(L_{g*}\mathbf{A})|_{gh}=L_{g*}(\mathbf{A}|_{h})$$
 左不变矢量场乘上常数仍是左不变矢量场，左不变矢量场与左不变矢量场求和也仍是左不变矢量场，所以$G$上全体左不变矢量场构成一个线性空间$\mathcal{L}$。
@@ -76,7 +76,7 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 
 >Lie群$G$上的指数映射（Expontential Map） $\exp:V_{e}\to G$定义为$$\exp(\vec{A}):=\gamma(1),\quad \forall \vec{A} \in \mathcal{G}$$其中$\gamma:\mathbb{R}\to G$是与$\vec{A}$对应的那个单参数子群。
 
-- $$\exp(s\vec{A})=\gamma(s)$$其中$\gamma(s)$是由$\vec{A}$决定的单参数子群。
+- 可以用指数映射的方式表示单参数子群$$\exp(s\vec{A})=e^{ s\vec{A} }=\gamma(s)$$其中$\gamma(s)$是由$\vec{A}$决定的单参数子群。
 
 指数映射建立起了生成元与单参数子群的联系，例如平移算符$T_{a}f(x)=f(x+a)$，那么$T_{a}=e^{a\frac{ \mathrm{d}   }{ \mathrm{d}  x} }$，算符$\dfrac{ \mathrm{d}   }{ \mathrm{d} x }$是平移群的生成元。
 # 常见Lie群和Lie代数
