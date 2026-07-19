@@ -91,8 +91,9 @@ Lie代数中的Lie括号则是衡量两类无穷小变换之间有何种程度�
 
 - 在$M_{n}(F)$上定义矩阵的对易子为Lie括号，则$\mathcal{G}\mathcal{L}_{n}(F)$与$M_{n}(F)$有Lie代数同构。
 
-引入矩阵的指数符号$$\mathrm{Exp}(A):=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\dots$$可以证明
+引入矩阵的指数符号$$e^{A}:=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\dots$$可以证明
 - 级数收敛于一个$n\times n$矩阵。
-- 当$[A,B]=0$时，$\mathrm{Exp(A+B)}=\mathrm{Exp}(A)\cdot\mathrm{Exp}(B)$。
+- 当$[A,B]=0$时，$e^{ A+B }=e^{ A }\cdot e^{ B }$。
+- $$\det(e^{ A })=e^{ \mathrm{Tr}(A) }$$
 - $$\mathrm{Exp}(A)=\exp(\vec{A})$$
 
