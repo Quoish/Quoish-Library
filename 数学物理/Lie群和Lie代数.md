@@ -94,6 +94,8 @@ Lie代数中的Lie括号则是衡量两类无穷小变换之间有何种程度�
 引入矩阵的指数符号$$e^{A}:=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\dots$$可以证明
 - 级数收敛于一个$n\times n$矩阵。
 - 当$[A,B]=0$时，$e^{ A+B }=e^{ A }\cdot e^{ B }$。
-- $$\det(e^{ A })=e^{ \mathrm{Tr}(A) }$$
+- 矩阵指数的行列式$$\det(e^{ A })=e^{ \mathrm{Tr}(A) }$$
+证明：设矩阵的特征值为$\lambda_{1},\lambda_{2},\dots,\lambda_{n}$，即使矩阵不可对角化，这些特征值依然存在于复数域。对于任意向量$v$，$$e^{ A }v=\left( I+A+\frac{1}{2!}A^2+\dots \right)v=$$
+
 - $$\mathrm{Exp}(A)=\exp(\vec{A})$$
 
