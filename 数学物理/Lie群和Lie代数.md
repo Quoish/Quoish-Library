@@ -48,8 +48,8 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 - 域$F$上的全体$n$阶矩阵$M_{n}(F)$是$n^2$维线性空间，若在其上定义Lie括号为$$[A,B]:= AB-BA,\quad \forall A,B \in M_{n}(F)$$则$M_{n}(F)$是Lie代数。
 - $G$上全体左不变矢量场的集合$\mathcal{L}$是线性空间，若在其上定义Lie括号为矢量场的对易子，则$\mathcal{L}$是Lie代数。
 
->设$V,W$是线性空间，若存在映射$\sigma:V\to W$保Lie括号，则$\sigma$是Lie代数同态。
->若$\sigma$还是双射，则$\sigma$是Lie代数同构。
+>设$V,W$是线性空间，若存在映射$\sigma:V\to W$保Lie括号，则$\sigma$是*Lie代数同态*。
+>若$\sigma$还是双射，则$\sigma$是*Lie代数同构*。
 
 同构的Lie代数今后当做它们相等。
 >若Lie群$G$恒等元$e$的切空间$V_{e}$上定义Lie括号为$$[\vec{A},\vec{B}]:=[\mathbf{A},\mathbf{B}]|_{e},\quad \forall \vec{A},\vec{B} \in V_{e}$$则$V_{e}$称为Lie代数，称为*Lie群$G$的Lie代数*，记作$\mathcal{G}$。
