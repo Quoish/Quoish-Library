@@ -56,7 +56,7 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 
 易证$\mathcal{G}=\mathcal{L}$。
 给定一个Lie群，就能找到一个Lie代数。然而，**给定一个Lie代数，找到的Lie群不一定唯一（同构的Lie群视作同一个），它至少相差到拓扑结构的不同**。例如实数轴$\mathbb{R}$是1维Lie群，圆环$S^1$是1维Lie群，它们并不同构（因为并不同胚），但是它们有相同的Lie代数。
-准确来说，给定一个Lie代数，总可以找到唯一一个单连通Lie群（流形是单连通流形），它能给出这个Lie代数。
+准确来说，**给定一个Lie代数，总可以找到唯一一个单连通Lie群**（流形是单连通流形），它能给出这个Lie代数。
 - 设$\mathcal{G},\mathcal{G}'$是Lie群$G,G'$的Lie代数，$\rho:G\to G'$是同态映射，则$\rho$在$e \in G$处诱导的推前映射$\rho_{*}:\mathcal{G}\to \mathcal{G}'$是Lie代数同态。
 >Lie代数$\mathcal{G}$的子空间$\mathcal{H}$若$$[\vec{A},\vec{B}]\in \mathcal{H},\quad \forall \vec{A},\vec{B} \in \mathcal{H}$$则称$\mathcal{H}$是$\mathcal{G}$的*Lie子代数*，$\mathcal{G}$的Lie括号现在也称$\mathcal{H}$的Lie括号。
 
