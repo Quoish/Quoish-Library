@@ -31,9 +31,9 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 
 >若$G$上的矢量场$\mathbf{A}$满足$$L_{g*}\mathbf{A}=\mathbf{A}$$其中$L_{g*}$是由$L_{g}$诱导的推前映射，则称$\mathbf{A}$是*左不变的*（Left Invariant）。
 
+一个例子就是实数加法群$G=(\mathbb{R},+)$，左不变映射就是平移$L_{a}f(x)=f(x+a)$，设有一个矢量场$f(x)\dfrac{ \partial   }{ \partial  x}$，它如果要是左不变矢量场，那就必须$$L_{a}f(x)\dfrac{ \partial   }{ \partial  x}=f(x+a)\dfrac{ \partial   }{ \partial  x}=f(x)\dfrac{ \partial   }{ \partial  x}$$这只有是常函数$f(x)=c$，所以$c\dfrac{ \partial   }{ \partial  x}$是$(\mathbb{R},+)$的一个左不变矢量场。
 - 左不变矢量场一定是光滑的。
 - $\mathbf{A}$是左不变矢量场的充要条件是$$\mathbf{A}|_{gh}=(L_{g*}\mathbf{A})|_{gh}=L_{g*}(\mathbf{A}|_{h})$$
-
 左不变矢量场乘上常数仍是左不变矢量场，左不变矢量场与左不变矢量场求和也仍是左不变矢量场，所以$G$上全体左不变矢量场构成一个线性空间$\mathcal{L}$。
 - **$G$上全体左不变矢量场的集合$\mathcal{L}$与$G$的恒等元$e$的切空间$V_{e}$同构**。
 证明：对任意一个矢量$\vec{A} \in V_{e}$，用下面的方式定义左不变矢量场$\mathbf{A}$：$$\mathbf{A}|_{g}:= L_{g*}\vec{A},\quad \forall g \in G$$然后$$\mathbf{A}|_{gh}=L_{gh*}\vec{A}=(L_{g*}\circ L_{h*})\vec{A}=L_{g*}A|_{h}$$故而是左不变矢量场，之后可证明它是双射并且保运算，因此同构。
