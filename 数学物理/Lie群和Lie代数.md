@@ -22,6 +22,7 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 
 >$\forall g \in G$，映射$L_{g}:h\mapsto gh$，$\forall h \in G$，称为由$g$生成的*左平移*（Left Translation）。
 
+左平移就像是突出Lie群中元素的“变换”性质，回到实数乘法群的例子，2生成的左平移$L_{2}$，
 左平移有如下性质：
 - $L_{e}$是恒等映射。
 - $L_{gh}=L_{g}\circ L_{h},\forall g,h \in G$。
