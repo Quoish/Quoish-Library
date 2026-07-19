@@ -54,7 +54,6 @@ Lie群既是流形又是群，这意味着它之中的元素同时有两重身�
 同构的Lie代数今后当做它们相等。
 >若Lie群$G$恒等元$e$的切空间$V_{e}$上定义Lie括号为$$[\vec{A},\vec{B}]:=[\mathbf{A},\mathbf{B}]|_{e},\quad \forall \vec{A},\vec{B} \in V_{e}$$则$V_{e}$称为Lie代数，称为*Lie群$G$的Lie代数*，记作$\mathcal{G}$。
 
-易证$\mathcal{G}=\mathcal{L}$。
 给定一个Lie群，就能找到一个Lie代数。然而，**给定一个Lie代数，找到的Lie群不一定唯一（同构的Lie群视作同一个），它至少相差到拓扑结构的不同**。例如实数轴$\mathbb{R}$是1维Lie群，圆环$S^1$是1维Lie群，它们并不同构（因为并不同胚），但是它们有相同的Lie代数。
 准确来说，**给定一个Lie代数，总可以找到唯一一个单连通Lie群**（流形是单连通流形），它能给出这个Lie代数。
 - 设$\mathcal{G},\mathcal{G}'$是Lie群$G,G'$的Lie代数，$\rho:G\to G'$是同态映射，则$\rho$在$e \in G$处诱导的推前映射$\rho_{*}:\mathcal{G}\to \mathcal{G}'$是Lie代数同态。
