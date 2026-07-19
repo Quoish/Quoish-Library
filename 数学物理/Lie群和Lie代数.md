@@ -104,4 +104,14 @@ Lie代数中的Lie括号则是衡量两类无穷小变换之间有何种程度�
 - 矩阵的指数就是一般线性群的指数映射$$\mathrm{Exp}(A)=\exp(A)$$今后都用$e^{ A }$表示。这是因为矩阵的指数的确可以视作一个$M_n(F)\to GL_{n}(F)$的映射，$$\forall A\in M_{n}(F),\quad\det (e^{ A })=e^{ \mathrm{Tr}(A) }>0\implies e^{ A }\in GL_{n}(F)$$
 
 从这一结论我们可以更深刻地看出为什么当初我们要将指数映射命名为指数映射。当Lie群为一般线性群的时候，指数映射就相当于是对矩阵做像实数指数的运算。
-如果有一系列可逆矩阵$M(t)$构成了一个单参数子群，那它可以表示成$M(t)=e^{ tA }$，求它的生成元的过程可以视作对$t$求导，即$$\frac{ \partial  M(t) }{ \partial  t} =AM(t)$$
+如果有一系列可逆矩阵$M(t)$构成了一个单参数子群，那它可以表示成$M(t)=e^{ tA }$，求它的生成元的过程可以视作对$t$求导，即$$A=\left. \frac{ \mathrm{d}  M(t) }{ \mathrm{d}  }  \right|_{t=0} $$
+例如平面旋转群$SO(2)$：$$M(t)=\begin{pmatrix}
+\cos t & -\sin t \\
+\sin t & \cos t
+\end{pmatrix}$$生成元为$$A=M'(0)=\begin{pmatrix}
+-\sin0 & -\cos 0 \\
+\cos 0 & -\sin 0
+\end{pmatrix}=\begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}$$它代表了旋转的角速度。
