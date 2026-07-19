@@ -96,7 +96,7 @@ Lie代数中的Lie括号则是衡量两类无穷小变换之间有何种程度�
 证明：设矩阵的特征值为$\lambda_{1},\lambda_{2},\dots,\lambda_{n}$，即使矩阵不可对角化，这些特征值依然存在于复数域。对于$A$的任意一个特征向量$v$，$$e^{ A }v=\left( I+A+\frac{1}{2!}A^2+\dots \right)v=\left( 1+\lambda+\frac{1}{2!}\lambda^2+\dots \right)v=e^{ \lambda v }$$所以$e^{ A }$的特征值就是$e^{ \lambda_{1} },e^{ \lambda_{2} },\dots,e^{ \lambda_{n} }$。
 而$$\det(e^{ A })=\prod_{i}e^{ \lambda_{i} }=e^{ \sum_{i}\lambda_{i} }=e^{ \mathrm{Tr}(A) }$$证毕。
 ### 一般线性群的李代数
-一般线性群的Lie代数的线性空间应当是它单位元的切空间，它的单位元是$I$，倘若以$I$为起点向外引出任意曲线$\gamma(t)$
+一般线性群的Lie代数的线性空间应当是它单位元的切空间，它的单位元是$I$。倘若以$I$为起点向外引出曲线$\gamma(t)$，这个曲线设为$$\gamma(t)=I+tA,\q$$
 - $GL_{n}(F)$的Lie代数$\mathcal{G}\mathcal{L}_{n}(F)$作为一个线性空间，它和全体$n$阶方阵的集合$M_{n}(F)$（包括行列式等于零的方阵）同构。
 
 
