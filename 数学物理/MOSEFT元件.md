@@ -77,4 +77,5 @@ PMOS器件的导通现象类似于NFETS，但是其所有的极性都是相反�
 将$v$改写为关于迁移率的式子，再注意到$E=-\dfrac{ \mathrm{d}  V }{ \mathrm{d}  x}$，得到$$I_{D}=WC_{ox}(V_{GS}-V_{TH})\mu_{n}\frac{ \mathrm{d}  V }{ \mathrm{d}  x} $$而我们关注的是$I_{D}$，所以两边关于$x$在$x=0$到$x=L$积分，得到$$\boxed{I_{D}=\mu_{n}C_{ox} \frac{W}{L}\left[ (V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V^2_{DS} \right]}$$![[漏电流与漏源电压之间的关系.png]]
 我们称$V_{ov}=V_{GS}-V_{TH}$为*过驱动电压*（Overdrive Voltage），意思是$V_{GS}$超过阈值$V_{TH}$用以维系沟道所需的电压，**过驱动电压越高，意味着反型越强，沟道中有更多的电子**$Q_{d}\approx C_{ox}V_{ov}$。
 当$V_{DS}=V_{GS}-V_{TH}$时，$I_{D}$取到最大值，此时$$I_{D,\max}=\frac{1}{2}\mu_{n}C_{ox} \frac{W}{L}(V_{GS}-V_{TH})^2$$
+根据上面
 ![[预夹断的出现 1.png]]
