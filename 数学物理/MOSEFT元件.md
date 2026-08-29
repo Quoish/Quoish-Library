@@ -84,4 +84,4 @@ PMOS器件的导通现象类似于NFETS，但是其所有的极性都是相反�
 器件工作在$V_{DS}>V_{GS}-V_{TH}$时，被称为*饱和区*。![[漏电流的饱和 1.png]]
 对于PMOS器件，三极管区与饱和区的电流公式分别为$$\boxed{I_{D}=-\mu_{p}C_{ox} \frac{W}{L}\left[ (V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V^2_{DS} \right]}$$$$\boxed{I_{D}=-\frac{1}{2}\mu_{p}C_{ox} \frac{W}{L'}(V_{GS}-V_{TH})^2}$$由于空穴的迁移率通常是电子的1/2到1/4，所以PMOS器件**有较低的电流驱动**。
 若$L'$近似等于$L$，则工作在饱和区的MOSFET构成一个从源到漏的电流源。注意，电流源要么向地注入电流，要么从$V_{DD}$抽取电流，总之**电流源只有一个端点是浮动的**。![[MOSFET电流源.png]]
-由于MOSFET工作在饱和区时，其电流受栅源过驱动电压控制，所以我们可以定义一个性能系数来表示电压转换电流的能力，我们称之为*跨导*，即$$g_{m}=\left. \frac{ \partial  I_{D} }{ \partial  V_{GS}}  \right| _{V_{DS}=\mathrm{Const}}=\mu_{n}C_{ox} \frac{W}{L}(V_{GS}-V_{TH})$$
+由于MOSFET工作在饱和区时，其电流受栅源过驱动电压控制，所以我们可以定义一个性能系数来表示电压转换电流的能力，我们称之为*跨导*，即$$g_{m}=\left. \frac{ \partial  I_{D} }{ \partial  V_{GS}}  \right| _{V_{DS}=\mathrm{Const}}=\mu_{n}C_{ox} \frac{W}{L}(V_{GS}-V_{TH})$$可以证明跨导也可以表示为$$g_{m}=\sqrt{ 2\mu_{n}C_{ox} \frac{W}{L}I_{D} }=\frac{2I_{D}}{V_{GS}-V_{TH}}$$
