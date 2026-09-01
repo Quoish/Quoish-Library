@@ -30,4 +30,4 @@ $$\boxed{\text{增益}\sim \text{跨导}\times\text{输出电阻}}$$
 所以这里我们采用二极管负载的方案，但并不是真的二极管，而是*二极管连接*的MOS管，也就是**栅极和漏极短接**，如下图所示。这样连接的MOS管**可以起到一个小信号电阻的作用**。![[二极管连接的MOS管.png]]
 接下来我们分析它从端口看入的电阻特性。图中$I_{X}=V_{X} /r_{O}+g_{m}V_{X}$，所以二极管电阻为$$R_{diode}=\frac{1}{g_{m}} \parallel r_{O}$$如果考虑体效应，则可以得到$$R_{diode}=\frac{1}{g_{m}+g_{mb}}\parallel r_{O}=\frac{1}{g_{m}+g_{mb}+r_{O}^{-1}}$$![[考虑体效应的MOS二极管电路.png]]
 不考虑二级效应时$$\boxed{R_{diode}\approx \frac{1}{g_{m}}}$$![[二极管负载共源极放大电路.png]]
-用二极管作为共源极放大电路的负载，增益为$$A_{v}\approx \frac{g_{m1}}{g_{m 2}}$$
+用二极管作为共源极放大电路的负载，增益为$$A_{v}\approx \frac{g_{m1}}{g_{m 2}}=\frac{\sqrt{ 2\mu_{n}C_{ox}(W /L)_{1}I_{D 1} }}{\sqrt{ 2\mu_{n}C_{ox}(W /L)_{2}I_{D 2} }}=\sqrt{ \frac{(W /L)_{1}}{(W /L)_{2}} }$$
