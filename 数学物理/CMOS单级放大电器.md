@@ -85,3 +85,4 @@ $$\boxed{\text{增益}\sim \text{跨导}\times\text{输出电阻}}$$
 源跟随器表现出**高的输入阻抗**$R_{in}$和**中等的输出阻抗**$R_{out}$，但这是以**非线性、电压余度的减小的两个缺点**为代价的。
 若是理想线性（$A_{v}\approx 1$），就应当有$$V_{out}-V_{in}=\mathrm{Const}$$然而实际上$$V_{out}-V_{in}=-V_{GS}$$问题就出在$V_{GS}$并不是恒定的。
 $$I_{D}=\frac{1}{2}\mu_{n}C_{ox}(V_{GS}-V_{TH})^2\implies V_{GS}\propto \sqrt{ I_{D} }$$
+如果漏电流$I_{D}$发生变化，就会导致非线性。
