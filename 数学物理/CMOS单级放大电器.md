@@ -86,3 +86,7 @@ $$\boxed{\text{增益}\sim \text{跨导}\times\text{输出电阻}}$$
 若是理想线性（$A_{v}\approx 1$），就应当有$$V_{out}-V_{in}=\mathrm{Const}$$然而实际上$$V_{out}-V_{in}=-V_{GS}$$问题就出在$V_{GS}$并不是恒定的。
 $$I_{D}=\frac{1}{2}\mu_{n}C_{ox}(V_{GS}-V_{TH})^2\implies V_{GS}\propto \sqrt{ I_{D} }$$
 如果漏电流$I_{D}$发生变化，就会导致非线性。
+因此最好是在源端接入电流源，保持电流恒定。
+![[带电流源的源跟随器电路.png]]
+另一方面，电压余度的减小体现在$V_{out}$和$V_{in}$的电压偏移使得$$V_{out \max}=V_{in \max}-V_{GS 1}$$而$M_{2}$管又要求$$V_{out \min{}}=V_{OV 2}$$最终使得$$V_{OV 2}\leq V_{out}\leq V_{in \max}-V_{GS 1}$$从而电压余度被两面的要求压缩。
+
