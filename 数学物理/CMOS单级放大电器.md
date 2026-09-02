@@ -116,3 +116,4 @@ $$I_{D}=\frac{1}{2}\mu_{n}C_{ox}(V_{GS}-V_{TH})^2\implies V_{GS}\propto \sqrt{ I
 ![[共栅极输入输出特性 1.png]]
 在饱和区$$V_{out}=V_{DD}-I_{D}R_{D}$$求偏导得到小信号增益$$A_{v}=\frac{ \partial  V_{out} }{ \partial  V_{in}} =(g_{m}+g_{mb})R_{D}$$
 这里需要注意两点：**增益是正值、体效应使等效跨导变大**。
+输入电阻$$R_{in}=\frac{1}{g_{m}+g_{mb}}$$输出电阻$$R_{\text{out}} = \left\{ [1+(g_m+g_{mb})r_o]R_S+r_o \right\} \parallel R_D$$由此可见，共栅电路的**输入电阻很小，输出电阻很高**。
