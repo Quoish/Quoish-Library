@@ -1764,6 +1764,326 @@ Password:
 alice
 ```
 
+### 8.13 `groupadd`：创建用户组
+
+- 名称来源：`groupadd` 由英语 “group add” 合成，即“添加用户组”。
+
+- 语法
+
+```bash
+groupadd [选项] <组名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-g <GID>` | 指定数字组 ID | GID = Group Identifier |
+| `-r` | 创建系统组，通常从系统组 ID 范围分配编号 |  |
+| `-f` | 组已存在时仍返回成功；与部分选项组合时还会采用可用 GID | force |
+| `-o` | 与 `-g` 配合，允许使用非唯一 GID；通常不推荐 |  |
+| `-R <目录>` | 在指定的 chroot 目录中操作账户数据库 | root directory |
+
+- 参数填写：组名通常使用小写字母、数字、下划线和连字符，并应符合本机账户策略。`GID` 来自 **Group Identifier**，应填写未被占用的非负整数。通常需要管理员权限。
+
+- 示例
+
+```console
+$ sudo groupadd -g 1500 developers
+$ getent group developers
+developers:x:1500:
+```
+
+`getent` 来自英语 “get entries”，用于从系统配置的名称服务数据库取得条目；其结果不一定只来自本地 `/etc/group`。
+
+### 8.14 `groupmod`：修改用户组
+
+- 名称来源：`groupmod` 由英语 “group modify” 缩合而来，即“修改用户组”。
+
+- 语法
+
+```bash
+groupmod [选项] <现有组名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-n <新组名>` | 修改组名 | new name |
+| `-g <新GID>` | 修改数字组 ID | GID = Group Identifier |
+| `-o` | 与 `-g` 配合，允许使用非唯一 GID；通常不推荐 |  |
+| `-R <目录>` | 在指定的 chroot 目录中操作账户数据库 | root directory |
+
+- 参数填写：最后一个参数必须是当前存在的组名。修改 GID 后，应检查文件系统中是否仍有文件保留旧 GID；`groupmod` 不会可靠地替你处理所有文件系统、网络挂载或离线数据。
+
+- 示例
+
+```console
+$ sudo groupmod -n appops appteam
+$ getent group appops
+appops:x:1600:
+```
+
+修改 GID 后可先查找旧 GID 对应的文件，再决定是否调整所有权：
+
+```console
+$ find /srv -group 1500 -print
+/srv/project/report.txt
+```
+
+### 8.15 `groupdel`：删除用户组
+
+- 名称来源：`groupdel` 由英语 “group delete” 缩合而来，即“删除用户组”。
+
+- 语法
+
+```bash
+groupdel [选项] <组名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-f` | 强制删除，即使该组仍是某用户的主组；风险较高，且并非所有版本都支持 | force |
+| `-R <目录>` | 在指定的 chroot 目录中操作账户数据库 | root directory |
+| `-P <前缀目录>` | 使用指定目录前缀下的账户文件；行为不同于 chroot | prefix |
+
+- 参数填写：填写现有组名。正常情况下，如果该组仍是某个用户的主组，命令会拒绝删除；应先用 `usermod -g` 为这些用户更换主组。删除组不会自动修改文件原有的数字 GID。
+
+- 示例
+
+```console
+$ sudo groupdel obsolete
+$ getent group obsolete
+$ echo $?
+2
+```
+
+示例中的空输出和非零退出码表示该组已无法查到。不同 `getent` 实现的具体退出码可能不同。
+
+### 8.16 `useradd`：创建用户账户
+
+- 名称来源：`useradd` 由英语 “user add” 合成，即“添加用户”。它通常来自 shadow-utils，是偏底层、适合脚本的账户创建工具。
+
+- 语法
+
+```bash
+useradd [选项] <用户名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-m` | 创建用户主目录 | make home directory |
+| `-M` | 明确不创建主目录 | no home directory |
+| `-d <目录>` | 指定主目录路径 | directory |
+| `-s <Shell>` | 指定登录 Shell | shell |
+| `-g <主组>` | 指定主组，可填组名或 GID | group |
+| `-G <组列表>` | 指定附加组，多个组用逗号分隔 | supplementary Groups |
+| `-u <UID>` | 指定数字用户 ID | UID = User Identifier |
+| `-c '<说明>'` | 设置账户说明/GECOS 字段，常填写真实姓名或用途 | comment |
+| `-e <日期>` | 设置账户到期日，常用 `YYYY-MM-DD` | expire date |
+| `-r` | 创建系统账户；通常从系统 UID 范围分配编号 |  |
+| `-N` | 不创建同名用户组 | no user group |
+| `-U` | 创建同名用户组 | user group |
+| `-k <骨架目录>` | 与 `-m` 配合，从指定 skeleton 目录复制初始文件 |  |
+
+- 参数填写：用户名必须符合本机策略；主组需事先存在，附加组列表不能包含空格。创建账户后通常还要用 `passwd <用户名>` 设置密码。发行版的 `/etc/login.defs` 与 `/etc/default/useradd` 会影响默认 UID、Shell、主目录和同名组行为。
+
+- 示例
+
+```console
+$ sudo useradd -m -s /bin/bash -g developers -G sudo -c 'Alice Example' alice
+$ sudo passwd alice
+New password:
+Retype new password:
+passwd: password updated successfully
+$ id alice
+uid=1501(alice) gid=1500(developers) groups=1500(developers),27(sudo)
+```
+
+不要把明文密码写进命令行。`useradd -p` 需要的是已经加密的密码散列，而且命令行参数可能被其他用户、审计系统或历史记录看到，因此这里不推荐使用。
+
+### 8.17 `usermod`：修改用户账户
+
+- 名称来源：`usermod` 由英语 “user modify” 缩合而来，即“修改用户”。
+
+- 语法
+
+```bash
+usermod [选项] <用户名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-a` | 与 `-G` 配合，把新组追加到现有附加组，而不是替换 | append |
+| `-G <组列表>` | 设置附加组列表；不加 `-a` 会替换原列表 | supplementary Groups |
+| `-g <主组>` | 修改主组 | group |
+| `-l <新用户名>` | 修改登录名 | login name |
+| `-d <目录>` | 修改主目录路径 | directory |
+| `-m` | 与 `-d` 配合，把原主目录内容移动到新位置 | move home |
+| `-s <Shell>` | 修改登录 Shell | shell |
+| `-u <UID>` | 修改数字用户 ID | UID = User Identifier |
+| `-c '<说明>'` | 修改账户说明/GECOS 字段 | comment |
+| `-e <日期>` | 修改账户到期日 | expire date |
+| `-L` | 锁定密码 | lock |
+| `-U` | 解锁密码 | unlock |
+
+- 参数填写：最后填写现有用户名。最容易误用的是 `-G`：单独使用会把用户现有的附加组替换成新列表；只想增加一个组时应使用 `-aG`。修改 UID、用户名或主目录前，应先停止该用户的进程并检查文件所有权。
+
+- 示例：把 `alice` 追加到 `docker` 组，同时保留原有附加组。
+
+```console
+$ sudo usermod -aG docker alice
+$ id alice
+uid=1501(alice) gid=1500(developers) groups=1500(developers),27(sudo),999(docker)
+```
+
+现有登录会话通常不会立即获得新的组列表；用户需要重新登录，或在合适场景下启动新的组环境。
+
+### 8.18 `userdel`：删除用户账户
+
+- 名称来源：`userdel` 由英语 “user delete” 缩合而来，即“删除用户”。
+
+- 语法
+
+```bash
+userdel [选项] <用户名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-r` | 同时删除主目录和邮件池 | remove home and mail spool |
+| `-f` | 强制删除，即使用户仍已登录；可能留下运行进程或其他数据，风险高 | force |
+| `-R <目录>` | 在指定的 chroot 目录中操作账户数据库 | root directory |
+| `-P <前缀目录>` | 使用指定目录前缀下的账户文件 | prefix |
+| `-Z` | 删除相应的 SELinux 用户映射；仅在支持的系统上有效 |  |
+
+- 参数填写：填写现有用户名。删除前检查该用户的运行进程、计划任务、邮件、主目录之外的文件、服务配置、SSH 密钥和业务数据。`-r` 通常只处理主目录与邮件池，不会删除用户在其他目录中的文件。
+
+- 示例：先检查，再删除测试账户及其主目录。
+
+```console
+$ pgrep -a -u testuser
+6201 sleep 300
+$ sudo pkill -TERM -u testuser
+$ sudo userdel -r testuser
+$ id testuser
+id: 'testuser': no such user
+```
+
+若账户拥有需要保留的数据，应先转移所有权或归档。删除后遗留文件只保存数字 UID；将来该 UID 被新账户复用时，旧文件可能意外归属于新用户。
+
+### 8.19 `adduser` / `deluser`：交互式管理用户与组
+
+- 名称来源：`adduser` 和 `deluser` 分别来自英语 “add user” 与 “delete user”。在 Debian/Ubuntu 中，它们通常是对底层账户工具的高层封装；其他发行版可能不存在，或含义不同。
+
+- 语法（Debian/Ubuntu 常见实现）
+
+```bash
+adduser [选项] <用户名>
+adduser <用户名> <组名>
+addgroup [选项] <组名>
+deluser [选项] <用户名>
+deluser <用户名> <组名>
+delgroup [选项] <组名>
+```
+
+- 常用选项与写法
+
+| 选项或写法 | 功能 | 字母来源 |
+|---|---|---|
+| `adduser <用户>` | 交互式创建普通用户，并通常创建主目录、同名组和密码 |  |
+| `adduser <用户> <组>` | 把现有用户加入现有组 |  |
+| `addgroup <组>` | 创建用户组 |  |
+| `--system` | 创建系统用户或系统组 |  |
+| `--home <目录>` | 指定主目录 |  |
+| `--shell <Shell>` | 指定登录 Shell |  |
+| `deluser <用户> <组>` | 从组中移除用户，但不删除用户账户 |  |
+| `--remove-home` | 删除账户时同时删除主目录和邮件池 |  |
+| `--remove-all-files` | 删除该用户拥有的全部文件；范围很大，必须谨慎 |  |
+| `--backup` | 删除前备份用户文件 |  |
+
+- 参数填写：这组命令的具体选项与行为高度依赖发行版；使用前先运行 `adduser --help`、`deluser --help`。不要假设它们在 Fedora、RHEL、Arch 等系统上与 Debian 实现完全相同。
+
+- 示例（Debian/Ubuntu）：
+
+```console
+$ sudo adduser bob
+Adding user `bob' ...
+Adding new group `bob' (1502) ...
+Adding new user `bob' (1502) with group `bob' ...
+Creating home directory `/home/bob' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+$ sudo adduser bob developers
+Adding user `bob' to group `developers' ...
+Done.
+```
+
+### 8.20 `gpasswd`：管理组成员和组管理员
+
+- 名称来源：`gpasswd` 来自英语 “group password”。它历史上用于管理组密码，现在也常用于维护组成员与组管理员。
+
+- 语法
+
+```bash
+gpasswd [选项] <组名>
+```
+
+- 常用选项
+
+| 选项 | 功能 | 字母来源 |
+|---|---|---|
+| `-a <用户>` | 把一个用户加入组 | add |
+| `-d <用户>` | 把一个用户从组中移除 | delete |
+| `-M <用户列表>` | 一次设置完整成员列表，逗号分隔；会替换原列表 | members |
+| `-A <管理员列表>` | 设置组管理员列表，逗号分隔 | administrators |
+| `-r` | 删除组密码 | remove password |
+| `-R` | 限制使用组密码加入该组 | restrict access |
+
+- 参数填写：目标用户和组必须已存在。`-M` 会替换整个成员列表，自动化中使用前应先核对现有成员。普通用户组密码机制很少推荐，通常使用明确的管理员权限和成员列表更安全。
+
+- 示例
+
+```console
+$ sudo gpasswd -a alice developers
+Adding user alice to group developers
+$ getent group developers
+developers:x:1500:alice
+$ sudo gpasswd -d alice developers
+Removing user alice from group developers
+```
+
+### 8.21 账户管理文件与操作顺序
+
+| 路径 | 名称来源 | 保存内容 |
+|---|---|---|
+| `/etc/passwd` | password file；现代系统通常不在这里保存密码散列 | 用户名、UID、GID、说明、主目录、登录 Shell |
+| `/etc/shadow` | shadow password file | 受保护的密码散列及密码期限信息 |
+| `/etc/group` | group file | 组名、GID 和成员列表 |
+| `/etc/gshadow` | group shadow file | 受保护的组管理员、成员和组密码信息 |
+| `/etc/login.defs` | login definitions | shadow-utils 的部分默认值和账户策略 |
+
+推荐操作顺序：
+
+1. 创建需要的组：`groupadd`。
+2. 创建用户并设置主组、附加组和 Shell：`useradd`。
+3. 设置密码：`passwd`；服务账户通常应使用 `nologin` Shell，并按实际需要决定是否设置密码。
+4. 用 `id`、`groups`、`getent passwd`、`getent group` 核对结果。
+5. 删除前先检查进程、服务、文件、计划任务和密钥；归档需要保留的数据。
+6. 先删用户或调整其主组，再删除不再使用的组。
+
+账户数据库可能来自 LDAP、SSSD、NIS 或其他目录服务，而不只是本地文件。在集中身份环境中，应使用对应的目录管理流程，不要仅修改本机账户文件。
+
 ---
 
 ## 9. 系统与时间信息
@@ -4199,7 +4519,7 @@ total size is 24.80K  speedup is 134.78 (DRY RUN)
 | `2>&1` | 把标准错误合并到当前标准输出目标 | `cmd >all.log 2>&1` |
 | `<` | 从文件提供标准输入 | `sort < names.txt` |
 | `&&` | 前一条成功才运行后一条 | `mkdir build && cd build` |
-| `||` | 前一条失败才运行后一条 | `ping -c1 host || echo failed` |
+| `\|\|` | 前一条失败才运行后一条 | `ping -c1 host \|\| echo failed` |
 | `;` | 无论前一条是否成功都继续 | `date; uptime` |
 | `&` | 在后台启动 | `sleep 300 &` |
 
