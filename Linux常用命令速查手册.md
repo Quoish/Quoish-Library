@@ -2384,16 +2384,17 @@ ps [选项]
 
 - 常用选项
 
-| 选项 | 功能 | 字母来源 |
-|---|---|---|
-| `-e`、`-A` | 显示所有进程 | every process；all |
-| `-f` | 完整格式 | full format |
-| `-u <用户>` | 显示指定用户的进程 | user |
-| `-p <PID列表>` | 只显示指定 PID，逗号分隔 | process ID |
-| `-o <字段>` | 自定义列，如 `pid,user,%cpu,cmd` | output format |
-| `--sort=<字段>` | 排序；前缀 `-` 表示降序，如 `--sort=-%cpu` |  |
-| `aux` | BSD 常见组合：显示所有用户和详细资源信息 | a = all terminals；u = user format；x = include no-TTY processes |
-| `--forest` | 以树状关系显示进程 |  |
+| 选项            | 功能                              | 字母来源                                                           |
+| ------------- | ------------------------------- | -------------------------------------------------------------- |
+| `-e`、`-A`     | 显示所有进程                          | every process；all                                              |
+| `-f`          | 完整格式                            | full format                                                    |
+| `-u <用户>`     | 显示指定用户的进程                       | user                                                           |
+| `-p <PID列表>`  | 只显示指定 PID，逗号分隔                  | process ID                                                     |
+| `-o <字段>`     | 自定义列，如 `pid,user,%cpu,cmd`      | output format                                                  |
+| `--sort=<字段>` | 排序；前缀 `-` 表示降序，如 `--sort=-%cpu` |                                                                |
+| `aux`         | BSD 常见组合：显示所有用户和详细资源信息          | a = all terminals；u = user format；x = include no-TTY processes |
+| `--forest`    | 以树状关系显示进程                       |                                                                |
+|               |                                 |                                                                |
 
 - 参数填写：PID 可用逗号分隔；字段名参考 `ps --help output`。
 
