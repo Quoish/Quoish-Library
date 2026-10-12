@@ -1,14 +1,14 @@
 ---
-title: 'Fermi-Dirac分布'
+title: Fermi-Dirac分布
 aliases:
-  - '费米-狄拉克分布'
+  - 费米-狄拉克分布
 tags:
-  - '统计物理'
+  - 统计物理
 category:
-  - '热力学与统计物理'
-status:
-created: '2025-11-16'
-updated: '2026-05-25'
+  - 热力学与统计物理
+status: 完成
+created: 2025-11-16
+updated: 2026-05-25
 ---
 # Fermi分布
 根据[[三种粒子系统分布的微观状态数#费米系统的微观状态数]]，两边取对数

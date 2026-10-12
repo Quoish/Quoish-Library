@@ -1,15 +1,15 @@
 ---
-title: 'Lie群和Lie代数'
+title: Lie群和Lie代数
 aliases:
-  - '李群和李代数'
+  - 李群和李代数
 tags:
-  - '微分几何'
-  - '抽象代数'
+  - 微分几何
+  - 抽象代数
 category:
-  - '场论、微分几何与张量分析'
-status:
-created: '2026-05-01'
-updated: '2026-07-20'
+  - 场论、微分几何与张量分析
+status: 完成
+created: 2026-05-01
+updated: 2026-07-20
 ---
 # 李群和李代数
 ## Lie群

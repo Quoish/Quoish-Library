@@ -1,14 +1,14 @@
 ---
-title: 'Legendre函数'
+title: Legendre函数
 aliases:
-  - '勒让德函数'
+  - 勒让德函数
 tags:
-  - '数理方法'
+  - 数理方法
 category:
-  - '数学物理方法'
-status:
-created: '2025-11-16'
-updated: '2025-10-18'
+  - 数学物理方法
+status: 完成
+created: 2025-11-16
+updated: 2025-10-18
 ---
 # 连带Legendre方程
 $$

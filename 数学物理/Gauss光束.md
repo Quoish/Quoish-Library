@@ -1,15 +1,15 @@
 ---
-title: 'Gauss光束'
+title: Gauss光束
 aliases:
-  - '高斯光束'
+  - 高斯光束
 tags:
-  - '激光原理'
-  - '光学'
+  - 激光原理
+  - 光学
 category:
-  - '电磁学与光学'
-status:
-created: '2026-05-16'
-updated: '2026-06-04'
+  - 电磁学与光学
+status: 完成
+created: 2026-05-16
+updated: 2026-06-04
 ---
 # 对称共焦腔的Gauss光束
 ## Gauss行波场

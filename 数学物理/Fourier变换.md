@@ -1,16 +1,16 @@
 ---
-title: 'Fourier变换'
+title: Fourier变换
 aliases:
-  - '傅里叶变换'
+  - 傅里叶变换
 tags:
-  - '信号处理'
-  - '数理方法'
+  - 信号处理
+  - 数理方法
 category:
-  - '数学物理方法'
-  - '信息与信号'
-status:
-created: '2025-11-16'
-updated: '2026-05-08'
+  - 数学物理方法
+  - 信息与信号
+status: 完成
+created: 2025-11-16
+updated: 2026-05-08
 ---
 # Fourier级数
 ## Fourier级数的三角形式

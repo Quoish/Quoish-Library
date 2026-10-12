@@ -1,14 +1,14 @@
 ---
-title: 'Bassel函数'
+title: Bassel函数
 aliases:
-  - '贝塞尔函数'
+  - 贝塞尔函数
 tags:
-  - '数理方法'
+  - 数理方法
 category:
-  - '数学物理方法'
-status:
-created: '2025-11-16'
-updated: '2025-10-24'
+  - 数学物理方法
+status: 完成
+created: 2025-11-16
+updated: 2025-10-24
 ---
 # 含参Bassel方程
 $$

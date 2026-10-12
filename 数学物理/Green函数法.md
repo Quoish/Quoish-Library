@@ -1,14 +1,14 @@
 ---
-title: 'Green函数法'
+title: Green函数法
 aliases:
-  - '格林函数法'
+  - 格林函数法
 tags:
-  - '数理方法'
+  - 数理方法
 category:
-  - '数学物理方法'
-status:
-created: '2025-11-16'
-updated: '2025-10-17'
+  - 数学物理方法
+status: 完成
+created: 2025-11-16
+updated: 2025-10-17
 ---
 # Green恒等式
 根据[[广义Stokes定理#Gauss定理]]$$\iiint \nabla \cdot \vec{A}\mathrm{d}V=\iint_{}\kern{-13.5pt}\subset\kern{-2pt}\supset  \vec{A}\cdot \mathrm{d}\vec{S}  $$

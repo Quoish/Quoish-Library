@@ -1,14 +1,14 @@
 ---
-title: 'Bose-Einstein分布'
+title: Bose-Einstein分布
 aliases:
-  - '玻色-爱因斯坦分布'
+  - 玻色-爱因斯坦分布
 tags:
-  - '统计物理'
+  - 统计物理
 category:
-  - '热力学与统计物理'
-status:
-created: '2025-11-16'
-updated: '2025-10-26'
+  - 热力学与统计物理
+status: 完成
+created: 2025-11-16
+updated: 2025-10-26
 ---
 根据[[三种粒子系统分布的微观状态数#玻色系统的微观状态数]]，两边取对数
 $$\ln W=\sum_{l}\{ \ln(g_{l}+N_{l}-1)!-\ln N_{l}!-\ln(g_{l}-1)! \}$$

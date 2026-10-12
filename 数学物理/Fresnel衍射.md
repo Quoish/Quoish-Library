@@ -1,14 +1,14 @@
 ---
-title: 'Fresnel衍射'
+title: Fresnel衍射
 aliases:
-  - '菲涅耳衍射'
+  - 菲涅耳衍射
 tags:
-  - '光学'
+  - 光学
 category:
-  - '电磁学与光学'
-status:
-created: '2025-11-16'
-updated: '2026-05-31'
+  - 电磁学与光学
+status: 完成
+created: 2025-11-16
+updated: 2026-05-31
 ---
 Fresnel衍射是在[[光的衍射#Fresnel近似]]]条件成立的距离范围内所观察到的衍射现象。
 直接计算Fresnel衍射，其数学处理非常复杂。实际上都采用数值计算方法，或者在半定量处理问题时，采用物理概念清晰、简单的菲涅耳波带作图法讨论。

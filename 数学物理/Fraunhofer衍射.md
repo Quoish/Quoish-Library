@@ -1,14 +1,14 @@
 ---
-title: 'Fraunhofer衍射'
+title: Fraunhofer衍射
 aliases:
-  - '夫琅禾费衍射'
+  - 夫琅禾费衍射
 tags:
-  - '光学'
+  - 光学
 category:
-  - '电磁学与光学'
-status:
-created: '2025-11-16'
-updated: '2025-12-27'
+  - 电磁学与光学
+status: 完成
+created: 2025-11-16
+updated: 2025-12-27
 ---
 在[[光的衍射#Fraunhofer近似]]中我们已经提到，Fraunhofer衍射的观测屏必须要距离衍射屏很远的位置。
 实际上要实现这么远的距离会很麻烦，我们可以考虑用透镜代替这个情况。

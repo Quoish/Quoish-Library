@@ -1,15 +1,15 @@
 ---
-title: 'Maxwell方程组'
+title: Maxwell方程组
 aliases:
-  - '麦克斯韦方程组'
+  - 麦克斯韦方程组
 tags:
-  - '电磁学'
-  - '场论'
+  - 电磁学
+  - 场论
 category:
-  - '电磁学与光学'
-status:
-created: '2025-11-16'
-updated: '2026-07-16'
+  - 电磁学与光学
+status: 完成
+created: 2025-11-16
+updated: 2026-07-16
 ---
 Maxwell方程组、Lorentz力公式、[[物质的电磁特性#物质方程]]、[[电荷守恒定律]]构成了经典电磁学的全部图景。
 Maxwell方程组由四部分组成：

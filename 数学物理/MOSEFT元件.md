@@ -1,14 +1,14 @@
 ---
-title: 'MOSEFT元件'
+title: MOSEFT元件
 aliases:
-  - 'MOSFET元件'
+  - MOSFET元件
 tags:
-  - '集成电路'
+  - 集成电路
 category:
-  - '电子线路'
-status:
-created: '2026-08-26'
-updated: '2026-09-11'
+  - 电子线路
+status: 完成
+created: 2026-08-26
+updated: 2026-09-11
 ---
 ![[漏电流的饱和.png]]![[预夹断的出现.png]]
 学习集成电路的设计，可以采用以下两种极端方法之一：

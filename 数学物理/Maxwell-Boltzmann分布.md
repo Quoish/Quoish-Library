@@ -1,14 +1,14 @@
 ---
-title: 'Maxwell-Boltzmann分布'
+title: Maxwell-Boltzmann分布
 aliases:
-  - '麦克斯韦-玻尔兹曼分布'
+  - 麦克斯韦-玻尔兹曼分布
 tags:
-  - '统计物理'
+  - 统计物理
 category:
-  - '热力学与统计物理'
-status:
-created: '2025-11-16'
-updated: '2025-11-16'
+  - 热力学与统计物理
+status: 完成
+created: 2025-11-16
+updated: 2025-11-16
 ---
 Maxwell-Boltzmann分布（又称Boltzmann分布），是经典粒子系统的[[统计物理概述#最可几分布|最可几分布]]
 表达式可以通过对[[三种粒子系统分布的微观状态数#经典系统的微观状态数|经典系统的微观状态数]]求最值得到。

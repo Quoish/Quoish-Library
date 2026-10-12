@@ -1,15 +1,15 @@
 ---
-title: 'Legendre变换'
+title: Legendre变换
 aliases:
-  - '勒让德变换'
+  - 勒让德变换
 tags:
-  - '经典力学'
-  - '热力学'
+  - 经典力学
+  - 热力学
 category:
-  - '经典力学'
-status:
-created: '2026-02-26'
-updated: '2026-02-26'
+  - 经典力学
+status: 完成
+created: 2026-02-26
+updated: 2026-02-26
 ---
 # Legendre变换
 Legendre变换是一种改变函数自变量的技巧。
