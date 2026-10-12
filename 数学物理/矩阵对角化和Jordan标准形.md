@@ -1,14 +1,14 @@
 ---
-title: '矩阵对角化和Jordan标准形'
+title: 矩阵对角化和Jordan标准形
 aliases:
-  - '矩阵对角化和约当标准形'
+  - 矩阵对角化和约当标准形
 tags:
-  - '线性代数'
+  - 线性代数
 category:
-  - '线性代数'
-status:
-created: '2026-02-28'
-updated: '2026-04-29'
+  - 线性代数
+status: 完成
+created: 2026-02-28
+updated: 2026-04-29
 ---
 # 矩阵对角化
 ## 特征值和特征向量
