@@ -1,15 +1,15 @@
 ---
-title: '广义Stokes定理'
+title: 广义Stokes定理
 aliases: []
 tags:
-  - '数学分析'
-  - '场论'
-  - '微分几何'
+  - 数学分析
+  - 场论
+  - 微分几何
 category:
-  - '场论、微分几何与张量分析'
-status:
-created: '2025-11-16'
-updated: '2026-07-16'
+  - 场论、微分几何与张量分析
+status: 完成
+created: 2025-11-16
+updated: 2026-07-16
 ---
 # 前置概念
 ## Jordan曲线/简单闭曲线
