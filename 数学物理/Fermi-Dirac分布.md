@@ -8,10 +8,10 @@ category:
   - 热力学与统计物理
 status: 完成
 created: 2025-11-16
-updated: 2026-05-25
+updated: 2026-10-13
 ---
 # Fermi分布
-根据[[三种粒子系统分布的微观状态数#费米系统的微观状态数]]，两边取对数
+根据[[全同粒子#费米系统的微观状态数]]，两边取对数
 $$\ln W=\sum_{l}\{ \ln g_{l}!-\ln N_{l}!-\ln(g_{l}-N_{l})! \}$$
 假设$g_{l}\gg 1$，$N_{l}\gg 1$，$g_{l}-N_{l}\gg 1$，并利用Stirling公式。
 $$\ln W=\sum_{l}\{ g_{l}\ln g_{l}-N_{l}\ln N_{l}-(g_{l}-N_{l})\ln(g_{l}-N_{l}) \}$$
