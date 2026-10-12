@@ -7,8 +7,8 @@ tags:
 category:
   - '热力学与统计物理'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2025-11-16T12:17:23+08:00'
+created: '2025-11-16'
+updated: '2025-11-16'
 ---
 #统计物理 
 Maxwell-Boltzmann分布（又称Boltzmann分布），是经典粒子系统的[[统计物理的方法#最可几分布|最可几分布]]

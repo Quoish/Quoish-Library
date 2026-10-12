@@ -7,8 +7,8 @@ tags:
 category:
   - '数学物理方法'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2025-10-24T13:05:28+08:00'
+created: '2025-11-16'
+updated: '2025-10-24'
 ---
 #数理方法 
 # 含参Bassel方程

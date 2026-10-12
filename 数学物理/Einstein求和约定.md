@@ -7,8 +7,8 @@ tags:
 category:
   - '场论、微分几何与张量分析'
 status:
-created: '2025-12-22T13:33:24+08:00'
-updated: '2025-12-22T15:13:08+08:00'
+created: '2025-12-22'
+updated: '2025-12-22'
 ---
 #场论 
 # Einstein求和约定

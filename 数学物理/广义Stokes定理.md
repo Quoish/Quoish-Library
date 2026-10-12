@@ -1,7 +1,6 @@
 ---
 title: '广义Stokes定理'
-aliases:
-  - '广义Stokes定理 笔记'
+aliases: []
 tags:
   - '数学分析'
   - '场论'
@@ -9,8 +8,8 @@ tags:
 category:
   - '场论、微分几何与张量分析'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2026-07-16T17:29:48+08:00'
+created: '2025-11-16'
+updated: '2026-07-16'
 ---
 #数学分析 #场论 #微分几何
 # 前置概念

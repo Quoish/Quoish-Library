@@ -8,8 +8,8 @@ tags:
 category:
   - '经典力学'
 status:
-created: '2026-02-26T16:39:13+08:00'
-updated: '2026-02-26T20:23:56+08:00'
+created: '2026-02-26'
+updated: '2026-02-26'
 ---
 #经典力学 #热力学 
 # Legendre变换

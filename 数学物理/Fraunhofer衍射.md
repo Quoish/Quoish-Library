@@ -7,8 +7,8 @@ tags:
 category:
   - '电磁学与光学'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2025-12-27T20:17:34+08:00'
+created: '2025-11-16'
+updated: '2025-12-27'
 ---
 #光学 
 在[[光的衍射#Fraunhofer近似]]中我们已经提到，Fraunhofer衍射的观测屏必须要距离衍射屏很远的位置。

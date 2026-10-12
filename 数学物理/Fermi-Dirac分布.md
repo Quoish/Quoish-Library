@@ -7,8 +7,8 @@ tags:
 category:
   - '热力学与统计物理'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2026-05-25T21:32:56+08:00'
+created: '2025-11-16'
+updated: '2026-05-25'
 ---
 #统计物理 
 # Fermi分布

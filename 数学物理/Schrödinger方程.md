@@ -7,8 +7,8 @@ tags:
 category:
   - '非相对论量子力学'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2026-02-23T23:54:11+08:00'
+created: '2025-11-16'
+updated: '2026-02-23'
 ---
 #量子力学 
 # Schrödinger方程

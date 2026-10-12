@@ -7,8 +7,8 @@ tags:
 category:
   - '非相对论量子力学'
 status:
-created: '2025-11-16T13:04:27+08:00'
-updated: '2025-10-27T16:32:54+08:00'
+created: '2025-11-16'
+updated: '2025-10-27'
 ---
 #量子力学 
 # Bose-Sommerfeld量子化条件
