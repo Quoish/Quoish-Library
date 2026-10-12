@@ -1,5 +1,4 @@
-# Python 面向对象：实例方法、类方法与静态方法
-## 1. 三种方法概述
+# 1. 三种方法概述
 
 Python 类中定义的方法主要分为三种：
 
@@ -13,7 +12,7 @@ Python 类中定义的方法主要分为三种：
 
 ---
 
-## 2. 实例方法（Instance Method）
+# 2. 实例方法（Instance Method）
 
 ### 2.1 定义
 
@@ -51,7 +50,7 @@ s2.introduce()  # 我是Bob
 s1.introduce()
 ```
 
-等价于：
+通常等价于：
 
 ```
 Student.introduce(s1)
@@ -77,7 +76,7 @@ Python 自动将调用方法的实例作为第一个参数传入。
 
 ---
 
-## 3. 类方法（Class Method）
+# 3. 类方法（Class Method）
 
 ### 3.1 定义
 
@@ -199,7 +198,7 @@ print(type(s))
 
 ---
 
-## 4. 静态方法（Static Method）
+# 4. 静态方法（Static Method）
 
 ### 4.1 定义
 
@@ -260,7 +259,7 @@ class Student:
 
 ---
 
-## 5. 三种方法的完整对比
+# 5. 三种方法的完整对比
 
 ```
 class Student:
@@ -306,7 +305,7 @@ print(Student.is_adult(20))
 
 ---
 
-## 6. 方法的底层绑定机制
+# 6. 方法的底层绑定机制
 
 Python 的方法绑定与**描述符协议（Descriptor Protocol）**有关。
 
@@ -342,7 +341,7 @@ Class.method()
 
 ---
 
-## 7. 如何选择方法类型？
+# 7. 如何选择方法类型？
 
 判断顺序：
 
@@ -365,7 +364,7 @@ Class.method()
 
 ---
 
-## 8. 常见误区
+# 8. 常见误区
 
 ### 误区一：`self` 和 `cls` 是 Python 关键字
 
@@ -399,7 +398,7 @@ Python 的三种方法主要区别在于参数的自动绑定方式，而不是�
 
 ---
 
-## 9. 总结
+# 9. 总结
 
 三种方法的核心可以概括为：
 
