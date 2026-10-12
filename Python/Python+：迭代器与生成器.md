@@ -1,10 +1,15 @@
 ---
-tags:
-  - Python
+title:
+  - Python 迭代器与生成器
 aliases:
   - Python Iterator and Generator
+tags:
+  - Python
+category: Python/高级语法
+status: 完成
+created: 2026-10-13
+updated: 2026-10-13
 ---
-
 # Python 迭代器与生成器
 
 > [!abstract] 本文目标
