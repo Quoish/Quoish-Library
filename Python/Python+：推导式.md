@@ -1,6 +1,4 @@
-# Python 推导式（Comprehension）
-
-## 1. 什么是推导式
+# 1. 什么是推导式
 
 推导式（Comprehension）是 Python 提供的一种简洁语法，用于根据已有的可迭代对象构造新的数据容器。
 
@@ -15,7 +13,7 @@
 
 注意：Python 没有元组推导式，使用圆括号构造的类似表达式是**生成器表达式**。
 
-## 2. 使用目的
+# 2. 使用目的
 
 推导式主要用于：
 
@@ -30,11 +28,13 @@
 
 推导式适合逻辑简单的数据处理，但不适合包含复杂控制流程的操作。
 
-## 3. 列表推导式
+# 3. 列表推导式
 
-### 3.1 基本语法
+## 3.1 基本语法
 
-`[expression for item in iterable if condition]`
+```
+[expression for item in iterable if condition]
+```
 
 各部分含义：
 
@@ -47,7 +47,7 @@
 - `condition`：可选的筛选条件。
     
 
-### 3.2 基本示例
+## 3.2 基本示例
 
 普通循环：
 
@@ -69,7 +69,7 @@ print(squares)
 # [0, 1, 4, 9, 16]
 ```
 
-### 3.3 使用 if 筛选
+## 3.3 使用 if 筛选
 
 ```
 numbers = range(10)
@@ -89,7 +89,7 @@ print(evens)
 3. 如果条件成立，将 `x` 加入新列表。
     
 
-### 3.4 使用 if-else 转换
+## 3.4 使用 if-else 转换
 
 ```
 numbers = [1, 2, 3, 4, 5]
@@ -107,7 +107,7 @@ print(result)
 - `[a if condition else b for x in data]`：根据条件选择表达式的结果。
     
 
-### 3.5 多层循环
+## 3.5 多层循环
 
 ```
 pairs = [(x, y) for x in range(3) for y in range(2)]
@@ -126,13 +126,15 @@ for x in range(3):
         pairs.append((x, y))
 ```
 
-## 4. 字典推导式
+# 4. 字典推导式
 
-### 4.1 基本语法
+## 4.1 基本语法
 
-`{key_expression: value_expression for item in iterable}`
+```
+{key_expression: value_expression for item in iterable}
+```
 
-### 4.2 示例：数字与平方映射
+## 4.2 示例：数字与平方映射
 
 ```
 squares = {x: x ** 2 for x in range(5)}
@@ -141,7 +143,7 @@ print(squares)
 # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 ```
 
-### 4.3 示例：交换字典的键和值
+## 4.3 示例：交换字典的键和值
 
 ```
 data = {"Alice": 20, "Bob": 21}
@@ -154,13 +156,15 @@ print(reversed_data)
 
 注意：如果原字典中存在重复的值，交换键和值时可能发生覆盖。
 
-## 5. 集合推导式
+# 5. 集合推导式
 
-### 5.1 基本语法
+## 5.1 基本语法
 
-`{expression for item in iterable}`
+```
+{expression for item in iterable}
+```
 
-### 5.2 示例：去除重复结果
+## 5.2 示例：去除重复结果
 
 ```
 numbers = [1, 2, 2, 3, 3, 4]
@@ -173,7 +177,7 @@ print(result)
 
 集合推导式得到的是 `set` 对象，因此自动去重。
 
-## 6. 推导式与普通循环的区别
+# 6. 推导式与普通循环的区别
 
 |特性|普通 for 循环|推导式|
 |---|---|---|
@@ -183,7 +187,7 @@ print(result)
 |多层逻辑|容易组织|容易变得难读|
 |适用范围|通用循环|构造新容器|
 
-## 7. 注意事项
+# 7. 注意事项
 
 1. 列表推导式会立即构造完整列表，数据量大时可能占用较多内存。
     
@@ -196,7 +200,7 @@ print(result)
 5. 生成器表达式与推导式语法相似，但使用惰性求值。
     
 
-## 8. 总结
+# 8. 总结
 
 推导式的核心思想是：
 
