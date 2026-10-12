@@ -1,3 +1,15 @@
+---
+title: 'Bassel函数'
+aliases:
+  - '贝塞尔函数'
+tags:
+  - '数理方法'
+category:
+  - '数学物理方法'
+status:
+created: '2025-11-16T13:04:27+08:00'
+updated: '2025-10-24T13:05:28+08:00'
+---
 #数理方法 
 # 含参Bassel方程
 $$

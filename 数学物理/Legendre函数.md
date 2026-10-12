@@ -1,3 +1,15 @@
+---
+title: 'Legendre函数'
+aliases:
+  - '勒让德函数'
+tags:
+  - '数理方法'
+category:
+  - '数学物理方法'
+status:
+created: '2025-11-16T13:04:27+08:00'
+updated: '2025-10-18T17:23:34+08:00'
+---
 #数理方法 
 # 连带Legendre方程
 $$

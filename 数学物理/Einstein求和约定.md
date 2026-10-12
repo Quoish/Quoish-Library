@@ -1,3 +1,15 @@
+---
+title: 'Einstein求和约定'
+aliases:
+  - '爱因斯坦求和约定'
+tags:
+  - '场论'
+category:
+  - '场论、微分几何与张量分析'
+status:
+created: '2025-12-22T13:33:24+08:00'
+updated: '2025-12-22T15:13:08+08:00'
+---
 #场论 
 # Einstein求和约定
 Einstein求和约定是一种符号速记法。

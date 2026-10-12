@@ -1,3 +1,15 @@
+---
+title: 'Nabla算子'
+aliases:
+  - '∇算子'
+tags:
+  - '场论'
+category:
+  - '场论、微分几何与张量分析'
+status:
+created: '2025-11-16T13:04:27+08:00'
+updated: '2025-09-01T17:14:47+08:00'
+---
 #场论 
 # Nabla算子的二重性
 Nabla原指一种希伯来竖琴。
