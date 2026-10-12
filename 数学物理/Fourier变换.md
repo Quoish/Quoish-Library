@@ -12,7 +12,6 @@ status:
 created: '2025-11-16'
 updated: '2026-05-08'
 ---
-#信号处理 #数理方法 
 # Fourier级数
 ## Fourier级数的三角形式
 $$f(t)=\frac{a_{0}}{2}+\sum_{k=1}^{+\infty}[a_{k}\cos(k\Omega t)+b_{k}\sin(k\Omega t)]$$

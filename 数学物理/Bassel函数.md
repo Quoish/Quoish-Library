@@ -10,7 +10,6 @@ status:
 created: '2025-11-16'
 updated: '2025-10-24'
 ---
-#数理方法 
 # 含参Bassel方程
 $$
 x^2y''+xy'+(\lambda x^2-\nu^2)y=0\\

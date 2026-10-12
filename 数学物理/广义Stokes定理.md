@@ -11,7 +11,6 @@ status:
 created: '2025-11-16'
 updated: '2026-07-16'
 ---
-#数学分析 #场论 #微分几何
 # 前置概念
 ## Jordan曲线/简单闭曲线
 设$L$为平面上一条曲线，$L:\vec{r}(t)=x(t)\vec{i}+y(t)\vec{j}+z(t)\vec{k},t\in[\alpha,\beta]$。

@@ -10,7 +10,6 @@ status:
 created: '2025-11-16'
 updated: '2026-02-23'
 ---
-#量子力学 
 # Schrödinger方程
 我们注意到单色平面经典波是$Ae^{ i(\vec{k}\cdot r-\omega t) }$的实部，于是不妨将能量$E=\hbar \omega$，动量$\vec{p}'=\hbar \vec{k}'$，质量为$m$的非相对论自由粒子波函数写为
 $$\Psi(\vec{r},t)=(2\pi \hbar)^{-3/2}e^{i(\vec{p}\cdot \vec{r}-Et)/\hbar}$$

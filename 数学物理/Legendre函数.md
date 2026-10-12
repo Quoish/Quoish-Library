@@ -10,7 +10,6 @@ status:
 created: '2025-11-16'
 updated: '2025-10-18'
 ---
-#数理方法 
 # 连带Legendre方程
 $$
 (1-x^2)y'' -2xy'+\left(\mu-\frac{m^2}{1-x^2} \right)y=0

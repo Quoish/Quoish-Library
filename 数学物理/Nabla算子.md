@@ -10,7 +10,6 @@ status:
 created: '2025-11-16'
 updated: '2025-09-01'
 ---
-#场论 
 # Nabla算子的二重性
 Nabla原指一种希伯来竖琴。
 Nabla算子定义为

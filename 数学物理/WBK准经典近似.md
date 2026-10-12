@@ -10,5 +10,4 @@ status:
 created: '2025-11-16'
 updated: '2025-10-27'
 ---
-#量子力学 
 # Bose-Sommerfeld量子化条件

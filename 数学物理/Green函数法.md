@@ -10,7 +10,6 @@ status:
 created: '2025-11-16'
 updated: '2025-10-17'
 ---
-#数理方法 
 # Green恒等式
 根据[[广义Stokes定理#Gauss定理]]$$\iiint \nabla \cdot \vec{A}\mathrm{d}V=\iint_{}\kern{-13.5pt}\subset\kern{-2pt}\supset  \vec{A}\cdot \mathrm{d}\vec{S}  $$
 令$\vec{A}=u\nabla v$，有$$\iiint \nabla \cdot (u\nabla v)\mathrm{d}V=\iint_{}\kern{-13.5pt}\subset\kern{-2pt}\supset  (u\nabla v)\cdot \mathrm{d}\vec{S}  $$
