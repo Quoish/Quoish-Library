@@ -1,4 +1,4 @@
-**Python 推导式（Comprehension）**
+# Python 推导式（Comprehension）
 
 # 1. 什么是推导式
 
@@ -53,7 +53,7 @@
 
 普通循环：
 
-```
+```python
 squares = []
 
 for x in range(5):
