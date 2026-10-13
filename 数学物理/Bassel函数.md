@@ -8,7 +8,7 @@ category:
   - 数学物理方法
 status: 完成
 created: 2025-11-16
-updated: 2025-10-24
+updated: 2026-10-13
 ---
 # 含参Bassel方程
 $$

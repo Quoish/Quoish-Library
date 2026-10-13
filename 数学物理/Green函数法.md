@@ -8,7 +8,7 @@ category:
   - 数学物理方法
 status: 完成
 created: 2025-11-16
-updated: 2025-10-17
+updated: 2026-10-13
 ---
 # Green恒等式
 根据[[广义Stokes定理#Gauss定理]]$$\iiint \nabla \cdot \vec{A}\mathrm{d}V=\iint_{}\kern{-13.5pt}\subset\kern{-2pt}\supset  \vec{A}\cdot \mathrm{d}\vec{S}  $$
