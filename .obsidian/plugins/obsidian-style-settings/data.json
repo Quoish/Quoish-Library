@@ -16,5 +16,8 @@
   "blue-topaz-theme@@font-text-theme": "Bookerly,'Inter', 'Segoe UI','方正兰亭黑简体', 'LXGW WenKai', 'Segoe UI Emoji',var(--font-interface)",
   "blue-topaz-theme@@notebook-liked-markdown-page-options": "notebook-liked-markdown-page-stripe-notebook-1",
   "blue-topaz-theme@@toggle-paragraph-spacing": true,
-  "blue-topaz-theme@@text-indentation-two-em": false
+  "blue-topaz-theme@@text-indentation-two-em": false,
+  "blue-topaz-theme@@h4-line-height": 1,
+  "blue-topaz-theme@@h4-size": "1em",
+  "blue-topaz-theme@@h4-toggle-short-underline": false
 }
