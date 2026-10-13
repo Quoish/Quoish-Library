@@ -79,7 +79,7 @@ $$G(\vec{r};\vec{r}')=\frac{1}{2\pi}\ln\left(\frac{1}{|\vec{r}-\vec{r}'|}\right)
 ### 三维
 $$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\cdot \frac{1}{|\vec{r}-\vec{r}'|}$$
 ## 边界问题
-Poisson方程的边界问题在求解的过程中，可以运用[[镜像法]]，把复杂的边界问题改成求解少数几个点产生的场。
+Poisson方程的边界问题在求解的过程中，可以运用[[静态电磁场#镜像法|镜像法]]，把复杂的边界问题改成求解少数几个点产生的场。
 ### 半空间问题
 对于方程$$\begin{equation}
         \left\{
@@ -89,7 +89,7 @@ Poisson方程的边界问题在求解的过程中，可以运用[[镜像法]]，
 	\end{aligned}
 	\right.
 \end{equation}$$
-可以通过[[镜像法#无限大平面]]解得$$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\left [
+可以通过[[静态电磁场#无限大平面]]解得$$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\left [
 \frac{1}{\sqrt[]{(x-x')^2+(y-y')^2+(z-z')^2}}-
 \frac{1}{\sqrt[]{(x-x')^2+(y-y')^2+(z+z')^2}}  \right ] $$
 ### 球外问题
@@ -102,7 +102,7 @@ $$\begin{equation}
 	\end{aligned}
 	\right.
 \end{equation}$$
-可以通过[[镜像法#导体球]]解得$$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\left [
+可以通过[[静态电磁场#导体球]]解得$$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\left [
 \frac{1}{|\vec{r}-\vec{r}'|}-
 \frac{R_0}{r'\cdot|\vec{r}-\frac{R_0^2}{r'^2}\vec{r}'|}  \right ] $$
 其中$r'=|\vec{r}'|$。

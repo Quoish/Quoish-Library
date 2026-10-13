@@ -8,7 +8,7 @@ tags:
 category:
   - 数学物理方法
   - 信息与信号
-status: 完成
+status: 未完成
 created: 2025-11-16
 updated: 2026-05-08
 ---
