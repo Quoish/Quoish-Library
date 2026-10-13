@@ -21,9 +21,9 @@ $$\iiint (u \nabla^2 v-v\nabla^2 u) \mathrm{d}V=\iint_{}\kern{-13.5pt}\subset\ke
 这就是*格林第二恒等式*。
 事实上，对于任意线性微分算子$\mathcal{L}$，都有
 $$
-\int_V \left[ v (\mathcal{L} u) - u (\mathcal{L}^\dagger v) \right] dV = \iint_{S}\kern{-17.8pt}\subset\kern{-2pt}\supset     \mathbf{J}(u, v) \cdot d\mathbf{S}
+\int_V \left[ v (\mathcal{L} u) - u (\mathcal{L}^\dagger v) \right] dV = \iint_{S}\kern{-17.8pt}\subset\kern{-2pt}\supset     \vec{J}(u, v) \cdot d\vec{S}
 $$
-其中$\mathcal{L}^\dagger$ 是 $\mathcal{L}$ 的伴随算子， $\mathbf{J}(u, v)$ 是一个由 $u$, $v$ 及其导数构成的向量函数，称为双线性共变式。它的具体形式完全取决于算子 $\mathcal{L}$ 的形式。
+其中$\mathcal{L}^\dagger$ 是 $\mathcal{L}$ 的伴随算子， $\vec{J}(u, v)$ 是一个由 $u$, $v$ 及其导数构成的向量函数，称为双线性共变式。它的具体形式完全取决于算子 $\mathcal{L}$ 的形式。
 # Green函数
 若对于线性算子$\mathcal{L}$，一般的线性方程形如$$\mathcal{L}u(\vec{r})=-f(\vec{r})$$
 可以定义若
@@ -31,7 +31,7 @@ $$\mathcal{L}G(\vec{r};\vec{r}')=-\delta^n (\vec{r}-\vec{r}')$$
 则称$G(\vec{r}-\vec{r}')$是Green函数，其中$\delta^n(\vec{r}-\vec{r}')$是$n$维Dirac函数。
 >Green函数法的核心思想是：将一个复杂源 $f(\vec{r})$ 产生的场，看作是无数个点源 $\delta^n(\vec{r} - \vec{r}')$ 产生的场的线性叠加。
 
-之后，我们需要求解一个最简单的问题：*点源的响应*。这个响应就是格林函数 $G(\mathbf{r}, \mathbf{r}')$
+之后，我们需要求解一个最简单的问题：*点源的响应*。这个响应就是格林函数 $G(\vec{r}, \vec{r}')$
 注意：
 - 格林函数是一个仅与求解问题的线性算子和空间边界形状有关的函数，跟待求函数的边界值无关。
 - 格林函数往往不止一个
