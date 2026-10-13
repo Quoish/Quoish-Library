@@ -117,5 +117,5 @@ $$\begin{equation}
 根据Poisson方程中Green函数和$R$成反比的经验，可以令$T=RG$，于是原式变换为$$\frac{ \mathrm{d}  ^2 T }{ \mathrm{d}  R^2} +k^2 T=0$$
 解为$$T(R)=Ae^{ikR}+Be^{-ikR}$$
 所以$$G(R)=\frac{Ae^{ikR}+Be^{-ikR}}{R}$$
-无界空间中的波动方程需要满足[[波动方程#Sommerfeld辐射条件]]，即只有向外传播的波，所以$B=0$。
-常数按类似Poisson方程的方式求得，可以最终解得$$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\cdot \frac{e^{ik|\vec{r}-\vec{r}'|}}{|\vec{r}-\vec{r}'|}$$
+采用时间因子$e^{i\omega t}$时，无界空间中的波动方程需要满足[[波动方程#Sommerfeld辐射条件]]，即只保留向外传播的$e^{-ikR}$项，所以$A=0$。
+常数按类似Poisson方程的方式求得，可以最终解得$$G(\vec{r};\vec{r}')=\frac{1}{4\pi}\cdot \frac{e^{-ik|\vec{r}-\vec{r}'|}}{|\vec{r}-\vec{r}'|}$$

@@ -27,7 +27,7 @@ $$J_\nu(x) = \frac{1}{\pi} \int_0^{\pi} \cos(\nu \theta - x \sin \theta) \mathrm
 或者复指数形式
 $$J_\nu(x) = \frac{1}{2\pi} \int_{-\pi}^{\pi} e^{i(\nu \theta - x \sin \theta)}\mathrm{d}\theta$$
 # 平面波对圆波的展开式
-向x轴方向传播的平面波为$$e^{ ikx }=e^{ ikr\cos \theta }$$平面波也是二维Helmholtz方程的解，因而可以写成$J_{n}(kr)e^{ im\theta }$的线性叠加（$e^{ im\theta }$是分离变量出来的）$$e^{ ikr\cos \theta }=\sum_{m=-\infty}^{+\infty}i^m J_{m}(kr)e^{ im\theta }$$这个展开式将平面波视作无数个圆波的叠加。
+采用时间因子$e^{i\omega t}$时，向x轴正方向传播的平面波为$$e^{-ikx}=e^{-ikr\cos \theta}$$平面波也是二维Helmholtz方程的解，因而可以写成$J_{n}(kr)e^{im\theta}$的线性叠加（$e^{im\theta}$是分离变量出来的）$$e^{-ikr\cos \theta}=\sum_{m=-\infty}^{+\infty}(-i)^mJ_{m}(kr)e^{im\theta}$$这个展开式将平面波视作无数个圆波的叠加。
 # 线性相关性
 当$\nu$不为整数时，$J_\nu$和$J_{-\nu}$线性无关
 当$\nu$为整数时，$J_\nu$和$J_{-\nu}$线性相关
