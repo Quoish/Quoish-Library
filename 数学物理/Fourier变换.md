@@ -344,9 +344,9 @@ DFT有两种等价理解：
 - **频率移位**：
   $$e^{jk_0\Omega nT}f(nT)\longleftrightarrow F(j\langle k-k_0\rangle_N\Omega)$$
 - **圆卷积**：
-  $$f(nT)\circledast_Ng(nT)\longleftrightarrow F(jk\Omega)G(jk\Omega)$$
+  $$f(nT)\circledast g(nT)\longleftrightarrow F(jk\Omega)G(jk\Omega)$$
 - **时域乘积**：
-  $$f(nT)g(nT)\longleftrightarrow\frac1N\left[F(jk\Omega)\circledast_NG(jk\Omega)\right]$$
+  $$f(nT)g(nT)\longleftrightarrow\frac1N\left[F(jk\Omega)\circledast G(jk\Omega)\right]$$
 - **Parseval等式**：
   $$\sum_{n=0}^{N-1}|f(nT)|^2=\frac1N\sum_{k=0}^{N-1}|F(jk\Omega)|^2$$
 - **实序列的共轭对称性**：
