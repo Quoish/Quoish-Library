@@ -146,10 +146,10 @@ $$f(t)\longleftrightarrow F(j\omega)$$
 - 若$f\in L^2(\mathbb{R})$，Fourier变换可按均方极限定义，并保持能量。
 - 常数、周期函数、阶跃函数等不属于$L^1$，但可在缓增分布意义下变换；此时会自然出现Dirac函数和主值分布。相关定义见[[广义函数]]。
 
-## 频谱的含义
 写成
 $$F(j\omega)=|F(j\omega)|e^{j\varphi(\omega)}$$
-其中$|F(j\omega)|$为幅度谱，$\varphi(\omega)$为相位谱。若$f(t)$为实函数，则
+其中$|F(j\omega)|$为*幅度谱*，$\varphi(\omega)$为*相位谱*。
+若$f(t)$为实函数，则
 $$F(-j\omega)=F^*(j\omega)$$
 从而
 $$|F(-j\omega)|=|F(j\omega)|,\quad \varphi(-\omega)=-\varphi(\omega)$$
