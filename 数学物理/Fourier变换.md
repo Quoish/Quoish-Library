@@ -24,7 +24,7 @@ updated: 2026-10-14
 - **复数单位**：$j^2=-1$。
 - **归一化正弦函数**：
   $$\operatorname{Sa}(x)=\frac{\sin x}{x},\quad \operatorname{Sa}(0)=1$$
-- **相位约定**：连续时间的分析核取$e^{-j\omega t}$，合成核取$e^{j\omega t}$。这与电磁学、光学中采用的$e^{j(\omega t-\vec{k}\cdot\vec{r})}$相位约定一致。
+- **相位约定**：连续时间的分析核取$e^{-j\omega t}$，合成核取$e^{j\omega t}$。
 
 ## 变换算子
 - **连续时间Fourier变换**：
