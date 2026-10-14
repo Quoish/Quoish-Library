@@ -1,2 +1,3 @@
-2026/10/15-00:35:05.537 58ac Creating DB D:\Library\Quoish-Library\数学物理\_fourier-v2-edge-profile\Default\Local Storage\leveldb since it was missing.
-2026/10/15-00:35:05.570 58ac Reusing MANIFEST D:\Library\Quoish-Library\数学物理\_fourier-v2-edge-profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/15-00:37:21.301 3534 Reusing MANIFEST D:\Library\Quoish-Library\数学物理\_fourier-v2-edge-profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/15-00:37:21.303 3534 Recovering log #3
+2026/10/15-00:37:21.311 3534 Reusing old log D:\Library\Quoish-Library\数学物理\_fourier-v2-edge-profile\Default\Local Storage\leveldb/000003.log 
