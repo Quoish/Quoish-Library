@@ -26,6 +26,14 @@ updated: 2026-10-14
   $$\operatorname{Sa}(x)=\frac{\sin x}{x},\quad \operatorname{Sa}(0)=1$$
 - **相位约定**：连续时间的分析核取$e^{-j\omega t}$，合成核取$e^{j\omega t}$。这与电磁学、光学中采用的$e^{j(\omega t-\vec{k}\cdot\vec{r})}$相位约定一致。
 
+## 变换算子
+- **连续时间Fourier变换**：
+  $$\mathcal{F}\{f(t)\}=F(j\omega),\quad \mathcal{F}^{-1}\{F(j\omega)\}=f(t)$$
+- **离散时间Fourier变换**：
+  $$\mathrm{DTFT}\{f(nT)\}=\tilde F(j\omega),\quad \mathrm{DTFT}^{-1}\{\tilde F(j\omega)\}=f(nT)$$
+- **离散Fourier变换**：
+  $$\mathrm{DFT}\{f(nT)\}=F(jk\Omega),\quad \mathrm{DFT}^{-1}\{F(jk\Omega)\}=f(nT)$$
+
 ## 五类Fourier表示
 - **Fourier变换**：
   $$f(t)\longleftrightarrow F(j\omega)$$
@@ -91,22 +99,23 @@ $$A_k=\sqrt{a_k^2+b_k^2}=2|F(jk\Omega)|,\quad \varphi_k=\arg F(jk\Omega)$$
     $$|\tilde f(t_1)-\tilde f(t_2)|\leq L|t_1-t_2|^\alpha$$
 
 ## Fourier级数的运算性质
-设$\tilde f(t)$的系数为$F_f(jk\Omega)$。
+设$\tilde f(t)$、$\tilde g(t)$的Fourier系数分别为$F(jk\Omega)$、$G(jk\Omega)$。
 
 - **时移**：
-  $$\tilde f(t-t_1)\longleftrightarrow e^{-jk\Omega t_1}F_f(jk\Omega)$$
+  $$\tilde f(t-t_1)\longleftrightarrow e^{-jk\Omega t_1}F(jk\Omega)$$
 - **时间反转**：
-  $$\tilde f(-t)\longleftrightarrow F_f(-jk\Omega)$$
+  $$\tilde f(-t)\longleftrightarrow F(-jk\Omega)$$
 - **微分**：若逐项微分合法，则
-  $$\frac{\mathrm{d}^m\tilde f}{\mathrm{d}t^m}\longleftrightarrow(jk\Omega)^mF_f(jk\Omega)$$
-- **周期积分**：若$F_f(0)=0$，则$\tilde f(t)$存在周期原函数，其非零频率系数为
-  $$F_{f^{(-1)}}(jk\Omega)=\frac{F_f(jk\Omega)}{jk\Omega},\quad k\neq0$$
+  $$\frac{\mathrm{d}^m\tilde f}{\mathrm{d}t^m}\longleftrightarrow(jk\Omega)^mF(jk\Omega)$$
+- **周期积分**：若$F(0)=0$，令$\tilde g(t)$为$\tilde f(t)$的周期原函数，则
+  $$G(jk\Omega)=\frac{F(jk\Omega)}{jk\Omega},\quad k\neq0$$
 - **时域乘积**：若$\tilde h(t)=\tilde f(t)\tilde g(t)$，则
-  $$F_h(jk\Omega)=\sum_{m=-\infty}^{\infty}F_f(jm\Omega)F_g(j(k-m)\Omega)$$
+  $$H(jk\Omega)=\sum_{m=-\infty}^{\infty}F(jm\Omega)G(j(k-m)\Omega)$$
 - **周期卷积**：定义
   $$(\tilde f*_0\tilde g)(t)=\frac1{T_0}\int_{t_0}^{t_0+T_0}\tilde f(\tau)\tilde g(t-\tau)\,\mathrm{d}\tau$$
   则
-  $$F_{f*_0g}(jk\Omega)=F_f(jk\Omega)F_g(jk\Omega)$$
+  若$\tilde h=\tilde f*_0\tilde g$，则
+  $$H(jk\Omega)=F(jk\Omega)G(jk\Omega)$$
 
 ## 正交投影、Bessel不等式与Parseval等式
 取前$N$阶部分和
@@ -122,14 +131,14 @@ $$S_N(t)=\sum_{k=-N}^{N}F(jk\Omega)e^{jk\Omega t}$$
 
 ## 周期信号的连续Fourier变换
 周期信号通常不可绝对积分，但可在分布意义下作Fourier变换：
-$$\boxed{F_{\mathrm{per}}(j\omega)=2\pi\sum_{k=-\infty}^{\infty}F(jk\Omega)\delta(\omega-k\Omega)}$$
+$$\boxed{\mathcal{F}\{\tilde f(t)\}=F(j\omega)=2\pi\sum_{k=-\infty}^{\infty}F(jk\Omega)\delta(\omega-k\Omega)}$$
 因此，Fourier级数系数就是连续频谱中各条谱线的权重。
 
 # 连续时间Fourier变换
 ## 定义与适用范围
 采用变换对
-$$\boxed{F(j\omega)=\int_{-\infty}^{\infty}f(t)e^{-j\omega t}\,\mathrm{d}t}$$
-$$\boxed{f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}F(j\omega)e^{j\omega t}\,\mathrm{d}\omega}$$
+$$\boxed{F(j\omega)=\mathcal{F}\{f(t)\}=\int_{-\infty}^{\infty}f(t)e^{-j\omega t}\,\mathrm{d}t}$$
+$$\boxed{f(t)=\mathcal{F}^{-1}\{F(j\omega)\}=\frac{1}{2\pi}\int_{-\infty}^{\infty}F(j\omega)e^{j\omega t}\,\mathrm{d}\omega}$$
 简记为
 $$f(t)\longleftrightarrow F(j\omega)$$
 
@@ -171,8 +180,8 @@ $$|F(-j\omega)|=|F(j\omega)|,\quad \varphi(-\omega)=-\varphi(\omega)$$
   $$f(t)*g(t)\longleftrightarrow F(j\omega)G(j\omega)$$
 - **乘积**：
   $$f(t)g(t)\longleftrightarrow\frac{1}{2\pi}\left[F(j\omega)*G(j\omega)\right]$$
-- **对偶性**：若$f(t)\longleftrightarrow F(j\omega)$，则把$F$视作时间变量的函数时，
-  $$F(jt)\longleftrightarrow2\pi f(-\omega)$$
+- **对偶性**：若$f(t)\longleftrightarrow F(j\omega)$，再令$g(t)=F(jt)$，则
+  $$G(j\omega)=2\pi f(-\omega)$$
 - **Parseval–Plancherel等式**：
   $$\int_{-\infty}^{\infty}f(t)g^*(t)\,\mathrm{d}t=\frac{1}{2\pi}\int_{-\infty}^{\infty}F(j\omega)G^*(j\omega)\,\mathrm{d}\omega$$
   特别地，
@@ -253,11 +262,11 @@ $$\boxed{\lim_{\sigma\to0^+}\frac{1}{\sigma+j(\omega-\omega_0)}=\pi\delta(\omega
 
 # 采样与Poisson求和
 设连续信号$f(t)$的Fourier变换为$F(j\omega)$，以间隔$T$采样。采样后的冲激串为
-$$f_s(t)=\sum_{n=-\infty}^{\infty}f(nT)\delta(t-nT)$$
+$$g(t)=\sum_{n=-\infty}^{\infty}f(nT)\delta(t-nT)$$
 其频谱为
-$$\boxed{F_s(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}F(j(\omega-k\Omega_s))},\quad \Omega_s=\frac{2\pi}{T}$$
-另一方面，直接对$f_s(t)$变换得到
-$$F_s(j\omega)=\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}$$
+$$\boxed{G(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}F(j(\omega-k\Omega_s))},\quad \Omega_s=\frac{2\pi}{T}$$
+另一方面，直接对$g(t)$作连续时间Fourier变换得到
+$$G(j\omega)=\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}=\tilde F(j\omega)$$
 于是得到Poisson求和公式
 $$\boxed{\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}=\frac{1}{T}\sum_{k=-\infty}^{\infty}F(j(\omega-k\Omega_s))}$$
 它同时说明：时域离散化会在频域产生周期复本。采样定理、混叠和理想重构见[[连续时间信号的采样]]。
@@ -265,9 +274,9 @@ $$\boxed{\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}=\frac{1}{T}\sum_{k=-\inft
 # 离散时间Fourier变换
 ## 定义与周期性
 离散序列记为$f(nT)$。其频谱为周期函数，所以记作$\tilde F(j\omega)$：
-$$\boxed{\tilde F(j\omega)=\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}}$$
+$$\boxed{\tilde F(j\omega)=\mathrm{DTFT}\{f(nT)\}=\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}}$$
 逆变换可在任意长度为$2\pi/T$的频率区间上进行：
-$$\boxed{f(nT)=\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}\tilde F(j\omega)e^{j\omega nT}\,\mathrm{d}\omega}$$
+$$\boxed{f(nT)=\mathrm{DTFT}^{-1}\{\tilde F(j\omega)\}=\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}\tilde F(j\omega)e^{j\omega nT}\,\mathrm{d}\omega}$$
 由于
 $$e^{-j(\omega+2\pi/T)nT}=e^{-j\omega nT}$$
 所以
@@ -319,8 +328,8 @@ $$\tilde f((n+N)T)=\tilde f(nT),\quad \tilde F(j(k+N)\Omega)=\tilde F(jk\Omega)$
 # 离散Fourier变换
 ## 定义
 对长度为$N$的有限序列$f(nT)$，$n=0,1,\ldots,N-1$，定义
-$$\boxed{F(jk\Omega)=\sum_{n=0}^{N-1}f(nT)e^{-jk\Omega nT}}$$
-$$\boxed{f(nT)=\frac{1}{N}\sum_{k=0}^{N-1}F(jk\Omega)e^{jk\Omega nT}}$$
+$$\boxed{F(jk\Omega)=\mathrm{DFT}\{f(nT)\}=\sum_{n=0}^{N-1}f(nT)e^{-jk\Omega nT}}$$
+$$\boxed{f(nT)=\mathrm{DFT}^{-1}\{F(jk\Omega)\}=\frac{1}{N}\sum_{k=0}^{N-1}F(jk\Omega)e^{jk\Omega nT}}$$
 其中
 $$\Omega=\frac{2\pi}{NT},\quad k=0,1,\ldots,N-1$$
 
@@ -358,19 +367,19 @@ FFT是计算DFT的算法。它不改变DFT的定义和结果，只利用复指�
 
 令
 $$W_N=e^{-j2\pi/N}$$
-对偶数$N$，把序列拆成偶数样值与奇数样值，可得
-$$F(jk\Omega)=F_{\mathrm{e}}(jk\Omega)+W_N^kF_{\mathrm{o}}(jk\Omega)$$
-$$F(j(k+N/2)\Omega)=F_{\mathrm{e}}(jk\Omega)-W_N^kF_{\mathrm{o}}(jk\Omega)$$
-其中$F_{\mathrm{e}},F_{\mathrm{o}}$分别是偶数样值和奇数样值的$N/2$点DFT。递归分解后，运算复杂度由直接计算的$O(N^2)$降为$O(N\log N)$。基2 FFT通常要求$N=2^m$；混合基和Bluestein算法可处理其他长度。
+对偶数$N$，把偶数样值序列和奇数样值序列分别记作$g$和$h$，其$N/2$点DFT分别记作$G(jk\Omega)$和$H(jk\Omega)$，则
+$$F(jk\Omega)=G(jk\Omega)+W_N^kH(jk\Omega)$$
+$$F(j(k+N/2)\Omega)=G(jk\Omega)-W_N^kH(jk\Omega)$$
+递归分解后，运算复杂度由直接计算的$O(N^2)$降为$O(N\log N)$。基2 FFT通常要求$N=2^m$；混合基和Bluestein算法可处理其他长度。
 
 # 短时Fourier变换
 ## 定义
 Fourier变换给出整个信号的总体频谱，但不保留某个频率在何时出现的信息。短时Fourier变换用移动窗截取局部片段，对每一片分别作Fourier变换。
 
 连续频率形式可写成
-$$F_{\mathrm{ST}}(\tau,j\omega)=\sum_{n=-\infty}^{\infty}f(nT)w(nT-\tau)e^{-j\omega nT}$$
+$$F(\tau,j\omega)=\sum_{n=-\infty}^{\infty}f(nT)w(nT-\tau)e^{-j\omega nT}$$
 实际计算通常取长度为$M$的窗、帧移为$H$个样值，并作$N$点DFT：
-$$\boxed{F_r(jk\Omega)=\sum_{m=0}^{M-1}f((rH+m)T)w(mT)e^{-jk\Omega mT}}$$
+$$\boxed{F(rHT,jk\Omega)=\sum_{m=0}^{M-1}f((rH+m)T)w(mT)e^{-jk\Omega mT}}$$
 $$\Omega=\frac{2\pi}{NT},\quad N\geq M$$
 其中$rHT$是帧的时间位置，$k\Omega$是离散频率。若$N>M$，其余位置补零。
 
@@ -414,15 +423,15 @@ Hann、Hamming和Blackman窗都属于余弦和窗。它们与Bartlett窗的形�
 在偏微分方程和场论中，常对空间变量作Fourier变换。为了与
 $$e^{j(\omega t-\vec{k}\cdot\vec{r})}$$
 的相位约定一致，空间变换取
-$$\hat{f}(\vec{k})=\int_{\mathbb{R}^d}f(\vec{r})e^{j\vec{k}\cdot\vec{r}}\,\mathrm{d}^d\vec{r}$$
-$$f(\vec{r})=\int_{\mathbb{R}^d}\hat{f}(\vec{k})e^{-j\vec{k}\cdot\vec{r}}\frac{\mathrm{d}^d\vec{k}}{(2\pi)^d}$$
+$$F(\vec{k})=\int_{\mathbb{R}^d}f(\vec{r})e^{j\vec{k}\cdot\vec{r}}\,\mathrm{d}^d\vec{r}$$
+$$f(\vec{r})=\int_{\mathbb{R}^d}F(\vec{k})e^{-j\vec{k}\cdot\vec{r}}\frac{\mathrm{d}^d\vec{k}}{(2\pi)^d}$$
 于是
 
 - **梯度**：
-  $$\nabla f\longleftrightarrow-j\vec{k}\hat{f}$$
+  $$\nabla f\longleftrightarrow-j\vec{k}F(\vec{k})$$
 - **Laplacian**：
-  $$\nabla^2f\longleftrightarrow-|\vec{k}|^2\hat{f}$$
+  $$\nabla^2f\longleftrightarrow-|\vec{k}|^2F(\vec{k})$$
 - **卷积**：
-  $$(f*g)(\vec{r})\longleftrightarrow\hat{f}(\vec{k})\hat{g}(\vec{k})$$
+  $$(f*g)(\vec{r})\longleftrightarrow F(\vec{k})G(\vec{k})$$
 
 这使常系数线性偏微分方程在频域中化为代数方程，具体应用见[[位势方程#Fourier变换法|位势方程的Fourier变换法]]。
