@@ -78,6 +78,24 @@ $$A_k=\sqrt{a_k^2+b_k^2}=2|C(k\Omega_0)|,\quad \varphi_k=\arg C(k\Omega_0)$$
   - **Hölder条件**：存在$L>0$和$0<\alpha\leq1$，使
     $$|x(t_1)-x(t_2)|\leq L|t_1-t_2|^\alpha$$
 
+## Fourier级数的运算性质
+设$x(t)$的系数为$C_x(k\Omega_0)$。
+
+- **时移**：
+  $$x(t-t_1)\longleftrightarrow e^{-jk\Omega_0t_1}C_x(k\Omega_0)$$
+- **时间反转**：
+  $$x(-t)\longleftrightarrow C_x(-k\Omega_0)$$
+- **微分**：若逐项微分合法，则
+  $$\frac{\mathrm{d}^mx}{\mathrm{d}t^m}\longleftrightarrow(jk\Omega_0)^mC_x(k\Omega_0)$$
+- **周期积分**：若$C_x(0)=0$，则$x(t)$存在周期原函数，其非零频率系数为
+  $$C_{x^{(-1)}}(k\Omega_0)=\frac{C_x(k\Omega_0)}{jk\Omega_0},\quad k\neq0$$
+- **时域乘积**：若$z(t)=x(t)y(t)$，则
+  $$C_z(k\Omega_0)=\sum_{m=-\infty}^{\infty}C_x(m\Omega_0)C_y((k-m)\Omega_0)$$
+- **周期卷积**：定义
+  $$(x*_0y)(t)=\frac1{T_0}\int_{t_0}^{t_0+T_0}x(\tau)y(t-\tau)\,\mathrm{d}\tau$$
+  则
+  $$C_{x*_0y}(k\Omega_0)=C_x(k\Omega_0)C_y(k\Omega_0)$$
+
 ## 正交投影、Bessel不等式与Parseval等式
 取前$N$阶部分和
 $$S_N(t)=\sum_{k=-N}^{N}C(k\Omega_0)e^{jk\Omega_0t}$$
@@ -105,7 +123,7 @@ $$x(t)\longleftrightarrow X(\omega)$$
 
 - 若$x\in L^1(\mathbb{R})$，积分按通常意义存在，$X(\omega)$连续并在$|\omega|\to\infty$时趋于零。
 - 若$x\in L^2(\mathbb{R})$，Fourier变换可按均方极限定义，并保持能量。
-- 常数、周期函数、阶跃函数等不属于$L^1$，但可在缓增分布意义下变换；此时会自然出现Dirac函数和主值分布。相关函数空间见[[信号与系统#从普通函数推广到广义函数|广义函数框架]]。
+- 常数、周期函数、阶跃函数等不属于$L^1$，但可在缓增分布意义下变换；此时会自然出现Dirac函数和主值分布。相关定义见[[广义函数]]。
 
 ## 频谱的含义
 写成
@@ -122,6 +140,9 @@ $$|X(-\omega)|=|X(\omega)|,\quad \varphi(-\omega)=-\varphi(\omega)$$
   $$x(t-t_0)\longleftrightarrow e^{-j\omega t_0}X(\omega)$$
 - **频移**：
   $$e^{j\omega_0t}x(t)\longleftrightarrow X(\omega-\omega_0)$$
+  因而实正弦调制满足
+  $$x(t)\cos(\omega_0t)\longleftrightarrow\frac12\left[X(\omega-\omega_0)+X(\omega+\omega_0)\right]$$
+  $$x(t)\sin(\omega_0t)\longleftrightarrow\frac{1}{2j}\left[X(\omega-\omega_0)-X(\omega+\omega_0)\right]$$
 - **尺度变换**：对实数$a\neq0$，
   $$x(at)\longleftrightarrow\frac{1}{|a|}X\left(\frac{\omega}{a}\right)$$
 - **时间反转**：
@@ -149,6 +170,10 @@ $$|X(-\omega)|=|X(\omega)|,\quad \varphi(-\omega)=-\varphi(\omega)$$
   则
   $$R_{xy}(\tau)\longleftrightarrow X^*(\omega)Y(\omega)$$
   自相关函数的Fourier变换为能量谱密度$|X(\omega)|^2$。
+- **Hilbert变换**：若
+  $$\mathcal{H}\{x\}(t)=x(t)*\operatorname{PV}\frac{1}{\pi t}$$
+  则
+  $$\mathcal{H}\{x\}(t)\longleftrightarrow-j\operatorname{sgn}(\omega)X(\omega)$$
 
 ## 积分特性与主值分布
 若
@@ -293,10 +318,10 @@ DFT有两种等价理解：
 - 它是把有限序列作$N$点周期延拓后得到的离散Fourier级数，只是系数的归一化位置不同。
 
 ## 常用性质
-- **圆周时移**：若$y(nT)=x(((n-m))_NT)$，则
+- **圆周时移**：若$y(nT)=x(\langle n-m\rangle_NT)$，其中$\langle\cdot\rangle_N$表示模$N$取值，则
   $$Y(k\Omega)=e^{-jk\Omega mT}X(k\Omega)$$
 - **频率移位**：
-  $$e^{jk_0\Omega nT}x(nT)\longleftrightarrow X(((k-k_0))_N\Omega)$$
+  $$e^{jk_0\Omega nT}x(nT)\longleftrightarrow X(\langle k-k_0\rangle_N\Omega)$$
 - **圆卷积**：
   $$x(nT)\circledast_Ny(nT)\longleftrightarrow X(k\Omega)Y(k\Omega)$$
 - **时域乘积**：
