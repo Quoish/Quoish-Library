@@ -17,58 +17,70 @@ updated: 2026-10-14
 - **连续时域**：$t$。
 - **离散时域**：$nT$，其中$n\in\mathbb{Z}$，$T$为采样间隔。
 - **连续频域**：$\omega$。
-- **离散频域**：$k\Omega$，其中$k\in\mathbb{Z}$，$\Omega$为相邻频率样点的间隔。
-- **连续周期信号**：周期记作$T_0$，基频为
-  $$\Omega_0=\frac{2\pi}{T_0}$$
+- **离散频域**：$k\Omega$，其中$k\in\mathbb{Z}$，$\Omega$为相邻频率样点的间隔；$\Omega$的具体取值由相应的周期决定。
 - **$N$点离散变换**：总观测时长为$NT$，频率间隔为
   $$\Omega=\frac{2\pi}{NT}$$
+- **周期函数**：在函数符号上加波浪号。$\tilde f$表示时域周期函数，$\tilde F$表示频域周期函数。
 - **复数单位**：$j^2=-1$。
 - **归一化正弦函数**：
   $$\operatorname{Sa}(x)=\frac{\sin x}{x},\quad \operatorname{Sa}(0)=1$$
 - **相位约定**：连续时间的分析核取$e^{-j\omega t}$，合成核取$e^{j\omega t}$。这与电磁学、光学中采用的$e^{j(\omega t-\vec{k}\cdot\vec{r})}$相位约定一致。
 
-## 四种基本时频结构
-- **连续时间、周期信号**：时域连续，频域只出现在$k\Omega_0$处，用Fourier级数描述。
-- **连续时间、非周期信号**：时域与频域都连续，用连续时间Fourier变换描述。
-- **离散时间、非周期序列**：时域位于$nT$，频域$\omega$连续并以$2\pi/T$为周期，用离散时间Fourier变换描述。
-- **离散时间、周期或有限长序列**：时域位于$nT$，频域位于$k\Omega$，用离散Fourier级数或离散Fourier变换描述。
+## 五类Fourier表示
+- **Fourier变换**：
+  $$f(t)\longleftrightarrow F(j\omega)$$
+  时域和频域都连续、非周期。
+- **Fourier级数**：
+  $$\tilde f(t)\longleftrightarrow F(jk\Omega)$$
+  时域连续、周期，频域离散、非周期。
+- **离散时间Fourier变换**：
+  $$f(nT)\longleftrightarrow\tilde F(j\omega)$$
+  时域离散、非周期，频域连续并以$2\pi/T$为周期。
+- **离散Fourier级数**：
+  $$\tilde f(nT)\longleftrightarrow\tilde F(jk\Omega)$$
+  时域离散、周期，频域离散、周期。
+- **离散Fourier变换**：
+  $$f(nT)\longleftrightarrow F(jk\Omega)$$
+  它把有限长序列限制在一个主值区间内表示；周期延拓后就是离散Fourier级数。
 
 # Fourier级数
 ## 复指数形式
-设$x(t)$的周期为$T_0$，基频$\Omega_0=2\pi/T_0$。其Fourier级数为
-$$\boxed{x(t)=\sum_{k=-\infty}^{\infty}C(k\Omega_0)e^{jk\Omega_0t}}$$
-$$\boxed{C(k\Omega_0)=\frac{1}{T_0}\int_{t_0}^{t_0+T_0}x(t)e^{-jk\Omega_0t}\,\mathrm{d}t}$$
+设$\tilde f(t)$的周期为$T_0$，并在本节记
+$$\Omega=\frac{2\pi}{T_0}$$
+其Fourier级数为
+$$\boxed{\tilde f(t)=\sum_{k=-\infty}^{\infty}F(jk\Omega)e^{jk\Omega t}}$$
+$$\boxed{F(jk\Omega)=\frac{1}{T_0}\int_{t_0}^{t_0+T_0}\tilde f(t)e^{-jk\Omega t}\,\mathrm{d}t}$$
 积分区间可以取任意一个完整周期。
 
-若$x(t)$为实函数，则
-$$C(-k\Omega_0)=C^*(k\Omega_0)$$
+若$\tilde f(t)$为实函数，则
+$$F(-jk\Omega)=F^*(jk\Omega)$$
 因而幅度谱为偶函数，相位谱为奇函数：
-$$|C(-k\Omega_0)|=|C(k\Omega_0)|,\quad \arg C(-k\Omega_0)=-\arg C(k\Omega_0)$$
+$$|F(-jk\Omega)|=|F(jk\Omega)|,\quad \arg F(-jk\Omega)=-\arg F(jk\Omega)$$
 
 ## 三角形式
-$$x(t)=\frac{a_0}{2}+\sum_{k=1}^{\infty}\left[a_k\cos(k\Omega_0t)+b_k\sin(k\Omega_0t)\right]$$
-$$a_k=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}x(t)\cos(k\Omega_0t)\,\mathrm{d}t$$
-$$b_k=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}x(t)\sin(k\Omega_0t)\,\mathrm{d}t$$
+$$\tilde f(t)=\frac{a_0}{2}+\sum_{k=1}^{\infty}\left[a_k\cos(k\Omega t)+b_k\sin(k\Omega t)\right]$$
+$$a_k=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}\tilde f(t)\cos(k\Omega t)\,\mathrm{d}t$$
+$$b_k=\frac{2}{T_0}\int_{t_0}^{t_0+T_0}\tilde f(t)\sin(k\Omega t)\,\mathrm{d}t$$
 
 两种形式之间满足
-$$C(0)=\frac{a_0}{2}$$
-$$C(k\Omega_0)=\frac{a_k-jb_k}{2},\quad C(-k\Omega_0)=\frac{a_k+jb_k}{2},\quad k>0$$
+$$F(0)=\frac{a_0}{2}$$
+$$F(jk\Omega)=\frac{a_k-jb_k}{2},\quad F(-jk\Omega)=\frac{a_k+jb_k}{2},\quad k>0$$
 若写成
-$$a_k\cos(k\Omega_0t)+b_k\sin(k\Omega_0t)=A_k\cos(k\Omega_0t+\varphi_k)$$
+$$a_k\cos(k\Omega t)+b_k\sin(k\Omega t)=A_k\cos(k\Omega t+\varphi_k)$$
 则
-$$A_k=\sqrt{a_k^2+b_k^2}=2|C(k\Omega_0)|,\quad \varphi_k=\arg C(k\Omega_0)$$
+$$A_k=\sqrt{a_k^2+b_k^2}=2|F(jk\Omega)|,\quad \varphi_k=\arg F(jk\Omega)$$
 
 ## 对称性与谐波筛选
-- **偶函数**：若$x(-t)=x(t)$，则$b_k=0$，只含余弦分量。
-- **奇函数**：若$x(-t)=-x(t)$，则$a_k=0$，并且$a_0=0$，只含正弦分量。
-- **半波反对称**：若$x(t+T_0/2)=-x(t)$，则只含奇次谐波。
-- **半周期重复**：若$x(t+T_0/2)=x(t)$，则原先标作$T_0$的周期并非最小周期；按$\Omega_0$编号时只出现偶次谐波。
+- **偶函数**：若$\tilde f(-t)=\tilde f(t)$，则$b_k=0$，只含余弦分量。
+- **奇函数**：若$\tilde f(-t)=-\tilde f(t)$，则$a_k=0$，并且$a_0=0$，只含正弦分量。
+- **半波反对称**：若$\tilde f(t+T_0/2)=-\tilde f(t)$，则只含奇次谐波。
+- **半周期重复**：若$\tilde f(t+T_0/2)=\tilde f(t)$，则原先标作$T_0$的周期并非最小周期；按$\Omega$编号时只出现偶次谐波。
 - **实信号**：正、负频率系数共轭对称。
 
 ## 收敛与Gibbs现象
-- 若$x(t)$在一个周期内分段光滑或具有有界变差，则其Fourier级数在$t$处收敛到
-  $$\frac{x(t^+)+x(t^-)}{2}$$
-- 在连续点处，上式就是$x(t)$；在跳跃间断点处，它是左右极限的平均值。
+- 若$\tilde f(t)$在一个周期内分段光滑或具有有界变差，则其Fourier级数在$t$处收敛到
+  $$\frac{\tilde f(t^+)+\tilde f(t^-)}{2}$$
+- 在连续点处，上式就是$\tilde f(t)$；在跳跃间断点处，它是左右极限的平均值。
 - 在跳跃点附近，部分和会出现振铃。阶数增加时，振铃区域变窄，但最大过冲趋近于跳变量的约$8.95\%$，这就是Gibbs现象。
 - 对平方可积函数，Fourier部分和至少在均方意义下收敛。
 - 对连续周期函数，Fejér平均一致收敛；普通Fourier部分和要获得一致收敛通常需要更强的光滑性条件。
@@ -76,110 +88,110 @@ $$A_k=\sqrt{a_k^2+b_k^2}=2|C(k\Omega_0)|,\quad \varphi_k=\arg C(k\Omega_0)$$
   - **Dirichlet–Jordan条件**：函数在一个周期内具有有界变差。
   - **Dini条件**：局部连续模满足相应的可积性条件。
   - **Hölder条件**：存在$L>0$和$0<\alpha\leq1$，使
-    $$|x(t_1)-x(t_2)|\leq L|t_1-t_2|^\alpha$$
+    $$|\tilde f(t_1)-\tilde f(t_2)|\leq L|t_1-t_2|^\alpha$$
 
 ## Fourier级数的运算性质
-设$x(t)$的系数为$C_x(k\Omega_0)$。
+设$\tilde f(t)$的系数为$F_f(jk\Omega)$。
 
 - **时移**：
-  $$x(t-t_1)\longleftrightarrow e^{-jk\Omega_0t_1}C_x(k\Omega_0)$$
+  $$\tilde f(t-t_1)\longleftrightarrow e^{-jk\Omega t_1}F_f(jk\Omega)$$
 - **时间反转**：
-  $$x(-t)\longleftrightarrow C_x(-k\Omega_0)$$
+  $$\tilde f(-t)\longleftrightarrow F_f(-jk\Omega)$$
 - **微分**：若逐项微分合法，则
-  $$\frac{\mathrm{d}^mx}{\mathrm{d}t^m}\longleftrightarrow(jk\Omega_0)^mC_x(k\Omega_0)$$
-- **周期积分**：若$C_x(0)=0$，则$x(t)$存在周期原函数，其非零频率系数为
-  $$C_{x^{(-1)}}(k\Omega_0)=\frac{C_x(k\Omega_0)}{jk\Omega_0},\quad k\neq0$$
-- **时域乘积**：若$z(t)=x(t)y(t)$，则
-  $$C_z(k\Omega_0)=\sum_{m=-\infty}^{\infty}C_x(m\Omega_0)C_y((k-m)\Omega_0)$$
+  $$\frac{\mathrm{d}^m\tilde f}{\mathrm{d}t^m}\longleftrightarrow(jk\Omega)^mF_f(jk\Omega)$$
+- **周期积分**：若$F_f(0)=0$，则$\tilde f(t)$存在周期原函数，其非零频率系数为
+  $$F_{f^{(-1)}}(jk\Omega)=\frac{F_f(jk\Omega)}{jk\Omega},\quad k\neq0$$
+- **时域乘积**：若$\tilde h(t)=\tilde f(t)\tilde g(t)$，则
+  $$F_h(jk\Omega)=\sum_{m=-\infty}^{\infty}F_f(jm\Omega)F_g(j(k-m)\Omega)$$
 - **周期卷积**：定义
-  $$(x*_0y)(t)=\frac1{T_0}\int_{t_0}^{t_0+T_0}x(\tau)y(t-\tau)\,\mathrm{d}\tau$$
+  $$(\tilde f*_0\tilde g)(t)=\frac1{T_0}\int_{t_0}^{t_0+T_0}\tilde f(\tau)\tilde g(t-\tau)\,\mathrm{d}\tau$$
   则
-  $$C_{x*_0y}(k\Omega_0)=C_x(k\Omega_0)C_y(k\Omega_0)$$
+  $$F_{f*_0g}(jk\Omega)=F_f(jk\Omega)F_g(jk\Omega)$$
 
 ## 正交投影、Bessel不等式与Parseval等式
 取前$N$阶部分和
-$$S_N(t)=\sum_{k=-N}^{N}C(k\Omega_0)e^{jk\Omega_0t}$$
-它是在相应有限维三角函数空间中对$x(t)$的最佳均方逼近。
+$$S_N(t)=\sum_{k=-N}^{N}F(jk\Omega)e^{jk\Omega t}$$
+它是在相应有限维三角函数空间中对$\tilde f(t)$的最佳均方逼近。
 
 - **Bessel不等式**：
-  $$\sum_{k=-\infty}^{\infty}|C(k\Omega_0)|^2\leq\frac{1}{T_0}\int_{t_0}^{t_0+T_0}|x(t)|^2\,\mathrm{d}t$$
+  $$\sum_{k=-\infty}^{\infty}|F(jk\Omega)|^2\leq\frac{1}{T_0}\int_{t_0}^{t_0+T_0}|\tilde f(t)|^2\,\mathrm{d}t$$
 - **Parseval等式**：当Fourier函数系完备时，
-  $$\boxed{\frac{1}{T_0}\int_{t_0}^{t_0+T_0}|x(t)|^2\,\mathrm{d}t=\sum_{k=-\infty}^{\infty}|C(k\Omega_0)|^2}$$
+  $$\boxed{\frac{1}{T_0}\int_{t_0}^{t_0+T_0}|\tilde f(t)|^2\,\mathrm{d}t=\sum_{k=-\infty}^{\infty}|F(jk\Omega)|^2}$$
   对实信号也可写成
-  $$\frac{1}{T_0}\int_{t_0}^{t_0+T_0}|x(t)|^2\,\mathrm{d}t=\frac{a_0^2}{4}+\frac12\sum_{k=1}^{\infty}(a_k^2+b_k^2)$$
+  $$\frac{1}{T_0}\int_{t_0}^{t_0+T_0}|\tilde f(t)|^2\,\mathrm{d}t=\frac{a_0^2}{4}+\frac12\sum_{k=1}^{\infty}(a_k^2+b_k^2)$$
 
 ## 周期信号的连续Fourier变换
 周期信号通常不可绝对积分，但可在分布意义下作Fourier变换：
-$$\boxed{X(\omega)=2\pi\sum_{k=-\infty}^{\infty}C(k\Omega_0)\delta(\omega-k\Omega_0)}$$
+$$\boxed{F_{\mathrm{per}}(j\omega)=2\pi\sum_{k=-\infty}^{\infty}F(jk\Omega)\delta(\omega-k\Omega)}$$
 因此，Fourier级数系数就是连续频谱中各条谱线的权重。
 
 # 连续时间Fourier变换
 ## 定义与适用范围
 采用变换对
-$$\boxed{X(\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}\,\mathrm{d}t}$$
-$$\boxed{x(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}\,\mathrm{d}\omega}$$
+$$\boxed{F(j\omega)=\int_{-\infty}^{\infty}f(t)e^{-j\omega t}\,\mathrm{d}t}$$
+$$\boxed{f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty}F(j\omega)e^{j\omega t}\,\mathrm{d}\omega}$$
 简记为
-$$x(t)\longleftrightarrow X(\omega)$$
+$$f(t)\longleftrightarrow F(j\omega)$$
 
-- 若$x\in L^1(\mathbb{R})$，积分按通常意义存在，$X(\omega)$连续并在$|\omega|\to\infty$时趋于零。
-- 若$x\in L^2(\mathbb{R})$，Fourier变换可按均方极限定义，并保持能量。
+- 若$f\in L^1(\mathbb{R})$，积分按通常意义存在，$F(j\omega)$连续并在$|\omega|\to\infty$时趋于零。
+- 若$f\in L^2(\mathbb{R})$，Fourier变换可按均方极限定义，并保持能量。
 - 常数、周期函数、阶跃函数等不属于$L^1$，但可在缓增分布意义下变换；此时会自然出现Dirac函数和主值分布。相关定义见[[广义函数]]。
 
 ## 频谱的含义
 写成
-$$X(\omega)=|X(\omega)|e^{j\varphi(\omega)}$$
-其中$|X(\omega)|$为幅度谱，$\varphi(\omega)$为相位谱。若$x(t)$为实函数，则
-$$X(-\omega)=X^*(\omega)$$
+$$F(j\omega)=|F(j\omega)|e^{j\varphi(\omega)}$$
+其中$|F(j\omega)|$为幅度谱，$\varphi(\omega)$为相位谱。若$f(t)$为实函数，则
+$$F(-j\omega)=F^*(j\omega)$$
 从而
-$$|X(-\omega)|=|X(\omega)|,\quad \varphi(-\omega)=-\varphi(\omega)$$
+$$|F(-j\omega)|=|F(j\omega)|,\quad \varphi(-\omega)=-\varphi(\omega)$$
 
 ## 基本性质
 - **线性**：
-  $$ax(t)+by(t)\longleftrightarrow aX(\omega)+bY(\omega)$$
+  $$af(t)+bg(t)\longleftrightarrow aF(j\omega)+bG(j\omega)$$
 - **时移**：
-  $$x(t-t_0)\longleftrightarrow e^{-j\omega t_0}X(\omega)$$
+  $$f(t-t_0)\longleftrightarrow e^{-j\omega t_0}F(j\omega)$$
 - **频移**：
-  $$e^{j\omega_0t}x(t)\longleftrightarrow X(\omega-\omega_0)$$
+  $$e^{j\omega_0t}f(t)\longleftrightarrow F(j(\omega-\omega_0))$$
   因而实正弦调制满足
-  $$x(t)\cos(\omega_0t)\longleftrightarrow\frac12\left[X(\omega-\omega_0)+X(\omega+\omega_0)\right]$$
-  $$x(t)\sin(\omega_0t)\longleftrightarrow\frac{1}{2j}\left[X(\omega-\omega_0)-X(\omega+\omega_0)\right]$$
+  $$f(t)\cos(\omega_0t)\longleftrightarrow\frac12\left[F(j(\omega-\omega_0))+F(j(\omega+\omega_0))\right]$$
+  $$f(t)\sin(\omega_0t)\longleftrightarrow\frac{1}{2j}\left[F(j(\omega-\omega_0))-F(j(\omega+\omega_0))\right]$$
 - **尺度变换**：对实数$a\neq0$，
-  $$x(at)\longleftrightarrow\frac{1}{|a|}X\left(\frac{\omega}{a}\right)$$
+  $$f(at)\longleftrightarrow\frac{1}{|a|}F\left(\frac{j\omega}{a}\right)$$
 - **时间反转**：
-  $$x(-t)\longleftrightarrow X(-\omega)$$
+  $$f(-t)\longleftrightarrow F(-j\omega)$$
 - **复共轭**：
-  $$x^*(t)\longleftrightarrow X^*(-\omega)$$
+  $$f^*(t)\longleftrightarrow F^*(-j\omega)$$
 - **时域微分**：若边界项消失，
-  $$\frac{\mathrm{d}^mx}{\mathrm{d}t^m}\longleftrightarrow(j\omega)^mX(\omega)$$
+  $$\frac{\mathrm{d}^mf}{\mathrm{d}t^m}\longleftrightarrow(j\omega)^mF(j\omega)$$
 - **时域乘幂**：
-  $$t^mx(t)\longleftrightarrow j^m\frac{\mathrm{d}^mX}{\mathrm{d}\omega^m}$$
+  $$t^mf(t)\longleftrightarrow j^m\frac{\mathrm{d}^mF(j\omega)}{\mathrm{d}\omega^m}$$
 - **频域微分**：
-  $$-jt\,x(t)\longleftrightarrow\frac{\mathrm{d}X}{\mathrm{d}\omega}$$
+  $$-jt\,f(t)\longleftrightarrow\frac{\mathrm{d}F(j\omega)}{\mathrm{d}\omega}$$
 - **卷积**：
-  $$x(t)*y(t)\longleftrightarrow X(\omega)Y(\omega)$$
+  $$f(t)*g(t)\longleftrightarrow F(j\omega)G(j\omega)$$
 - **乘积**：
-  $$x(t)y(t)\longleftrightarrow\frac{1}{2\pi}\left[X(\omega)*Y(\omega)\right]$$
-- **对偶性**：若$x(t)\longleftrightarrow X(\omega)$，则
-  $$X(t)\longleftrightarrow2\pi x(-\omega)$$
+  $$f(t)g(t)\longleftrightarrow\frac{1}{2\pi}\left[F(j\omega)*G(j\omega)\right]$$
+- **对偶性**：若$f(t)\longleftrightarrow F(j\omega)$，则把$F$视作时间变量的函数时，
+  $$F(jt)\longleftrightarrow2\pi f(-\omega)$$
 - **Parseval–Plancherel等式**：
-  $$\int_{-\infty}^{\infty}x(t)y^*(t)\,\mathrm{d}t=\frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)Y^*(\omega)\,\mathrm{d}\omega$$
+  $$\int_{-\infty}^{\infty}f(t)g^*(t)\,\mathrm{d}t=\frac{1}{2\pi}\int_{-\infty}^{\infty}F(j\omega)G^*(j\omega)\,\mathrm{d}\omega$$
   特别地，
-  $$\int_{-\infty}^{\infty}|x(t)|^2\,\mathrm{d}t=\frac{1}{2\pi}\int_{-\infty}^{\infty}|X(\omega)|^2\,\mathrm{d}\omega$$
+  $$\int_{-\infty}^{\infty}|f(t)|^2\,\mathrm{d}t=\frac{1}{2\pi}\int_{-\infty}^{\infty}|F(j\omega)|^2\,\mathrm{d}\omega$$
 - **相关定理**：若
-  $$R_{xy}(\tau)=\int_{-\infty}^{\infty}x^*(t)y(t+\tau)\,\mathrm{d}t$$
+  $$R_{fg}(\tau)=\int_{-\infty}^{\infty}f^*(t)g(t+\tau)\,\mathrm{d}t$$
   则
-  $$R_{xy}(\tau)\longleftrightarrow X^*(\omega)Y(\omega)$$
-  自相关函数的Fourier变换为能量谱密度$|X(\omega)|^2$。
+  $$R_{fg}(\tau)\longleftrightarrow F^*(j\omega)G(j\omega)$$
+  自相关函数的Fourier变换为能量谱密度$|F(j\omega)|^2$。
 - **Hilbert变换**：若
-  $$\mathcal{H}\{x\}(t)=x(t)*\operatorname{PV}\frac{1}{\pi t}$$
+  $$\mathcal{H}\{f\}(t)=f(t)*\operatorname{PV}\frac{1}{\pi t}$$
   则
-  $$\mathcal{H}\{x\}(t)\longleftrightarrow-j\operatorname{sgn}(\omega)X(\omega)$$
+  $$\mathcal{H}\{f\}(t)\longleftrightarrow-j\operatorname{sgn}(\omega)F(j\omega)$$
 
 ## 积分特性与主值分布
 若
-$$y(t)=\int_{-\infty}^{t}x(\tau)\,\mathrm{d}\tau$$
+$$g(t)=\int_{-\infty}^{t}f(\tau)\,\mathrm{d}\tau$$
 则在分布意义下
-$$Y(\omega)=\operatorname{PV}\frac{X(\omega)}{j\omega}+\pi X(0)\delta(\omega)$$
+$$G(j\omega)=\operatorname{PV}\frac{F(j\omega)}{j\omega}+\pi F(0)\delta(\omega)$$
 其中$\operatorname{PV}$表示Cauchy主值。$\delta$项记录积分结果中可能保留下来的直流分量。
 
 从Laplace变换逼近虚轴时，常用Sokhotski–Plemelj公式
@@ -240,48 +252,48 @@ $$\boxed{\lim_{\sigma\to0^+}\frac{1}{\sigma+j(\omega-\omega_0)}=\pi\delta(\omega
 - 遇到常数、阶跃、周期信号或无衰减振荡时，应使用分布公式并检查是否遗漏$\delta$项。
 
 # 采样与Poisson求和
-设连续信号$x(t)$的Fourier变换为$X(\omega)$，以间隔$T$采样。采样后的冲激串为
-$$x_s(t)=\sum_{n=-\infty}^{\infty}x(nT)\delta(t-nT)$$
+设连续信号$f(t)$的Fourier变换为$F(j\omega)$，以间隔$T$采样。采样后的冲激串为
+$$f_s(t)=\sum_{n=-\infty}^{\infty}f(nT)\delta(t-nT)$$
 其频谱为
-$$\boxed{X_s(\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}X(\omega-k\Omega_s)},\quad \Omega_s=\frac{2\pi}{T}$$
-另一方面，直接对$x_s(t)$变换得到
-$$X_s(\omega)=\sum_{n=-\infty}^{\infty}x(nT)e^{-j\omega nT}$$
+$$\boxed{F_s(j\omega)=\frac{1}{T}\sum_{k=-\infty}^{\infty}F(j(\omega-k\Omega_s))},\quad \Omega_s=\frac{2\pi}{T}$$
+另一方面，直接对$f_s(t)$变换得到
+$$F_s(j\omega)=\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}$$
 于是得到Poisson求和公式
-$$\boxed{\sum_{n=-\infty}^{\infty}x(nT)e^{-j\omega nT}=\frac{1}{T}\sum_{k=-\infty}^{\infty}X(\omega-k\Omega_s)}$$
+$$\boxed{\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}=\frac{1}{T}\sum_{k=-\infty}^{\infty}F(j(\omega-k\Omega_s))}$$
 它同时说明：时域离散化会在频域产生周期复本。采样定理、混叠和理想重构见[[连续时间信号的采样]]。
 
 # 离散时间Fourier变换
 ## 定义与周期性
-离散序列记为$x(nT)$。其离散时间Fourier变换为
-$$\boxed{X_{\mathrm{DT}}(\omega)=\sum_{n=-\infty}^{\infty}x(nT)e^{-j\omega nT}}$$
+离散序列记为$f(nT)$。其频谱为周期函数，所以记作$\tilde F(j\omega)$：
+$$\boxed{\tilde F(j\omega)=\sum_{n=-\infty}^{\infty}f(nT)e^{-j\omega nT}}$$
 逆变换可在任意长度为$2\pi/T$的频率区间上进行：
-$$\boxed{x(nT)=\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}X_{\mathrm{DT}}(\omega)e^{j\omega nT}\,\mathrm{d}\omega}$$
+$$\boxed{f(nT)=\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}\tilde F(j\omega)e^{j\omega nT}\,\mathrm{d}\omega}$$
 由于
 $$e^{-j(\omega+2\pi/T)nT}=e^{-j\omega nT}$$
 所以
-$$X_{\mathrm{DT}}\left(\omega+\frac{2\pi}{T}\right)=X_{\mathrm{DT}}(\omega)$$
+$$\tilde F\left(j\left(\omega+\frac{2\pi}{T}\right)\right)=\tilde F(j\omega)$$
 离散时间频谱在连续频率$\omega$上定义，但具有周期性。
 
 ## 基本性质
 - **线性**：
-  $$ax(nT)+by(nT)\longleftrightarrow aX_{\mathrm{DT}}(\omega)+bY_{\mathrm{DT}}(\omega)$$
+  $$af(nT)+bg(nT)\longleftrightarrow a\tilde F(j\omega)+b\tilde G(j\omega)$$
 - **离散时移**：
-  $$x((n-m)T)\longleftrightarrow e^{-j\omega mT}X_{\mathrm{DT}}(\omega)$$
+  $$f((n-m)T)\longleftrightarrow e^{-j\omega mT}\tilde F(j\omega)$$
 - **频移**：
-  $$e^{j\omega_0nT}x(nT)\longleftrightarrow X_{\mathrm{DT}}(\omega-\omega_0)$$
+  $$e^{j\omega_0nT}f(nT)\longleftrightarrow\tilde F(j(\omega-\omega_0))$$
 - **时间反转**：
-  $$x(-nT)\longleftrightarrow X_{\mathrm{DT}}(-\omega)$$
+  $$f(-nT)\longleftrightarrow\tilde F(-j\omega)$$
 - **序列卷积**：若
-  $$(x*y)(nT)=\sum_{m=-\infty}^{\infty}x(mT)y((n-m)T)$$
+  $$(f*g)(nT)=\sum_{m=-\infty}^{\infty}f(mT)g((n-m)T)$$
   则
-  $$(x*y)(nT)\longleftrightarrow X_{\mathrm{DT}}(\omega)Y_{\mathrm{DT}}(\omega)$$
+  $$(f*g)(nT)\longleftrightarrow\tilde F(j\omega)\tilde G(j\omega)$$
 - **序列乘积**：
-  $$x(nT)y(nT)\longleftrightarrow\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}X_{\mathrm{DT}}(\nu)Y_{\mathrm{DT}}(\omega-\nu)\,\mathrm{d}\nu$$
+  $$f(nT)g(nT)\longleftrightarrow\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}\tilde F(j\nu)\tilde G(j(\omega-\nu))\,\mathrm{d}\nu$$
   频域卷积按周期$2\pi/T$理解。
 - **Parseval等式**：
-  $$\sum_{n=-\infty}^{\infty}|x(nT)|^2=\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}|X_{\mathrm{DT}}(\omega)|^2\,\mathrm{d}\omega$$
+  $$\sum_{n=-\infty}^{\infty}|f(nT)|^2=\frac{T}{2\pi}\int_{\omega_0}^{\omega_0+2\pi/T}|\tilde F(j\omega)|^2\,\mathrm{d}\omega$$
 - **一阶差分**：
-  $$x(nT)-x((n-1)T)\longleftrightarrow(1-e^{-j\omega T})X_{\mathrm{DT}}(\omega)$$
+  $$f(nT)-f((n-1)T)\longleftrightarrow(1-e^{-j\omega T})\tilde F(j\omega)$$
 
 ## 常用离散时间变换公式
 - **单位样值序列**：令$\delta_n=1$仅在$n=0$成立，则
@@ -289,47 +301,47 @@ $$X_{\mathrm{DT}}\left(\omega+\frac{2\pi}{T}\right)=X_{\mathrm{DT}}(\omega)$$
   - $$\delta_{n-m}\longleftrightarrow e^{-j\omega mT}$$
 - **单边指数序列**：令$u_n=1$对$n\geq0$成立。当$|a|<1$时，
   $$a^nu_n\longleftrightarrow\frac{1}{1-ae^{-j\omega T}}$$
-- **有限长常数序列**：若$x(nT)=1$仅在$0\leq n\leq N-1$成立，则
-  $$X_{\mathrm{DT}}(\omega)=e^{-j\omega T(N-1)/2}\frac{\sin(N\omega T/2)}{\sin(\omega T/2)}$$
+- **有限长常数序列**：若$f(nT)=1$仅在$0\leq n\leq N-1$成立，则
+  $$\tilde F(j\omega)=e^{-j\omega T(N-1)/2}\frac{\sin(N\omega T/2)}{\sin(\omega T/2)}$$
   其中比值按连续延拓解释。
 - **离散单频序列**：
   $$e^{j\omega_0nT}\longleftrightarrow\Omega_s\sum_{k=-\infty}^{\infty}\delta(\omega-\omega_0-k\Omega_s),\quad \Omega_s=\frac{2\pi}{T}$$
 
 # 离散Fourier级数
-设$x(nT)$关于$n$以$N$为周期，即$x((n+N)T)=x(nT)$。总时间周期为$NT$，频率间隔为
+设$\tilde f(nT)$关于$n$以$N$为周期，即$\tilde f((n+N)T)=\tilde f(nT)$。总时间周期为$NT$，频率间隔为
 $$\Omega=\frac{2\pi}{NT}$$
-离散Fourier级数为
-$$\boxed{x(nT)=\sum_{k=0}^{N-1}C(k\Omega)e^{jk\Omega nT}}$$
-$$\boxed{C(k\Omega)=\frac{1}{N}\sum_{n=0}^{N-1}x(nT)e^{-jk\Omega nT}}$$
+离散Fourier级数的时域和频域都是周期函数：
+$$\boxed{\tilde f(nT)=\frac1N\sum_{k=0}^{N-1}\tilde F(jk\Omega)e^{jk\Omega nT}}$$
+$$\boxed{\tilde F(jk\Omega)=\sum_{n=0}^{N-1}\tilde f(nT)e^{-jk\Omega nT}}$$
 时域和频域指标都以$N$为周期：
-$$x((n+N)T)=x(nT),\quad C((k+N)\Omega)=C(k\Omega)$$
+$$\tilde f((n+N)T)=\tilde f(nT),\quad \tilde F(j(k+N)\Omega)=\tilde F(jk\Omega)$$
 
 # 离散Fourier变换
 ## 定义
-对长度为$N$的有限序列$x(nT)$，$n=0,1,\ldots,N-1$，定义
-$$\boxed{X(k\Omega)=\sum_{n=0}^{N-1}x(nT)e^{-jk\Omega nT}}$$
-$$\boxed{x(nT)=\frac{1}{N}\sum_{k=0}^{N-1}X(k\Omega)e^{jk\Omega nT}}$$
+对长度为$N$的有限序列$f(nT)$，$n=0,1,\ldots,N-1$，定义
+$$\boxed{F(jk\Omega)=\sum_{n=0}^{N-1}f(nT)e^{-jk\Omega nT}}$$
+$$\boxed{f(nT)=\frac{1}{N}\sum_{k=0}^{N-1}F(jk\Omega)e^{jk\Omega nT}}$$
 其中
 $$\Omega=\frac{2\pi}{NT},\quad k=0,1,\ldots,N-1$$
 
 DFT有两种等价理解：
 
-- 它是有限序列的DTFT在$\omega=k\Omega$处的$N$个等间隔样值。
-- 它是把有限序列作$N$点周期延拓后得到的离散Fourier级数，只是系数的归一化位置不同。
+- 它是有限序列的DTFT $\tilde F(j\omega)$在$\omega=k\Omega$处的$N$个等间隔样值。
+- 它把离散Fourier级数的一个时域主值区间与一个频域主值区间对应起来。把两端作$N$点周期延拓后，就得到$\tilde f(nT)$与$\tilde F(jk\Omega)$。
 
 ## 常用性质
-- **圆周时移**：若$y(nT)=x(\langle n-m\rangle_NT)$，其中$\langle\cdot\rangle_N$表示模$N$取值，则
-  $$Y(k\Omega)=e^{-jk\Omega mT}X(k\Omega)$$
+- **圆周时移**：若$g(nT)=f(\langle n-m\rangle_NT)$，其中$\langle\cdot\rangle_N$表示模$N$取值，则
+  $$G(jk\Omega)=e^{-jk\Omega mT}F(jk\Omega)$$
 - **频率移位**：
-  $$e^{jk_0\Omega nT}x(nT)\longleftrightarrow X(\langle k-k_0\rangle_N\Omega)$$
+  $$e^{jk_0\Omega nT}f(nT)\longleftrightarrow F(j\langle k-k_0\rangle_N\Omega)$$
 - **圆卷积**：
-  $$x(nT)\circledast_Ny(nT)\longleftrightarrow X(k\Omega)Y(k\Omega)$$
+  $$f(nT)\circledast_Ng(nT)\longleftrightarrow F(jk\Omega)G(jk\Omega)$$
 - **时域乘积**：
-  $$x(nT)y(nT)\longleftrightarrow\frac1N\left[X(k\Omega)\circledast_NY(k\Omega)\right]$$
+  $$f(nT)g(nT)\longleftrightarrow\frac1N\left[F(jk\Omega)\circledast_NG(jk\Omega)\right]$$
 - **Parseval等式**：
-  $$\sum_{n=0}^{N-1}|x(nT)|^2=\frac1N\sum_{k=0}^{N-1}|X(k\Omega)|^2$$
+  $$\sum_{n=0}^{N-1}|f(nT)|^2=\frac1N\sum_{k=0}^{N-1}|F(jk\Omega)|^2$$
 - **实序列的共轭对称性**：
-  $$X((N-k)\Omega)=X^*(k\Omega)$$
+  $$F(j(N-k)\Omega)=F^*(jk\Omega)$$
 - **用圆卷积计算线卷积**：若两序列长度分别为$N_1,N_2$，至少补零到
   $$N\geq N_1+N_2-1$$
   则$N$点圆卷积与线卷积一致。卷积本身的定义和图解法见[[卷积]]。
@@ -347,18 +359,18 @@ FFT是计算DFT的算法。它不改变DFT的定义和结果，只利用复指�
 令
 $$W_N=e^{-j2\pi/N}$$
 对偶数$N$，把序列拆成偶数样值与奇数样值，可得
-$$X(k\Omega)=E(k\Omega)+W_N^kO(k\Omega)$$
-$$X((k+N/2)\Omega)=E(k\Omega)-W_N^kO(k\Omega)$$
-其中$E,O$分别是两个$N/2$点DFT。递归分解后，运算复杂度由直接计算的$O(N^2)$降为$O(N\log N)$。基2 FFT通常要求$N=2^m$；混合基和Bluestein算法可处理其他长度。
+$$F(jk\Omega)=F_{\mathrm{e}}(jk\Omega)+W_N^kF_{\mathrm{o}}(jk\Omega)$$
+$$F(j(k+N/2)\Omega)=F_{\mathrm{e}}(jk\Omega)-W_N^kF_{\mathrm{o}}(jk\Omega)$$
+其中$F_{\mathrm{e}},F_{\mathrm{o}}$分别是偶数样值和奇数样值的$N/2$点DFT。递归分解后，运算复杂度由直接计算的$O(N^2)$降为$O(N\log N)$。基2 FFT通常要求$N=2^m$；混合基和Bluestein算法可处理其他长度。
 
 # 短时Fourier变换
 ## 定义
 Fourier变换给出整个信号的总体频谱，但不保留某个频率在何时出现的信息。短时Fourier变换用移动窗截取局部片段，对每一片分别作Fourier变换。
 
 连续频率形式可写成
-$$X_{\mathrm{ST}}(\tau,\omega)=\sum_{n=-\infty}^{\infty}x(nT)w(nT-\tau)e^{-j\omega nT}$$
+$$F_{\mathrm{ST}}(\tau,j\omega)=\sum_{n=-\infty}^{\infty}f(nT)w(nT-\tau)e^{-j\omega nT}$$
 实际计算通常取长度为$M$的窗、帧移为$H$个样值，并作$N$点DFT：
-$$\boxed{X_r(k\Omega)=\sum_{m=0}^{M-1}x((rH+m)T)w(mT)e^{-jk\Omega mT}}$$
+$$\boxed{F_r(jk\Omega)=\sum_{m=0}^{M-1}f((rH+m)T)w(mT)e^{-jk\Omega mT}}$$
 $$\Omega=\frac{2\pi}{NT},\quad N\geq M$$
 其中$rHT$是帧的时间位置，$k\Omega$是离散频率。若$N>M$，其余位置补零。
 
