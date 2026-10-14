@@ -34,7 +34,7 @@ updated: 2026-10-14
 - **离散Fourier变换**：
   $$\mathrm{DFT}\{f(nT)\}=F(jk\Omega),\quad \mathrm{DFT}^{-1}\{F(jk\Omega)\}=f(nT)$$
 
-## 五类Fourier表示
+## 五类Fourier的关系
 - **Fourier变换**：
   $$f(t)\longleftrightarrow F(j\omega)$$
   时域和频域都连续、非周期。
