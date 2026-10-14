@@ -111,11 +111,11 @@ $$A_k=\sqrt{a_k^2+b_k^2}=2|F(jk\Omega)|,\quad \varphi_k=\arg F(jk\Omega)$$
   $$G(jk\Omega)=\frac{F(jk\Omega)}{jk\Omega},\quad k\neq0$$
 - **时域乘积**：若$\tilde h(t)=\tilde f(t)\tilde g(t)$，则
   $$H(jk\Omega)=\sum_{m=-\infty}^{\infty}F(jm\Omega)G(j(k-m)\Omega)$$
-- **周期卷积**：定义
-  $$(\tilde f*_0\tilde g)(t)=\frac1{T_0}\int_{t_0}^{t_0+T_0}\tilde f(\tau)\tilde g(t-\tau)\,\mathrm{d}\tau$$
-  则
-  若$\tilde h=\tilde f*_0\tilde g$，则
+- **圆卷积**：周期函数的定义域可视为首尾相接的圆。采用归一化定义
+  $$(\tilde f\circledast\tilde g)(t)=\frac1{T_0}\int_{t_0}^{t_0+T_0}\tilde f(\tau)\tilde g(t-\tau)\,\mathrm{d}\tau$$
+  若$\tilde h=\tilde f\circledast\tilde g$，则
   $$H(jk\Omega)=F(jk\Omega)G(jk\Omega)$$
+  若定义中不含$1/T_0$，右端应相应多出因子$T_0$。
 
 ## 正交投影、Bessel不等式与Parseval等式
 取前$N$阶部分和
