@@ -1,5 +1,17 @@
 ---
-
+title: HAL库常用函数
+aliases:
+  - STM32 HAL函数速查
+  - HAL库函数
+tags:
+  - STM32
+  - HAL库
+  - 函数速查
+category:
+  - 嵌入式开发
+status:
+created: 2025-11-16
+updated: 2025-09-06
 ---
 ## 单片机编程的数据类型
 ```c

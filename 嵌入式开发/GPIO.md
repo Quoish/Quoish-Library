@@ -1,3 +1,18 @@
+---
+title: GPIO
+aliases:
+  - 通用输入输出
+  - STM32 GPIO
+tags:
+  - STM32
+  - GPIO
+  - 输入输出
+category:
+  - 嵌入式开发
+status:
+created: 2025-11-16
+updated: 2026-10-16
+---
 GPIO （General-Purpose Input/Output，通用型输入输出），是一种软件可编程的引脚，用户能够通过编程来控制这些引脚的输入或输出状态。
 # GPIO端口的基本结构
 ![[GPIO端口基本结构.png]]

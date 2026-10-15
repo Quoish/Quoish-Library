@@ -1,3 +1,18 @@
+---
+title: ADC
+aliases:
+  - 模数转换器
+  - STM32 ADC
+tags:
+  - STM32
+  - ADC
+  - 模数转换
+category:
+  - 嵌入式开发
+status:
+created: 2025-11-16
+updated: 2025-09-05
+---
 # ADC
 ADC(Analog to Digital Converter，数模转换器)用于将模拟信号转换为数字信号
 ## ADC的种类

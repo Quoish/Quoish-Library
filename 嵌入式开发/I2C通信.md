@@ -1,3 +1,19 @@
+---
+title: I2C通信
+aliases:
+  - I²C通信
+  - IIC通信
+  - STM32 I2C通信
+tags:
+  - STM32
+  - 串行通信
+  - I2C
+category:
+  - 嵌入式开发
+status:
+created: 2025-11-16
+updated: 2025-09-05
+---
 # I2C通信
 ## I2C的结构
 $\qquad$I2C（Inter-Integrated Circuit）可以利用一根时钟线（SCL）和一根数据线（SDA），使得一个主机能够与连接总线的多个器件之间进行信息传递的通信方式。
