@@ -52,7 +52,7 @@ $$I_{BQ}=\frac{V_{CC}-V_{BEQ}}{R_B},\qquad I_{CQ}=\beta I_{BQ},\qquad V_{CEQ}=V_
 $$V_{CEQ}=V_{CC}-I_{CQ}R_C-I_{EQ}R_E$$
 
 静态工作点$Q(I_{CQ},V_{CEQ})$应使输入信号整个周期内晶体管都尽量保持在放大区。
-
+![[常见的两种共射放大电路.png]]
 ## 直流通路与交流通路
 分析遵循“先静态，后动态”：
 
