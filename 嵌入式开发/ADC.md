@@ -2,9 +2,9 @@
 title: ADC
 aliases:
   - 模数转换器
-  - STM32 ADC
+  - 模拟数字转换器
 tags:
-  - STM32
+  - 嵌入式外设
   - ADC
   - 模数转换
 category:

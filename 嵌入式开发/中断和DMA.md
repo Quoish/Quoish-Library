@@ -1,10 +1,10 @@
 ---
 title: 中断和DMA
 aliases:
-  - STM32中断与DMA
   - 中断与直接存储器访问
+  - 中断与DMA机制
 tags:
-  - STM32
+  - 嵌入式系统
   - 中断
   - DMA
 category:

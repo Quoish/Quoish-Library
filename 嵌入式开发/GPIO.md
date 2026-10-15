@@ -2,11 +2,11 @@
 title: GPIO
 aliases:
   - 通用输入输出
-  - STM32 GPIO
+  - 通用型输入输出
 tags:
-  - STM32
+  - 嵌入式外设
   - GPIO
-  - 输入输出
+  - 数字接口
 category:
   - 嵌入式开发
 status:

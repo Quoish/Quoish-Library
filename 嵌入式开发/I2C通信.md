@@ -3,11 +3,11 @@ title: I2C通信
 aliases:
   - I²C通信
   - IIC通信
-  - STM32 I2C通信
+  - 两线式串行总线
 tags:
-  - STM32
   - 串行通信
   - I2C
+  - 总线协议
 category:
   - 嵌入式开发
 status:
