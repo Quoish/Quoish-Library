@@ -16,7 +16,7 @@ BJT放大电路利用[[双极型晶体管]]在放大区内的受控特性，将�
 
 # 放大电路的性能指标
 ## 放大倍数
-电压、电流和功率放大倍数分别为
+![[放大电路.png]]电压、电流和功率放大倍数分别为
 $$A_u=\frac{\dot U_o}{\dot U_i},\qquad A_i=\frac{\dot I_o}{\dot I_i},\qquad A_p=\frac{P_o}{P_i}$$
 其中相量比值包含幅值与相位信息。若计入信号源内阻，常用源电压增益
 $$A_{us}=\frac{\dot U_o}{\dot U_s}=A_u\frac{R_i}{R_s+R_i}$$
