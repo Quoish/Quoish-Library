@@ -11,7 +11,7 @@ category:
   - 嵌入式开发
 status:
 created: 2025-11-16
-updated: 2026-10-16
+updated: 2026-10-19
 ---
 ## 单片机编程的数据类型
 ```c
@@ -35,6 +35,7 @@ HAL函数常见的返回值类型为`HAL_StatusTypeDef`：
 
 中断和DMA模式启动后，传入的缓冲区必须保持有效，直到对应的完成回调已经执行或传输被停止。
 
+## HAL_Delay()
 ```c
 void HAL_Delay(uint32_t Delay)
 ```
@@ -44,6 +45,7 @@ void HAL_Delay(uint32_t Delay)
 
 `HAL_Delay`会占用当前执行流程，不适合放在要求快速返回的中断服务程序中。
 
+## HAL_GetTick()
 ```c
 uint32_t HAL_GetTick(void)
 ```
@@ -61,6 +63,7 @@ if ((uint32_t)(HAL_GetTick() - tick_start) >= 1000U) {
 }
 ```
 
+## HAL_SuspendTick()、HAL_ResumeTick()
 ```c
 void HAL_SuspendTick(void)
 void HAL_ResumeTick(void)
@@ -68,6 +71,7 @@ void HAL_ResumeTick(void)
 作用：暂停或恢复HAL时基中断。暂停期间`HAL_GetTick`不再递增，依赖Tick的超时判断和`HAL_Delay`也会受到影响
 
 # [[GPIO]]
+## HAL_GPIO_WritePin()
 ```c
 void HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx, 
                        uint16_t GPIO_Pin, 
@@ -78,6 +82,7 @@ void HAL_GPIO_WritePin(GPIO_TypeDef *GPIOx,
 - `GPIOx`：对应端口所属的GPIO组，以`GPIOx`的格式，x为字母，如`GPIOA`，或`自定义标签_GPIO_Port`
 - `GPIO_Pin`：对应端口名，以`GPIO_PIN_n`的格式，n为数字，或`自定义标签_Pin`
 - `PinState`：写入的端口电平，`GPIO_PIN_SET`为1，`GPIO_PIN_RESET`为0
+## HAL_GPIO_ReadPin()
 ```c
 GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, 
                                uint16_t GPIO_Pin)
@@ -87,6 +92,7 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx,
 - `GPIOx`：对应端口所属的GPIO组，以`GPIOx`的格式，x为字母，如`GPIOA`，或`自定义标签_GPIO_Port`
 - `GPIO_Pin`：对应端口名，以`GPIO_PIN_n`的格式，n为数字，或`自定义标签_Pin`
 - 返回值`GPIO_PinState`：读到的端口电平，`GPIO_PIN_SET`为1，`GPIO_PIN_RESET`为0
+## HAL_GPIO_TogglePin()
 ```c
 void HAL_GPIO_TogglePin(GPIO_TypeDef *GPIOx, 
                         uint16_t GPIO_Pin)
@@ -95,6 +101,7 @@ void HAL_GPIO_TogglePin(GPIO_TypeDef *GPIOx,
 参数：
 - `GPIOx`：对应端口所属的GPIO组，以`GPIOx`的格式，x为字母，如`GPIOA`，或`自定义标签_GPIO_Port`
 - `GPIO_Pin`：对应端口名，以`GPIO_PIN_n`的格式，n为数字，或`自定义标签_Pin`
+## HAL_GPIO_Init()
 ```c
 void HAL_GPIO_Init(GPIO_TypeDef *GPIOx,
                    GPIO_InitTypeDef *GPIO_Init)
@@ -122,6 +129,7 @@ GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 ```
 
+## HAL_GPIO_DeInit()
 ```c
 void HAL_GPIO_DeInit(GPIO_TypeDef *GPIOx,
                      uint32_t GPIO_Pin)
@@ -131,6 +139,7 @@ void HAL_GPIO_DeInit(GPIO_TypeDef *GPIOx,
 - `GPIOx`：GPIO组
 - `GPIO_Pin`：需要复位的引脚掩码
 
+## HAL_GPIO_LockPin()
 ```c
 HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef *GPIOx,
                                    uint16_t GPIO_Pin)
@@ -141,6 +150,7 @@ HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef *GPIOx,
 - `GPIO_Pin`：需要锁定的引脚掩码
 - 返回值`HAL_StatusTypeDef`：锁定成功返回`HAL_OK`，否则返回`HAL_ERROR`
 
+## HAL_GPIO_EXTI_Callback()
 ```c
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 ```
@@ -159,6 +169,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 ```
 
+## __HAL_GPIO_EXTI_GET_IT()、__HAL_GPIO_EXTI_CLEAR_IT()
 ```c
 __HAL_GPIO_EXTI_GET_IT(GPIO_Pin)
 __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin)
@@ -166,6 +177,7 @@ __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin)
 作用：读取或清除指定EXTI线的挂起标志。通常由`HAL_GPIO_EXTI_IRQHandler`自动处理，只有自行编写底层中断流程时才需要直接使用
 
 # [[串口通信]]
+## HAL_UART_Transmit()
 ```c
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart,
                                     const uint8_t *pData,
@@ -179,6 +191,7 @@ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart,
 - `Size`：要发送的数据大小，以字节为单位，发送字符串时常用`strlen`计算
 - `Timeout`：超时时间，单位ms
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UART_Receive()
 ```c
 HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart,
                                     uint8_t *pData,
@@ -192,6 +205,7 @@ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart,
 - `Size`：期望接收的数据长度，以字节为单位；接收缓冲区容量不能小于该值
 - `Timeout`：超时时间，单位ms
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UARTEx_ReceiveToIdle()
 ```c
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart,
                                            uint8_t *pData,
@@ -208,6 +222,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart,
 - `Timeout`：最大等待时间，单位ms
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_TIMEOUT`代表超时，其他返回值表示忙碌或错误
 
+## HAL_UART_Transmit_IT()
 ```c
 HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, 
                                        const uint8_t *pData, 
@@ -219,6 +234,7 @@ HAL_StatusTypeDef HAL_UART_Transmit_IT(UART_HandleTypeDef *huart,
 - `pData`：要发送的数据的指针
 - `Size`：要发送的数据大小，以字节为单位，发送字符串时常用`strlen`计算
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UART_Receive_IT()
 ```c
 HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart, 
                                       uint8_t *pData, 
@@ -230,6 +246,7 @@ HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *huart,
 - `pData`：指向接收缓冲区的指针
 - `Size`：期望接收的数据长度，以字节为单位；接收缓冲区容量不能小于该值
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UART_Transmit_DMA()
 ```c
 HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart, 
                                         const uint8_t *pData, 
@@ -241,6 +258,7 @@ HAL_StatusTypeDef HAL_UART_Transmit_DMA(UART_HandleTypeDef *huart,
 - `pData`：要发送的数据的指针
 - `Size`：要发送的数据大小，以字节为单位，发送字符串时常用`strlen`计算
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UART_Receive_DMA()
 ```c
 HAL_StatusTypeDef HAL_UART_Receive_DMA(UART_HandleTypeDef *huart, 
                                        uint8_t *pData, 
@@ -252,6 +270,7 @@ HAL_StatusTypeDef HAL_UART_Receive_DMA(UART_HandleTypeDef *huart,
 - `pData`：指向接收缓冲区的指针
 - `Size`：期望接收的数据长度，以字节为单位；接收缓冲区容量不能小于该值
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UART_DMAPause()、HAL_UART_DMAResume()、HAL_UART_DMAStop()
 ```c
 HAL_StatusTypeDef HAL_UART_DMAPause(UART_HandleTypeDef *huart)
 HAL_StatusTypeDef HAL_UART_DMAResume(UART_HandleTypeDef *huart)
@@ -264,6 +283,7 @@ HAL_StatusTypeDef HAL_UART_DMAStop(UART_HandleTypeDef *huart)
 
 `HAL_UART_DMAPause`只暂停DMA请求，缓冲区和已传输位置仍由当前句柄保存；`HAL_UART_DMAStop`会终止本次DMA收发，之后需要重新调用DMA收发函数才能开始新的传输。
 
+## HAL_UARTEx_ReceiveToIdle_IT()
 ```c
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, 
                                               uint8_t *pData, 
@@ -275,6 +295,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart,
 - `pData`：指向接收缓冲区的指针
 - `Size`：缓冲区的最大容量，以字节为单位
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UARTEx_ReceiveToIdle_DMA()
 ```c
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, 
                                                uint8_t *pData, 
@@ -286,6 +307,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart,
 - `pData`：指向接收缓冲区的指针
 - `Size`：缓冲区的最大容量，以字节为单位
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_UARTEx_RxEventCallback()
 ```c
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, 
                                 uint16_t Size)
@@ -297,6 +319,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart,
 
 对于`HAL_UARTEx_ReceiveToIdle_DMA`，回调可能由DMA半传输、传输完成或串口空闲事件触发，可以使用`HAL_UARTEx_GetRxEventType`判断本次回调来源。
 
+## HAL_UARTEx_GetRxEventType()
 ```c
 HAL_UART_RxEventTypeTypeDef HAL_UARTEx_GetRxEventType(
     UART_HandleTypeDef *huart)
@@ -307,6 +330,7 @@ HAL_UART_RxEventTypeTypeDef HAL_UARTEx_GetRxEventType(
 - `HAL_UART_RXEVENT_TC`：DMA或中断接收达到设定长度
 - `HAL_UART_RXEVENT_IDLE`：检测到串口空闲事件
 
+## HAL_UART_TxCpltCallback()、HAL_UART_RxCpltCallback()、HAL_UART_RxHalfCpltCallback()、HAL_UART_ErrorCallback()
 ```c
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
@@ -315,6 +339,7 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 ```
 作用：分别在发送完成、接收完成、DMA接收过半和串口错误时被HAL调用。用户可以在工程中重新实现这些弱定义函数
 
+## HAL_UART_GetState()、HAL_UART_GetError()
 ```c
 HAL_UART_StateTypeDef HAL_UART_GetState(
     const UART_HandleTypeDef *huart)
@@ -329,6 +354,7 @@ uint32_t HAL_UART_GetError(
 - `HAL_UART_ERROR_ORE`：接收溢出
 - `HAL_UART_ERROR_DMA`：DMA传输错误
 
+## HAL_UART_Abort()、HAL_UART_AbortTransmit()、HAL_UART_AbortReceive()
 ```c
 HAL_StatusTypeDef HAL_UART_Abort(UART_HandleTypeDef *huart)
 HAL_StatusTypeDef HAL_UART_AbortTransmit(UART_HandleTypeDef *huart)
@@ -339,6 +365,7 @@ HAL_StatusTypeDef HAL_UART_AbortReceive(UART_HandleTypeDef *huart)
 - `huart`：串口句柄指针
 - 返回值`HAL_StatusTypeDef`：终止成功返回`HAL_OK`
 
+## UART_Print()
 ```c
 // 自定义串口格式化输出函数，依赖stdio.h、string.h、stdarg.h
 void UART_Print(const char *format, int uart_num, ...) {
@@ -372,6 +399,7 @@ void UART_Print(const char *format, int uart_num, ...) {
 - `format`：格式字符串，用法与`printf`相同
 - `uart_num`：选择发送的串口
 # [[I2C通信]]
+## HAL_I2C_Master_Transmit()
 ```c
 HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, 
                                           uint16_t DevAddress, 
@@ -387,6 +415,7 @@ HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c,
 - `Size`：发送的数据长度，以字节为单位
 - `Timeout`：超时时间，单位ms
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_I2C_Master_Receive()
 ```c
 HAL_StatusTypeDef HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c, 
                                          uint16_t DevAddress, 
@@ -405,6 +434,7 @@ HAL_StatusTypeDef HAL_I2C_Master_Receive(I2C_HandleTypeDef *hi2c,
 
 `DevAddress`传入HAL时通常使用左移一位后的地址。例如器件手册给出的7位地址为`0x3C`，则传入`0x3C << 1`。读写位由HAL函数自动处理，不需要手动写入最低位。
 
+## HAL_I2C_IsDeviceReady()
 ```c
 HAL_StatusTypeDef HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c,
                                         uint16_t DevAddress,
@@ -419,6 +449,7 @@ HAL_StatusTypeDef HAL_I2C_IsDeviceReady(I2C_HandleTypeDef *hi2c,
 - `Timeout`：每次尝试的超时时间，单位ms
 - 返回值`HAL_StatusTypeDef`：检测到应答返回`HAL_OK`
 
+## HAL_I2C_Mem_Write()
 ```c
 HAL_StatusTypeDef HAL_I2C_Mem_Write(I2C_HandleTypeDef *hi2c,
                                     uint16_t DevAddress,
@@ -439,6 +470,7 @@ HAL_StatusTypeDef HAL_I2C_Mem_Write(I2C_HandleTypeDef *hi2c,
 - `Timeout`：超时时间，单位ms
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_I2C_Mem_Read()
 ```c
 HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c,
                                    uint16_t DevAddress,
@@ -459,6 +491,7 @@ HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c,
 - `Timeout`：超时时间，单位ms
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_I2C_Master_Transmit_IT()、HAL_I2C_Master_Receive_IT()
 ```c
 HAL_StatusTypeDef HAL_I2C_Master_Transmit_IT(
     I2C_HandleTypeDef *hi2c, uint16_t DevAddress,
@@ -472,6 +505,7 @@ HAL_StatusTypeDef HAL_I2C_Master_Receive_IT(
 - `HAL_I2C_MasterTxCpltCallback`：主机发送完成
 - `HAL_I2C_MasterRxCpltCallback`：主机接收完成
 
+## HAL_I2C_Master_Transmit_DMA()、HAL_I2C_Master_Receive_DMA()
 ```c
 HAL_StatusTypeDef HAL_I2C_Master_Transmit_DMA(
     I2C_HandleTypeDef *hi2c, uint16_t DevAddress,
@@ -488,6 +522,7 @@ HAL_StatusTypeDef HAL_I2C_Master_Receive_DMA(
 - `Size`：传输长度，以字节为单位
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_I2C_Mem_Write_IT()、HAL_I2C_Mem_Read_IT()、HAL_I2C_Mem_Write_DMA()、HAL_I2C_Mem_Read_DMA()
 ```c
 HAL_StatusTypeDef HAL_I2C_Mem_Write_IT(
     I2C_HandleTypeDef *hi2c, uint16_t DevAddress,
@@ -511,6 +546,7 @@ HAL_StatusTypeDef HAL_I2C_Mem_Read_DMA(
 - `HAL_I2C_MemTxCpltCallback`：内部地址写入完成
 - `HAL_I2C_MemRxCpltCallback`：内部地址读取完成
 
+## HAL_I2C_Slave_Transmit()、HAL_I2C_Slave_Receive()
 ```c
 HAL_StatusTypeDef HAL_I2C_Slave_Transmit(I2C_HandleTypeDef *hi2c,
                                          uint8_t *pData,
@@ -523,6 +559,7 @@ HAL_StatusTypeDef HAL_I2C_Slave_Receive(I2C_HandleTypeDef *hi2c,
 ```
 作用：单片机作为I2C从机时，以阻塞模式发送或接收数据。对应的非阻塞版本为`HAL_I2C_Slave_Transmit_IT`、`HAL_I2C_Slave_Receive_IT`及DMA版本
 
+## HAL_I2C_GetState()、HAL_I2C_GetMode()、HAL_I2C_GetError()
 ```c
 HAL_I2C_StateTypeDef HAL_I2C_GetState(I2C_HandleTypeDef *hi2c)
 HAL_I2C_ModeTypeDef HAL_I2C_GetMode(I2C_HandleTypeDef *hi2c)
@@ -537,12 +574,14 @@ uint32_t HAL_I2C_GetError(I2C_HandleTypeDef *hi2c)
 - `HAL_I2C_ERROR_DMA`：DMA传输错误
 - `HAL_I2C_ERROR_TIMEOUT`：超时
 
+## HAL_I2C_ErrorCallback()
 ```c
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
 ```
 作用：I2C中断或DMA传输出现错误时调用的回调函数，可以在其中读取`HAL_I2C_GetError`并记录故障
 
 # [[定时器]]
+## HAL_TIM_Base_Start()
 ```c
 HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef *htim)
 ```
@@ -550,6 +589,7 @@ HAL_StatusTypeDef HAL_TIM_Base_Start(TIM_HandleTypeDef *htim)
 参数：
 - `htim`：计时器句柄指针
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_Base_Stop()
 ```c
 HAL_StatusTypeDef HAL_TIM_Base_Stop(TIM_HandleTypeDef *htim)
 ```
@@ -557,6 +597,7 @@ HAL_StatusTypeDef HAL_TIM_Base_Stop(TIM_HandleTypeDef *htim)
 参数：
 - `htim`：计时器句柄指针
 - `HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_Base_Start_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_Base_Start_IT(TIM_HandleTypeDef *htim)
 ```
@@ -564,6 +605,7 @@ HAL_StatusTypeDef HAL_TIM_Base_Start_IT(TIM_HandleTypeDef *htim)
 参数：
 - `htim`：计时器句柄指针
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_Base_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_Base_Stop_IT(TIM_HandleTypeDef *htim)
 ```
@@ -571,6 +613,7 @@ HAL_StatusTypeDef HAL_TIM_Base_Stop_IT(TIM_HandleTypeDef *htim)
 参数：
 - `htim`：计时器句柄指针
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_Base_Start_DMA()、HAL_TIM_Base_Stop_DMA()
 ```c
 HAL_StatusTypeDef HAL_TIM_Base_Start_DMA(TIM_HandleTypeDef *htim,
                                          const uint32_t *pData,
@@ -586,6 +629,7 @@ HAL_StatusTypeDef HAL_TIM_Base_Stop_DMA(TIM_HandleTypeDef *htim)
 
 DMA传输过半和完成时分别调用`HAL_TIM_PeriodElapsedHalfCpltCallback`和`HAL_TIM_PeriodElapsedCallback`。
 
+## __HAL_TIM_SET_COUNTER()
 ```c
 #define __HAL_TIM_SET_COUNTER(__HANDLE__, __COUNTER__)
 ```
@@ -593,12 +637,14 @@ DMA传输过半和完成时分别调用`HAL_TIM_PeriodElapsedHalfCpltCallback`�
 参数：
 - `__HANDLE__`：计时器句柄指针
 - `__COUNTER__`：要设置的值
+## __HAL_TIM_GET_COUNTER()
 ```C
 #define __HAL_TIM_GET_COUNTER(__HANDLE__)
 ```
 作用：获取当前计时器的计数
 参数：
 - `__HANDLE__`：计时器句柄指针
+## __HAL_TIM_SET_PRESCALER()、__HAL_TIM_GET_PRESCALER()、__HAL_TIM_SET_AUTORELOAD()、__HAL_TIM_GET_AUTORELOAD()、__HAL_TIM_SET_COMPARE()、__HAL_TIM_GET_COMPARE()
 类似的宏有
 ```c
 //预分频器PSC
@@ -616,6 +662,7 @@ __HAL_TIM_GET_COMPARE(__HANDLE__, __CHANNEL__)
 ```
 
 不再一一介绍
+## HAL_TIM_PWM_Start()
 ```c
 HAL_StatusTypeDef HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim, 
                                     uint32_t Channel)
@@ -625,6 +672,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Start(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIMEx_PWMN_Start()
 ```c
 HAL_StatusTypeDef HAL_TIMEx_PWMN_Start(TIM_HandleTypeDef *htim, 
                                        uint32_t Channel)
@@ -634,6 +682,7 @@ HAL_StatusTypeDef HAL_TIMEx_PWMN_Start(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_PWM_Start_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_PWM_Start_IT(TIM_HandleTypeDef *htim, 
                                        uint32_t Channel)
@@ -643,6 +692,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Start_IT(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_PWM_Stop()、HAL_TIM_PWM_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_PWM_Stop(TIM_HandleTypeDef *htim,
                                    uint32_t Channel)
@@ -655,6 +705,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Stop_IT(TIM_HandleTypeDef *htim,
 - `Channel`：计时器通道编号
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_TIM_PWM_Start_DMA()、HAL_TIM_PWM_Stop_DMA()
 ```c
 HAL_StatusTypeDef HAL_TIM_PWM_Start_DMA(TIM_HandleTypeDef *htim,
                                         uint32_t Channel,
@@ -671,6 +722,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Stop_DMA(TIM_HandleTypeDef *htim,
 - `Length`：比较值个数
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_TIM_OC_Start()、HAL_TIM_OC_Stop()、HAL_TIM_OC_Start_IT()、HAL_TIM_OC_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_OC_Start(TIM_HandleTypeDef *htim,
                                    uint32_t Channel)
@@ -687,6 +739,7 @@ HAL_StatusTypeDef HAL_TIM_OC_Stop_IT(TIM_HandleTypeDef *htim,
 - `Channel`：计时器通道编号
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_TIM_OnePulse_Start()、HAL_TIM_OnePulse_Stop()、HAL_TIM_OnePulse_Start_IT()、HAL_TIM_OnePulse_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_OnePulse_Start(TIM_HandleTypeDef *htim,
                                          uint32_t OutputChannel)
@@ -703,6 +756,7 @@ HAL_StatusTypeDef HAL_TIM_OnePulse_Stop_IT(TIM_HandleTypeDef *htim,
 - `OutputChannel`：输出通道，通常使用`TIM_CHANNEL_1`或`TIM_CHANNEL_2`，具体支持情况取决于定时器
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_TIM_IC_Start()
 ```c
 HAL_StatusTypeDef HAL_TIM_IC_Start(TIM_HandleTypeDef *htim, 
                                    uint32_t Channel)
@@ -712,6 +766,7 @@ HAL_StatusTypeDef HAL_TIM_IC_Start(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_IC_Stop()
 ```c
 HAL_StatusTypeDef HAL_TIM_IC_Stop(TIM_HandleTypeDef *htim, 
                                    uint32_t Channel)
@@ -721,6 +776,7 @@ HAL_StatusTypeDef HAL_TIM_IC_Stop(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_IC_Start_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_IC_Start_IT(TIM_HandleTypeDef *htim, 
                                    uint32_t Channel)
@@ -730,6 +786,7 @@ HAL_StatusTypeDef HAL_TIM_IC_Start_IT(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_IC_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_IC_Stop_IT(TIM_HandleTypeDef *htim, 
                                    uint32_t Channel)
@@ -739,6 +796,7 @@ HAL_StatusTypeDef HAL_TIM_IC_Stop_IT(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_ReadCapturedValue()
 ```c
 uint32_t HAL_TIM_ReadCapturedValue(const TIM_HandleTypeDef *htim, 
                                    uint32_t Channel)
@@ -748,6 +806,7 @@ uint32_t HAL_TIM_ReadCapturedValue(const TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字
 - 返回值`uint32_t`：返回检测到边沿时对应的计数器值
+## __HAL_TIM_GET_FLAG()、__HAL_TIM_CLEAR_FLAG()
 ```c
 #define __HAL_TIM_GET_FLAG(__HANDLE__, __FLAG__) 
 #define __HAL_TIM_CLEAR_FLAG(__HANDLE__, __FLAG__)
@@ -756,6 +815,7 @@ uint32_t HAL_TIM_ReadCapturedValue(const TIM_HandleTypeDef *htim,
 当某定时器如`&htim1`的通道1捕获完成时，标志`TIM_FLAG_CC1`会置1，可以使用`__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_CC1)`读取，并使用`__HAL_TIM_CLEAR_FLAG(&htim1, TIM_FLAG_CC1)`清除
 当某定时器触发自动重装载时，标志`TIM_FLAG_UPDATE`会置1（注意：函数MX_TIMx_INIT()在初始化定时器时，也会将这个标志置1）
 当某定时器因为外部触发产生更新事件时，`TIM_FLAG_UPDATE`和`TIM_FLAG_TRIGGER`都可能置1
+## HAL_TIM_Encoder_Start()
 ```c
 HAL_StatusTypeDef HAL_TIM_Encoder_Start(TIM_HandleTypeDef *htim, 
                                         uint32_t Channel)
@@ -765,6 +825,7 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Start(TIM_HandleTypeDef *htim,
 - `htim`：计时器句柄指针
 - `Channel`：计时器通道编号，格式为`TIM_CHANNEL_n`，`n`为数字；编码器是多通道混合模式，一般写`TIM_CHANNEL_ALL`
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
+## HAL_TIM_Encoder_Stop()、HAL_TIM_Encoder_Start_IT()、HAL_TIM_Encoder_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_TIM_Encoder_Stop(TIM_HandleTypeDef *htim,
                                        uint32_t Channel)
@@ -779,6 +840,7 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Stop_IT(TIM_HandleTypeDef *htim,
 - `Channel`：通常使用`TIM_CHANNEL_ALL`同时管理编码器使用的两个输入通道
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_TIM_PeriodElapsedCallback()、HAL_TIM_PeriodElapsedHalfCpltCallback()、HAL_TIM_IC_CaptureCallback()、HAL_TIM_OC_DelayElapsedCallback()、HAL_TIM_PWM_PulseFinishedCallback()、HAL_TIM_ErrorCallback()
 ```c
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void HAL_TIM_PeriodElapsedHalfCpltCallback(TIM_HandleTypeDef *htim)
@@ -813,6 +875,7 @@ Encoder mode output : HAL_TIM_Encoder_Start(),    HAL_TIM_Encoder_Start_DMA(), H
 ```
 各种定时器启用函数概览
 # [[ADC]]
+## HAL_ADCEx_Calibration_Start()
 ```c
 HAL_StatusTypeDef HAL_ADCEx_Calibration_Start(ADC_HandleTypeDef *hadc)
 ```
@@ -823,6 +886,7 @@ HAL_StatusTypeDef HAL_ADCEx_Calibration_Start(ADC_HandleTypeDef *hadc)
 
 校准期间ADC必须处于未转换状态。其他系列的校准函数可能带有单端、差分等额外参数，应以对应系列HAL头文件为准。
 
+## HAL_ADC_ConfigChannel()
 ```c
 HAL_StatusTypeDef HAL_ADC_ConfigChannel(
     ADC_HandleTypeDef *hadc,
@@ -845,6 +909,7 @@ HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 
 采样时间需要结合信号源阻抗选择。信号源阻抗较高时，应适当延长采样时间，使内部采样电容有足够时间充电。
 
+## HAL_ADC_Start()、HAL_ADC_Stop()
 ```c
 HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef *hadc)
 HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef *hadc)
@@ -854,6 +919,7 @@ HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef *hadc)
 - `hadc`：ADC句柄指针
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_ADC_PollForConversion()
 ```c
 HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef *hadc,
                                             uint32_t Timeout)
@@ -864,6 +930,7 @@ HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef *hadc,
 - `Timeout`：超时时间，单位ms；可使用`HAL_MAX_DELAY`持续等待
 - 返回值`HAL_StatusTypeDef`：`HAL_OK`代表成功，`HAL_ERROR`代表出错，`HAL_BUSY`代表繁忙，`HAL_TIMEOUT`代表超时
 
+## HAL_ADC_GetValue()
 ```c
 uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef *hadc)
 ```
@@ -882,6 +949,7 @@ if (HAL_ADC_PollForConversion(&hadc1, 10U) == HAL_OK) {
 HAL_ADC_Stop(&hadc1);
 ```
 
+## HAL_ADC_Start_IT()、HAL_ADC_Stop_IT()
 ```c
 HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef *hadc)
 HAL_StatusTypeDef HAL_ADC_Stop_IT(ADC_HandleTypeDef *hadc)
@@ -891,6 +959,7 @@ HAL_StatusTypeDef HAL_ADC_Stop_IT(ADC_HandleTypeDef *hadc)
 - `hadc`：ADC句柄指针
 - 返回值`HAL_StatusTypeDef`：HAL状态
 
+## HAL_ADC_Start_DMA()、HAL_ADC_Stop_DMA()
 ```c
 HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef *hadc,
                                     uint32_t *pData,
@@ -906,6 +975,7 @@ HAL_StatusTypeDef HAL_ADC_Stop_DMA(ADC_HandleTypeDef *hadc)
 
 连续采样通常把ADC配置为连续转换，并把DMA配置为循环模式。DMA运行期间不能把局部数组作为接收缓冲区，也不要在主程序中同时改写该数组。
 
+## HAL_ADC_ConvCpltCallback()、HAL_ADC_ConvHalfCpltCallback()、HAL_ADC_LevelOutOfWindowCallback()、HAL_ADC_ErrorCallback()
 ```c
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
@@ -914,6 +984,7 @@ void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *hadc)
 ```
 作用：分别处理转换完成、DMA传输过半、模拟看门狗越界和ADC错误事件。多个ADC共用回调时，可通过`hadc->Instance`判断来源
 
+## HAL_ADC_GetState()、HAL_ADC_GetError()
 ```c
 uint32_t HAL_ADC_GetState(ADC_HandleTypeDef *hadc)
 uint32_t HAL_ADC_GetError(ADC_HandleTypeDef *hadc)
@@ -927,6 +998,7 @@ if ((HAL_ADC_GetState(&hadc1) & HAL_ADC_STATE_ERROR_INTERNAL) != 0U) {
 ```
 
 # [[中断和DMA]]
+## HAL_NVIC_SetPriorityGrouping()、HAL_NVIC_SetPriority()
 ```c
 void HAL_NVIC_SetPriorityGrouping(uint32_t PriorityGroup)
 void HAL_NVIC_SetPriority(IRQn_Type IRQn,
@@ -942,6 +1014,7 @@ void HAL_NVIC_SetPriority(IRQn_Type IRQn,
 
 优先级数值越小，优先级越高。只有抢占优先级更高的中断才能打断当前中断；响应优先级用于决定同一抢占优先级下的响应顺序。CubeMX通常会在初始化代码中统一完成优先级分组设置。
 
+## HAL_NVIC_EnableIRQ()、HAL_NVIC_DisableIRQ()
 ```c
 void HAL_NVIC_EnableIRQ(IRQn_Type IRQn)
 void HAL_NVIC_DisableIRQ(IRQn_Type IRQn)
@@ -952,6 +1025,7 @@ void HAL_NVIC_DisableIRQ(IRQn_Type IRQn)
 
 外设自身的中断允许位和NVIC使能位需要同时打开，中断才能进入服务程序。禁用NVIC中断不会自动清除已经挂起的请求。
 
+## HAL_NVIC_GetPendingIRQ()、HAL_NVIC_SetPendingIRQ()、HAL_NVIC_ClearPendingIRQ()、HAL_NVIC_GetActive()
 ```c
 uint32_t HAL_NVIC_GetPendingIRQ(IRQn_Type IRQn)
 void HAL_NVIC_SetPendingIRQ(IRQn_Type IRQn)
@@ -960,6 +1034,7 @@ uint32_t HAL_NVIC_GetActive(IRQn_Type IRQn)
 ```
 作用：读取、设置或清除中断挂起状态，以及查询中断是否正在执行
 
+## HAL_NVIC_SystemReset()
 ```c
 void HAL_NVIC_SystemReset(void)
 ```
@@ -967,6 +1042,7 @@ void HAL_NVIC_SystemReset(void)
 
 中断服务程序通常只完成清除标志、保存数据和设置事件标志等短操作，耗时处理放到主循环或任务中执行。中断中应避免使用`HAL_Delay`以及可能长时间等待的阻塞式外设函数。
 
+## HAL_DMA_Start()、HAL_DMA_Start_IT()
 ```c
 HAL_StatusTypeDef HAL_DMA_Start(DMA_HandleTypeDef *hdma,
                                 uint32_t SrcAddress,
@@ -987,6 +1063,7 @@ HAL_StatusTypeDef HAL_DMA_Start_IT(DMA_HandleTypeDef *hdma,
 
 UART、ADC、I2C等外设一般优先使用各自的`_DMA`函数，它们会完成外设DMA请求和回调关联。直接调用`HAL_DMA_Start`适合内存到内存传输或自行管理外设DMA请求的场景。
 
+## HAL_DMA_PollForTransfer()
 ```c
 HAL_StatusTypeDef HAL_DMA_PollForTransfer(
     DMA_HandleTypeDef *hdma,
@@ -1002,12 +1079,14 @@ HAL_StatusTypeDef HAL_DMA_PollForTransfer(
 
 循环模式下不应使用`HAL_DMA_PollForTransfer`等待全部完成，因为传输会自动重新开始。
 
+## HAL_DMA_Abort()、HAL_DMA_Abort_IT()
 ```c
 HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef *hdma)
 HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef *hdma)
 ```
 作用：终止正在进行的DMA传输。`HAL_DMA_Abort_IT`完成终止后可调用DMA终止回调
 
+## HAL_DMA_GetState()、HAL_DMA_GetError()、__HAL_DMA_GET_COUNTER()
 ```c
 HAL_DMA_StateTypeDef HAL_DMA_GetState(DMA_HandleTypeDef *hdma)
 uint32_t HAL_DMA_GetError(DMA_HandleTypeDef *hdma)
@@ -1025,6 +1104,7 @@ uint32_t HAL_DMA_GetError(DMA_HandleTypeDef *hdma)
 使用外设的`_DMA`函数时，HAL通常会自动设置这些底层回调，再转调对应的UART、ADC、I2C或定时器回调函数。
 
 # [[时钟树]]
+## HAL_RCC_GetSysClockFreq()、HAL_RCC_GetHCLKFreq()、HAL_RCC_GetPCLK1Freq()、HAL_RCC_GetPCLK2Freq()
 ```c
 uint32_t HAL_RCC_GetSysClockFreq(void)
 uint32_t HAL_RCC_GetHCLKFreq(void)
@@ -1035,6 +1115,7 @@ uint32_t HAL_RCC_GetPCLK2Freq(void)
 
 这些函数适合核对时钟配置或计算通信波特率。定时器时钟还受APB预分频规则影响：当对应APB预分频器不为1时，定时器内核时钟通常为该APB时钟的2倍。
 
+## __HAL_RCC_GPIOA_CLK_ENABLE()、__HAL_RCC_USART1_CLK_ENABLE()、__HAL_RCC_DMA1_CLK_ENABLE()、__HAL_RCC_GPIOA_CLK_DISABLE()
 ```c
 __HAL_RCC_GPIOA_CLK_ENABLE();
 __HAL_RCC_USART1_CLK_ENABLE();

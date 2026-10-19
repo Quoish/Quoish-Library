@@ -18,6 +18,7 @@ Arduino程序以C++为基础，Arduino Core在此基础上提供了统一的引�
 本文代码块中的函数形式用于说明常见调用方式。涉及硬件能力时，应同时查阅所用开发板的引脚图和Core文档。
 
 # 基础结构
+## setup()、loop()
 ```cpp
 void setup()
 {
@@ -56,6 +57,7 @@ float voltage = 0.0F;
 需要明确位宽的数据应优先使用`stdint.h`中的`uint8_t`、`int16_t`、`uint32_t`等类型。
 
 # [[GPIO]]
+## pinMode()
 ```cpp
 void pinMode(uint8_t pin, uint8_t mode)
 ```
@@ -71,6 +73,7 @@ pinMode(LED_BUILTIN, OUTPUT);
 pinMode(2, INPUT_PULLUP);
 ```
 
+## digitalWrite()
 ```cpp
 void digitalWrite(uint8_t pin, uint8_t value)
 ```
@@ -81,6 +84,7 @@ void digitalWrite(uint8_t pin, uint8_t value)
 
 当引脚仍处于输入模式时，`digitalWrite(pin, HIGH)`在部分Core中用于启用内部上拉，代码意图不如直接使用`pinMode(pin, INPUT_PULLUP)`清晰。
 
+## digitalRead()
 ```cpp
 int digitalRead(uint8_t pin)
 ```
@@ -97,6 +101,7 @@ digitalWrite(LED_BUILTIN,
 ```
 
 # [[ADC]]
+## analogRead()
 ```cpp
 int analogRead(uint8_t pin)
 ```
@@ -116,6 +121,7 @@ int raw = analogRead(A0);
 float voltage = raw * 5.0F / 1023.0F;
 ```
 
+## analogReadResolution()
 ```cpp
 void analogReadResolution(int bits)
 ```
@@ -125,6 +131,7 @@ void analogReadResolution(int bits)
 
 该函数只在部分开发板上可用。设置值高于硬件ADC分辨率时，增加的低位通常由零填充，不会提高实际测量精度。
 
+## analogReference()
 ```cpp
 void analogReference(uint8_t type)
 ```
@@ -135,6 +142,7 @@ void analogReference(uint8_t type)
 使用外部参考电压前必须核对开发板允许的AREF范围和接线要求。错误地连接AREF可能造成参考源冲突甚至损坏硬件。切换参考源后的前几次读数可能不稳定。
 
 # [[定时器]]与PWM
+## analogWrite()
 ```cpp
 void analogWrite(uint8_t pin, int value)
 ```
@@ -149,6 +157,7 @@ void analogWrite(uint8_t pin, int value)
 analogWrite(9, 128);  // 默认8位分辨率下约为50%占空比
 ```
 
+## analogWriteResolution()
 ```cpp
 void analogWriteResolution(int bits)
 ```
@@ -158,6 +167,7 @@ void analogWriteResolution(int bits)
 
 该函数只在部分开发板上可用。设置后满量程值为$2^{bits}-1$。
 
+## tone()、noTone()
 ```cpp
 void tone(uint8_t pin,
           unsigned int frequency,
@@ -176,6 +186,7 @@ void noTone(uint8_t pin)
 `tone()`会占用定时器资源，可能影响部分引脚的PWM输出。不同Core对同时输出的音调数量和频率范围支持不同。
 
 # 时间函数
+## delay()、delayMicroseconds()
 ```cpp
 void delay(unsigned long ms)
 void delayMicroseconds(unsigned int us)
@@ -187,6 +198,7 @@ void delayMicroseconds(unsigned int us)
 
 阻塞期间主循环无法处理其他任务。需要同时完成按键扫描、通信和状态更新时，应优先使用`millis()`编写非阻塞逻辑。
 
+## millis()、micros()
 ```cpp
 unsigned long millis()
 unsigned long micros()
@@ -215,6 +227,7 @@ void loop()
 不要使用`millis() >= previousMillis + interval`判断超时，这种写法跨越计数回绕点时容易产生错误。
 
 # 数学和数值处理
+## min()、max()、abs()、constrain()
 ```cpp
 min(x, y)
 max(x, y)
@@ -229,6 +242,7 @@ constrain(x, low, high)
 
 这些接口在部分Core中以宏实现。参数中应避免直接放入带有自增、函数调用等副作用的表达式。
 
+## map()
 ```cpp
 long map(long x,
          long in_min,
@@ -250,6 +264,7 @@ int pwm = map(analogRead(A0), 0, 1023, 0, 255);
 pwm = constrain(pwm, 0, 255);
 ```
 
+## pow()、sqrt()、sin()、cos()、tan()
 ```cpp
 double pow(double base, double exponent)
 double sqrt(double x)
@@ -259,12 +274,14 @@ double tan(double radians)
 ```
 作用：完成幂、平方根和三角函数计算。三角函数参数使用弧度
 
+## radians()、degrees()
 ```cpp
 radians(degrees)
 degrees(radians)
 ```
 作用：在角度和弧度之间转换
 
+## randomSeed()、random()
 ```cpp
 void randomSeed(unsigned long seed)
 long random(long max)
@@ -279,6 +296,7 @@ long random(long min, long max)
 固定种子会生成可重复的序列。需要每次启动得到不同序列时，可使用悬空模拟输入的读数作为简单种子，但这不能用于密码学或安全用途。
 
 # 位与字节操作
+## bit()、bitRead()、bitSet()、bitClear()、bitWrite()、highByte()、lowByte()
 ```cpp
 bit(n)
 bitRead(value, bit)
@@ -307,6 +325,7 @@ if (bitRead(flags, 2) == 1) {
 ```
 
 # 高级IO
+## pulseIn()、pulseInLong()
 ```cpp
 unsigned long pulseIn(uint8_t pin,
                       uint8_t state,
@@ -324,6 +343,7 @@ unsigned long pulseInLong(uint8_t pin,
 
 这两个函数在测量期间会等待脉冲，不适合需要持续处理其他实时任务的场景。`pulseInLong()`依赖中断和`micros()`，适合较长脉冲，但并非所有Core都支持。
 
+## shiftOut()、shiftIn()
 ```cpp
 void shiftOut(uint8_t dataPin,
               uint8_t clockPin,
@@ -344,6 +364,7 @@ uint8_t shiftIn(uint8_t dataPin,
 这些函数属于软件时序接口，速度和实时性低于硬件SPI。
 
 # [[中断和DMA]]
+## attachInterrupt()、detachInterrupt()、digitalPinToInterrupt()
 ```cpp
 attachInterrupt(digitalPinToInterrupt(pin), ISR, mode)
 detachInterrupt(digitalPinToInterrupt(pin))
@@ -375,6 +396,7 @@ void setup()
 
 中断服务函数应尽量短，只保存数据或设置事件标志。不要在其中使用`delay()`、长时间串口输出或其他阻塞操作。被主程序和中断共同访问的变量通常需要声明为`volatile`；当变量读写不是原子操作时，还需要在临界区内访问。
 
+## noInterrupts()、interrupts()
 ```cpp
 void noInterrupts()
 void interrupts()
@@ -390,6 +412,7 @@ interrupts();
 关闭中断会影响时间计数、串口收发和其他依赖中断的功能，临界区应保持尽可能短。Arduino没有跨平台统一的DMA API，需要使用开发板Core或第三方库提供的接口。
 
 # [[串口通信]]
+## Serial.begin()、Serial.end()
 ```cpp
 Serial.begin(baud)
 Serial.begin(baud, config)
@@ -415,6 +438,7 @@ if (Serial) {
 }
 ```
 
+## Serial.available()、Serial.read()、Serial.peek()
 ```cpp
 int Serial.available()
 int Serial.read()
@@ -434,6 +458,7 @@ if (Serial.available() > 0) {
 
 使用`int`接收`read()`的返回值，才能区分有效的`0xFF`与表示无数据的`-1`。
 
+## Serial.write()
 ```cpp
 size_t Serial.write(uint8_t value)
 size_t Serial.write(const uint8_t *buffer, size_t size)
@@ -441,6 +466,7 @@ size_t Serial.write(const uint8_t *buffer, size_t size)
 作用：发送原始字节或字节数组
 返回值`size_t`：成功排入发送缓冲区的字节数
 
+## Serial.print()、Serial.println()
 ```cpp
 Serial.print(value)
 Serial.print(value, format)
@@ -459,6 +485,7 @@ Serial.println(3.14159, 2); // 3.14
 
 `Serial.write()`发送二进制原始数据，`Serial.print()`发送文本表示。例如`Serial.write(65)`发送一个字节`0x41`，`Serial.print(65)`发送字符`6`和`5`。
 
+## Serial.availableForWrite()、Serial.flush()
 ```cpp
 int Serial.availableForWrite()
 void Serial.flush()
@@ -469,6 +496,7 @@ void Serial.flush()
 
 `flush()`不会清空接收缓冲区。需要丢弃已接收数据时，应循环调用`read()`直到`available()`为0。
 
+## Serial.readBytes()、Serial.readBytesUntil()、Serial.setTimeout()
 ```cpp
 size_t Serial.readBytes(char *buffer, size_t length)
 size_t Serial.readBytesUntil(char terminator,
@@ -498,6 +526,7 @@ buffer[length] = '\0';
 #include <Wire.h>
 ```
 
+## Wire.begin()、Wire.end()、Wire.setClock()
 ```cpp
 Wire.begin()
 Wire.begin(address)
@@ -512,6 +541,7 @@ Wire.setClock(clockFrequency)
 
 Wire使用7位I2C地址。例如器件手册给出7位地址`0x3C`时，应直接传入`0x3C`，不需要像部分底层驱动那样左移一位。
 
+## Wire.beginTransmission()、Wire.write()、Wire.endTransmission()
 ```cpp
 Wire.beginTransmission(address)
 Wire.write(value)
@@ -535,6 +565,7 @@ uint8_t error = Wire.endTransmission();
 
 `beginTransmission()`和`write()`只是把数据放入发送缓冲区，`endTransmission()`才真正发起总线传输。
 
+## Wire.requestFrom()、Wire.available()、Wire.read()
 ```cpp
 size_t Wire.requestFrom(address, quantity)
 int Wire.available()
@@ -570,6 +601,7 @@ if (Wire.endTransmission(false) == 0) {
 }
 ```
 
+## Wire.onReceive()、Wire.onRequest()
 ```cpp
 Wire.onReceive(receiveHandler)
 Wire.onRequest(requestHandler)
@@ -599,12 +631,14 @@ Wire缓冲区容量由Core决定，AVR Core常见为32字节。单次发送或�
 #include <SPI.h>
 ```
 
+## SPI.begin()、SPI.end()
 ```cpp
 SPI.begin()
 SPI.end()
 ```
 作用：初始化或关闭默认SPI接口
 
+## SPISettings、SPI.beginTransaction()、SPI.endTransaction()
 ```cpp
 SPISettings settings(clock,
                      bitOrder,
@@ -620,6 +654,7 @@ SPI.endTransaction()
 
 同一总线上连接多个SPI设备时，每次与设备通信前都应使用对应的`SPISettings`开始事务。
 
+## SPI.transfer()、SPI.transfer16()
 ```cpp
 uint8_t SPI.transfer(uint8_t data)
 uint16_t SPI.transfer16(uint16_t data)
@@ -664,6 +699,7 @@ uint8_t readRegister(uint8_t address)
 #include <EEPROM.h>
 ```
 
+## EEPROM.read()、EEPROM.write()、EEPROM.update()、EEPROM.length()
 ```cpp
 uint8_t EEPROM.read(int address)
 void EEPROM.write(int address, uint8_t value)
@@ -680,6 +716,7 @@ int EEPROM.length()
 - `address`：从0开始的存储地址
 - `value`：要写入的字节
 
+## EEPROM.get()、EEPROM.put()
 ```cpp
 template<typename T>
 T &EEPROM.get(int address, T &data)
@@ -706,6 +743,7 @@ EEPROM.put(0, settings);
 EEPROM具有有限擦写寿命，不应在每次`loop()`循环中反复写入。部分开发板没有独立EEPROM，Core可能使用Flash模拟并要求额外的初始化或提交操作，应查阅所用开发板的EEPROM实现。
 
 # 字符串与Flash存储
+## String.length()、String.charAt()、String.substring()、String.indexOf()、String.toInt()、String.c_str()
 ```cpp
 String text = "value=";
 text += 123;
@@ -721,17 +759,20 @@ text.c_str()
 
 在SRAM较小的开发板上频繁创建和拼接临时`String`可能造成内存碎片。长期运行的程序可使用固定长度的`char`数组，并用`snprintf()`限制写入长度。
 
+## snprintf()
 ```cpp
 char buffer[32];
 snprintf(buffer, sizeof(buffer), "value=%d", 123);
 Serial.println(buffer);
 ```
 
+## F()
 ```cpp
 Serial.println(F("constant text"));
 ```
 作用：在AVR平台上使用`F()`宏让只读字符串保存在Flash中，避免启动时复制到SRAM。其他架构通常会以不同方式处理只读常量，但保留该写法一般有利于兼容。
 
+## PROGMEM
 ```cpp
 const uint8_t table[] PROGMEM = {1, 2, 3, 4};
 ```
