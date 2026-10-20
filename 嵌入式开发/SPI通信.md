@@ -302,7 +302,7 @@ uint8_t readRegister(uint8_t reg)
 }
 ```
 
-不同Arduino开发板的SPI引脚位置可能不同，应根据板级引脚图使用默认SPI引脚或指定的SPI实例。相关函数可参考[[Arduino常用函数]]。
+不同Arduino开发板的SPI引脚位置可能不同，应根据板级引脚图使用默认SPI引脚或指定的SPI实例。相关函数可参考[[Arduino-ESP32常用函数|Arduino常用函数]]。
 
 ## SPI与I2C、UART的区别
 | 特性 | SPI | [[I2C通信]] | [[串口通信]] |

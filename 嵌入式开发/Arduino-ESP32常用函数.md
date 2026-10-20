@@ -3,8 +3,11 @@ title: Arduino常用函数
 aliases:
   - Arduino函数速查
   - Arduino API速查
+  - Arduino-ESP32常用函数
+  - ESP32 Arduino函数速查
 tags:
   - Arduino
+  - ESP32
   - 函数速查
   - 嵌入式开发
 category:
@@ -13,9 +16,9 @@ status:
 created: 2026-10-19
 updated: 2026-10-20
 ---
-Arduino程序以C++为基础，Arduino Core在此基础上提供了统一的引脚、时间和通信接口。不同开发板使用的微控制器和Core不同，支持的引脚、分辨率、串口数量及部分函数参数也可能不同。
+Arduino程序以C++为基础，Arduino Core在此基础上提供了统一的引脚、时间和通信接口。本文同时收录Arduino通用接口与Arduino-ESP32 Core常用扩展；带有芯片差异的接口会在正文中说明适用范围。
 
-本文代码块中的函数形式用于说明常见调用方式。涉及硬件能力时，应同时查阅所用开发板的引脚图和Core文档。
+本文代码块中的函数形式用于说明常见调用方式。涉及硬件能力时，应同时查阅所用开发板的引脚图、芯片数据手册和Core文档。ESP32系列各型号的外设数量与能力并不完全相同，本文中的专用接口以Arduino-ESP32 3.x为准。
 
 # 基础结构
 ## setup()、loop()
@@ -131,6 +134,32 @@ void analogReadResolution(int bits)
 
 该函数只在部分开发板上可用。设置值高于硬件ADC分辨率时，增加的低位通常由零填充，不会提高实际测量精度。
 
+Arduino-ESP32默认返回12位结果，即`0`到`4095`。经典ESP32可在9位到12位之间调整硬件分辨率；其他系列在改变返回位数时可能通过移位适配结果。
+
+## analogReadMilliVolts()
+```cpp
+uint32_t analogReadMilliVolts(uint8_t pin)
+```
+作用：读取指定引脚的ADC结果，并按校准信息换算为毫伏值
+参数：
+- `pin`：支持ADC的GPIO
+- 返回值`uint32_t`：校准后的电压，单位mV
+
+该函数省去了手动套用固定参考电压的换算步骤，但读数精度仍会受到芯片个体误差、衰减设置、输入阻抗和噪声影响。需要高精度测量时应进行多次采样与实测校准。
+
+## analogSetAttenuation()、analogSetPinAttenuation()
+```cpp
+void analogSetAttenuation(adc_attenuation_t attenuation)
+void analogSetPinAttenuation(uint8_t pin,
+                             adc_attenuation_t attenuation)
+```
+作用：设置全部ADC通道或指定引脚的输入衰减
+参数：
+- `pin`：支持ADC的GPIO
+- `attenuation`：`ADC_0db`、`ADC_2_5db`、`ADC_6db`或`ADC_11db`
+
+衰减越大，可测输入电压上限通常越高，但具体范围随ESP32型号而变化。输入电压不得超过芯片数据手册规定的引脚范围。
+
 ## analogReference()
 ```cpp
 void analogReference(uint8_t type)
@@ -157,15 +186,76 @@ void analogWrite(uint8_t pin, int value)
 analogWrite(9, 128);  // 默认8位分辨率下约为50%占空比
 ```
 
-## analogWriteResolution()
+## analogWriteResolution()、analogWriteFrequency()
 ```cpp
 void analogWriteResolution(int bits)
+void analogWriteResolution(uint8_t pin,
+                           uint8_t resolution)
+void analogWriteFrequency(uint8_t pin, uint32_t frequency)
 ```
-作用：设置`analogWrite()`使用的分辨率
+作用：设置`analogWrite()`使用的分辨率或指定引脚的PWM频率
 参数：
-- `bits`：目标位数
+- `bits`：部分Arduino Core使用的全局目标位数
+- `pin`、`resolution`：Arduino-ESP32中指定引脚及其目标位数
+- `frequency`：Arduino-ESP32中指定引脚的目标频率，单位Hz
 
-该函数只在部分开发板上可用。设置后满量程值为$2^{bits}-1$。
+这些函数只在部分开发板上可用。设置分辨率后，满量程值为$2^{bits}-1$。
+
+## ledcAttach()、ledcAttachChannel()
+```cpp
+bool ledcAttach(uint8_t pin,
+                uint32_t freq,
+                uint8_t resolution)
+bool ledcAttachChannel(uint8_t pin,
+                       uint32_t freq,
+                       uint8_t resolution,
+                       int8_t channel)
+```
+作用：把GPIO连接到LEDC硬件PWM；`ledcAttach()`自动选择通道，`ledcAttachChannel()`使用指定通道
+参数：
+- `pin`：PWM输出GPIO
+- `freq`：PWM频率，单位Hz
+- `resolution`：占空比分辨率，单位bit
+- `channel`：LEDC通道编号
+- 返回值`bool`：配置是否成功
+
+频率与分辨率相互制约，较高频率通常只能使用较低分辨率。多个引脚绑定到同一通道时会共享占空比；共享同一定时器的通道还会受频率和分辨率配置影响。
+
+```cpp
+const uint8_t pwmPin = 5;
+
+void setup()
+{
+  if (ledcAttach(pwmPin, 5000, 12)) {
+    ledcWrite(pwmPin, 2048);
+  }
+}
+```
+
+## ledcWrite()、ledcRead()、ledcReadFreq()
+```cpp
+bool ledcWrite(uint8_t pin, uint32_t duty)
+uint32_t ledcRead(uint8_t pin)
+uint32_t ledcReadFreq(uint8_t pin)
+```
+作用：设置占空比，或读取当前占空比与频率
+参数：
+- `pin`：已通过`ledcAttach()`绑定的GPIO
+- `duty`：占空比计数值，最大值通常为$2^{resolution}-1$
+- `ledcWrite()`返回值：写入是否成功
+- `ledcRead()`返回值：当前占空比计数值
+- `ledcReadFreq()`返回值：当前频率，单位Hz
+
+## ledcChangeFrequency()、ledcDetach()
+```cpp
+uint32_t ledcChangeFrequency(uint8_t pin,
+                             uint32_t freq,
+                             uint8_t resolution)
+bool ledcDetach(uint8_t pin)
+```
+作用：修改已绑定引脚的PWM频率和分辨率，或解除GPIO与LEDC的绑定
+
+修改频率时，所有共享同一定时器的通道都会受到影响。`ledcChangeFrequency()`返回实际配置的频率，失败时返回`0`。
 
 ## tone()、noTone()
 ```cpp
@@ -185,78 +275,91 @@ void noTone(uint8_t pin)
 
 `tone()`会占用定时器资源，可能影响部分引脚的PWM输出。不同Core对同时输出的音调数量和频率范围支持不同。
 
-## timerBegin()（ESP32）
+## timerBegin()、timerEnd()
 ```cpp
-hw_timer_t *timerBegin(uint8_t timer,
-                       uint16_t divider,
-                       bool countUp)
+hw_timer_t *timerBegin(uint32_t frequency)
+void timerEnd(hw_timer_t *timer)
 ```
-作用：初始化一个ESP32硬件定时器，并返回指向该定时器的`hw_timer_t`指针
-
+作用：按指定计数频率创建并启动硬件定时器，或释放定时器
 参数：
-- `timer`：硬件定时器编号
-- `divider`：定时器时钟分频系数
-- `countUp`：`true`表示向上计数，`false`表示向下计数
-- 返回值`hw_timer_t *`：定时器句柄；初始化失败时应检查是否为`nullptr`
-
-以80 MHz定时器源时钟为例，分频系数为80时，计数频率为1 MHz，每个计数周期为1 µs：
-
-$$f_{timer}=\frac{80\,\mathrm{MHz}}{80}=1\,\mathrm{MHz}$$
+- `frequency`：定时器计数频率，单位Hz
+- `timer`：`timerBegin()`返回的定时器句柄
+- `timerBegin()`返回值：配置成功时为定时器句柄，失败时为`nullptr`
 
 ```cpp
-hw_timer_t *timer = timerBegin(0, 80, true);
+hw_timer_t *timer = timerBegin(1000000);  // 每个计数为1 us
 ```
 
-该原型对应Arduino-ESP32 2.x。Arduino-ESP32 3.x调整了硬件定时器API，升级Core后应按照所安装版本的文档修改参数。
+Arduino-ESP32 3.x会根据目标频率自动选择时钟源和分频值。2.x中的`timerBegin(timer, divider, countUp)`三参数形式已不再适用。
 
-## timerAttachInterrupt()（ESP32）
+## timerAttachInterrupt()、timerAttachInterruptArg()、timerDetachInterrupt()
 ```cpp
 void timerAttachInterrupt(hw_timer_t *timer,
-                          void (*fn)(void),
-                          bool edge)
+                          void (*userFunc)(void))
+void timerAttachInterruptArg(hw_timer_t *timer,
+                             void (*userFunc)(void *),
+                             void *arg)
+void timerDetachInterrupt(hw_timer_t *timer)
 ```
-作用：把中断服务函数绑定到指定的ESP32硬件定时器
-
-参数：
-- `timer`：`timerBegin()`返回的定时器句柄
-- `fn`：无参数、无返回值的中断服务函数
-- `edge`：`true`使用边沿触发，`false`使用电平触发
+作用：注册不带参数或带参数的定时器中断函数，或解除中断函数
 
 ```cpp
-void IRAM_ATTR onTimer()
+volatile bool timerEvent = false;
+
+void ARDUINO_ISR_ATTR onTimer()
 {
-  // 只执行很短的操作，例如更新计数或设置标志
+  timerEvent = true;
 }
 
-timerAttachInterrupt(timer, &onTimer, true);
+timerAttachInterrupt(timer, &onTimer);
 ```
 
-ESP32中断服务函数通常使用`IRAM_ATTR`修饰，使中断代码放入内部RAM。中断服务函数应保持简短，不要在其中调用`Serial.print()`、`delay()`或其他可能阻塞的接口。
+中断服务函数应保持简短，不要调用`Serial.print()`、`delay()`或其他可能阻塞的接口。3.x已移除`timerAttachInterrupt()`旧接口中的`edge`参数。
 
-## timerAlarmWrite()、timerAlarmEnable()（ESP32）
+## timerAlarm()
 ```cpp
-void timerAlarmWrite(hw_timer_t *timer,
-                     uint64_t alarmValue,
-                     bool autoreload)
-void timerAlarmEnable(hw_timer_t *timer)
+void timerAlarm(hw_timer_t *timer,
+                uint64_t alarmValue,
+                bool autoreload,
+                uint64_t reloadCount)
 ```
-作用：
-- `timerAlarmWrite()`：设置定时器到达哪个计数值时产生报警中断
-- `timerAlarmEnable()`：启用已经配置好的定时器报警
-
+作用：设置报警计数值、自动重载方式和重复次数，并自动启用报警
 参数：
-- `timer`：`timerBegin()`返回的定时器句柄
-- `alarmValue`：报警计数值，其实际时间由定时器计数频率决定
-- `autoreload`：`true`表示触发后自动重新装载，适合周期定时；`false`表示单次触发
-
-当每个计数周期为1 µs时，`1000000`对应1 s：
+- `timer`：定时器句柄
+- `alarmValue`：触发报警的计数值
+- `autoreload`：`true`表示触发后自动重载
+- `reloadCount`：自动重载次数，`0`表示不限次数；关闭自动重载时无效
 
 ```cpp
-timerAlarmWrite(timer, 1000000ULL, true);
-timerAlarmEnable(timer);
+hw_timer_t *timer = timerBegin(1000000);
+timerAttachInterrupt(timer, &onTimer);
+timerAlarm(timer, 1000000ULL, true, 0);  // 每1 s触发一次
 ```
 
-推荐的配置顺序为：`timerBegin()`、`timerAttachInterrupt()`、`timerAlarmWrite()`、`timerAlarmEnable()`。
+3.x使用`timerAlarm()`取代2.x中的`timerAlarmWrite()`和`timerAlarmEnable()`组合。
+
+## timerStart()、timerStop()、timerRestart()、timerWrite()、timerRead()
+```cpp
+void timerStart(hw_timer_t *timer)
+void timerStop(hw_timer_t *timer)
+void timerRestart(hw_timer_t *timer)
+void timerWrite(hw_timer_t *timer, uint64_t value)
+uint64_t timerRead(hw_timer_t *timer)
+```
+作用：控制计数器运行状态，重新开始计数，写入或读取当前计数值
+
+`timerRestart()`从已保存的重载值重新开始计数；需要明确清零时可使用`timerWrite(timer, 0)`。
+
+## timerReadMicros()、timerReadMillis()、timerReadSeconds()、timerGetFrequency()
+```cpp
+uint64_t timerReadMicros(hw_timer_t *timer)
+uint64_t timerReadMillis(hw_timer_t *timer)
+double timerReadSeconds(hw_timer_t *timer)
+uint16_t timerGetFrequency(hw_timer_t *timer)
+```
+作用：以微秒、毫秒或秒读取当前计数时间，或读取定时器实际计数频率
+
+单位换算接口适合调试与状态显示；需要精确控制计数值时直接使用`timerRead()`。
 
 # 时间函数
 ## delay()、delayMicroseconds()
@@ -484,7 +587,7 @@ interrupts();
 
 关闭中断会影响时间计数、串口收发和其他依赖中断的功能，临界区应保持尽可能短。Arduino没有跨平台统一的DMA API，需要使用开发板Core或第三方库提供的接口。
 
-## portENTER_CRITICAL()、portEXIT_CRITICAL()、portENTER_CRITICAL_ISR()、portEXIT_CRITICAL_ISR()（ESP32）
+## portENTER_CRITICAL()、portEXIT_CRITICAL()、portENTER_CRITICAL_ISR()、portEXIT_CRITICAL_ISR()
 ```cpp
 portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
 
@@ -506,6 +609,82 @@ portEXIT_CRITICAL_ISR(&mux);
 ```
 
 `volatile`用于提示编译器共享变量可能被异步修改，但不会自动保证复合操作的原子性。对于`++`、`--`以及多步读写，应根据访问场景使用临界区保护。临界区内不要执行串口输出或其他耗时操作。
+
+# FreeRTOS任务与同步
+Arduino-ESP32在FreeRTOS任务中运行`setup()`与`loop()`，也可以直接使用常用FreeRTOS接口组织并发任务。任务函数通常包含不会退出的循环，并通过延时、队列、信号量或任务通知主动让出处理器。
+
+## xTaskCreate()、xTaskCreatePinnedToCore()
+```cpp
+BaseType_t xTaskCreate(TaskFunction_t taskCode,
+                       const char *name,
+                       uint32_t stackDepth,
+                       void *parameters,
+                       UBaseType_t priority,
+                       TaskHandle_t *taskHandle)
+BaseType_t xTaskCreatePinnedToCore(TaskFunction_t taskCode,
+                                   const char *name,
+                                   uint32_t stackDepth,
+                                   void *parameters,
+                                   UBaseType_t priority,
+                                   TaskHandle_t *taskHandle,
+                                   BaseType_t coreID)
+```
+作用：创建可由调度器安排的任务；后者还可以指定任务的CPU核心亲和性
+参数：
+- `taskCode`：任务入口函数，形式为`void task(void *parameter)`
+- `name`：任务名称，便于调试
+- `stackDepth`：任务栈深度；Arduino-ESP32中按字节计
+- `parameters`：传给任务的参数指针
+- `priority`：任务优先级，数值越大优先级越高
+- `taskHandle`：接收任务句柄，不需要时可填`nullptr`
+- `coreID`：核心编号，或使用`tskNO_AFFINITY`交给调度器安排
+- 返回值`BaseType_t`：成功时为`pdPASS`
+
+```cpp
+void blinkTask(void *parameter)
+{
+  const uint8_t pin = *(static_cast<uint8_t *>(parameter));
+
+  for (;;) {
+    digitalWrite(pin, !digitalRead(pin));
+    vTaskDelay(pdMS_TO_TICKS(500));
+  }
+}
+```
+
+单核型号只能在有效核心上运行任务。没有明确的核心亲和需求时，优先使用`xTaskCreate()`或把`coreID`设为`tskNO_AFFINITY`。
+
+## vTaskDelay()、xTaskDelayUntil()
+```cpp
+void vTaskDelay(TickType_t ticks)
+BaseType_t xTaskDelayUntil(TickType_t *previousWakeTime,
+                           TickType_t increment)
+```
+作用：
+- `vTaskDelay()`：从当前时刻起阻塞指定的系统节拍数
+- `xTaskDelayUntil()`：按固定唤醒基准实现周期任务，减少任务执行时间造成的周期漂移
+
+使用`pdMS_TO_TICKS(ms)`把毫秒转换为系统节拍。`vTaskDelay()`只阻塞当前任务，其他就绪任务仍可运行。
+
+## xSemaphoreCreateMutex()、xSemaphoreTake()、xSemaphoreGive()
+```cpp
+SemaphoreHandle_t xSemaphoreCreateMutex()
+BaseType_t xSemaphoreTake(SemaphoreHandle_t mutex,
+                          TickType_t waitTicks)
+BaseType_t xSemaphoreGive(SemaphoreHandle_t mutex)
+```
+作用：创建互斥量，并在多个任务之间串行访问共享资源
+
+```cpp
+SemaphoreHandle_t serialMutex = xSemaphoreCreateMutex();
+
+if (xSemaphoreTake(serialMutex, pdMS_TO_TICKS(20)) == pdTRUE) {
+  Serial.println("protected output");
+  xSemaphoreGive(serialMutex);
+}
+```
+
+成功取得互斥量后必须在所有执行路径中归还。普通互斥量不能在中断服务函数中使用；中断与任务之间的事件传递应使用带`FromISR`后缀的信号量、队列或任务通知接口。
 
 # [[串口通信]]
 ## Serial.begin()、Serial.end()
@@ -842,6 +1021,219 @@ EEPROM.put(0, settings);
 
 EEPROM具有有限擦写寿命，不应在每次`loop()`循环中反复写入。部分开发板没有独立EEPROM，Core可能使用Flash模拟并要求额外的初始化或提交操作，应查阅所用开发板的EEPROM实现。
 
+# Preferences非易失性存储
+Preferences库使用NVS以键值对形式保存少量配置，断电或复位后数据仍然保留。使用前需要包含头文件：
+
+```cpp
+#include <Preferences.h>
+```
+
+## Preferences.begin()、Preferences.end()
+```cpp
+Preferences preferences;
+preferences.begin(name, readOnly, partitionLabel)
+preferences.end()
+```
+作用：打开或关闭一个NVS命名空间
+参数：
+- `name`：命名空间名称，最长15个字符
+- `readOnly`：`true`表示只读，默认为读写模式
+- `partitionLabel`：NVS分区标签，通常省略并使用默认`nvs`分区
+- `begin()`返回值：命名空间是否成功打开
+
+命名空间和键名目前都不超过15个字符。完成访问后调用`end()`释放句柄。
+
+## Preferences.putX()、Preferences.getX()
+```cpp
+preferences.putUInt(key, value)
+preferences.getUInt(key, defaultValue)
+preferences.putBool(key, value)
+preferences.getBool(key, defaultValue)
+preferences.putString(key, value)
+preferences.getString(key, defaultValue)
+```
+作用：按类型写入或读取键值；键不存在或读取失败时，`getX()`返回给定默认值
+
+库还提供`putInt()`、`getFloat()`、`putBytes()`等同类接口。读取时应使用与写入时相匹配的数据类型。
+
+```cpp
+Preferences preferences;
+
+if (preferences.begin("settings", false)) {
+  uint32_t bootCount = preferences.getUInt("boots", 0);
+  preferences.putUInt("boots", bootCount + 1);
+  preferences.end();
+}
+```
+
+## Preferences.isKey()、Preferences.remove()、Preferences.clear()
+```cpp
+preferences.isKey(key)
+preferences.remove(key)
+preferences.clear()
+```
+作用：检查键是否存在、删除一个键值对，或清空当前命名空间中的全部键值对
+
+`remove()`和`clear()`要求命名空间以读写模式打开。`clear()`不会删除命名空间本身。Preferences适合许多较小的配置值，大块数据更适合存入LittleFS等文件系统。
+
+# Wi-Fi
+使用Wi-Fi功能前需要包含头文件：
+
+```cpp
+#include <WiFi.h>
+```
+
+## WiFi.mode()、WiFi.setHostname()、WiFi.begin()
+```cpp
+WiFi.mode(WIFI_STA)
+WiFi.setHostname(hostname)
+WiFi.begin(ssid, password)
+```
+作用：选择无线工作模式、设置主机名并以STA模式连接接入点
+参数：
+- `WIFI_STA`：作为站点连接现有无线网络
+- `WIFI_AP`：建立Soft-AP供其他设备连接
+- `WIFI_AP_STA`：同时启用两种模式
+- `ssid`、`password`：无线网络名称与密码
+
+`WiFi.setHostname()`应在`WiFi.begin()`、`WiFi.softAP()`或`WiFi.mode()`启动无线功能之前调用。
+
+```cpp
+WiFi.setHostname("sensor-node");
+WiFi.mode(WIFI_STA);
+WiFi.begin(ssid, password);
+```
+
+## WiFi.status()、WiFi.localIP()、WiFi.RSSI()
+```cpp
+wl_status_t WiFi.status()
+IPAddress WiFi.localIP()
+int32_t WiFi.RSSI()
+```
+作用：读取STA连接状态、本机IP地址和当前接入点的接收信号强度
+
+```cpp
+const unsigned long timeout = 10000UL;
+unsigned long startedAt = millis();
+
+while (WiFi.status() != WL_CONNECTED &&
+       millis() - startedAt < timeout) {
+  delay(100);
+}
+```
+
+连接等待应设置超时，防止网络不可用时程序永久停在初始化阶段。RSSI单位为dBm，数值越接近`0`通常表示信号越强。
+
+## WiFi.disconnect()、WiFi.reconnect()
+```cpp
+WiFi.disconnect()
+WiFi.reconnect()
+```
+作用：断开当前STA连接，或使用已经保存的配置重新连接
+
+断线重连逻辑应采用状态检查和间隔重试，避免在`loop()`中无间隔地反复调用连接接口。
+
+## WiFi.scanNetworks()、WiFi.SSID()、WiFi.RSSI(index)、WiFi.scanDelete()
+```cpp
+int16_t count = WiFi.scanNetworks()
+String WiFi.SSID(int index)
+int32_t WiFi.RSSI(int index)
+void WiFi.scanDelete()
+```
+作用：扫描附近网络、读取各扫描结果的名称和信号强度，并释放扫描结果占用的内存
+
+`scanNetworks()`返回发现的网络数量；负值表示扫描失败或异步扫描尚未完成。处理完结果后调用`scanDelete()`。
+
+## WiFi.softAP()、WiFi.softAPIP()、WiFi.softAPdisconnect()
+```cpp
+bool WiFi.softAP(const char *ssid,
+                 const char *password = nullptr,
+                 int channel = 1,
+                 int hidden = 0,
+                 int maxConnection = 4)
+IPAddress WiFi.softAPIP()
+bool WiFi.softAPdisconnect(bool wifioff = false)
+```
+作用：建立Soft-AP、读取AP接口IP地址，或关闭Soft-AP
+
+受保护网络的密码通常至少需要8个字符。频道、隐藏选项和最大连接数的有效范围受具体芯片与Core版本限制。
+
+## WiFiClient.connect()、available()、read()、write()、stop()
+```cpp
+WiFiClient client;
+client.connect(host, port)
+client.available()
+client.read()
+client.write(buffer, length)
+client.stop()
+```
+作用：建立TCP客户端连接，检查并读取接收数据、发送字节，或关闭连接
+
+网络数据可能分批到达。应用层协议应根据长度、终止符或状态机组帧，不能假设一次`read()`就能得到完整消息。
+
+# 低功耗与唤醒
+进入睡眠前应先配置至少一种唤醒源。深度睡眠会停止大部分数字外设，唤醒后的执行流程通常等同于重新启动。
+
+## esp_sleep_enable_timer_wakeup()、esp_deep_sleep_start()
+```cpp
+esp_err_t esp_sleep_enable_timer_wakeup(uint64_t timeInUs)
+void esp_deep_sleep_start()
+```
+作用：配置定时唤醒源，并进入深度睡眠
+参数：
+- `timeInUs`：睡眠时间，单位$\mu\mathrm{s}$
+
+```cpp
+const uint64_t sleepSeconds = 60ULL;
+esp_sleep_enable_timer_wakeup(sleepSeconds * 1000000ULL);
+esp_deep_sleep_start();
+```
+
+进入深度睡眠前应完成串口发送并保存必要状态。Wi-Fi连接不会在深度睡眠期间保持。
+
+## esp_sleep_get_wakeup_cause()
+```cpp
+esp_sleep_wakeup_cause_t esp_sleep_get_wakeup_cause()
+```
+作用：读取本次启动由哪一种睡眠唤醒源触发
+
+常见返回值包括`ESP_SLEEP_WAKEUP_TIMER`、`ESP_SLEEP_WAKEUP_EXT0`和`ESP_SLEEP_WAKEUP_EXT1`。外部GPIO唤醒接口及可用RTC引脚随芯片型号而变化。
+
+## RTC_DATA_ATTR
+```cpp
+RTC_DATA_ATTR uint32_t bootCount = 0;
+```
+作用：把变量放入RTC慢速内存，使其在深度睡眠唤醒后仍可保留
+
+该属性不能替代掉电存储。完全断电、部分复位方式或RTC内存失效后，变量内容不应被视为可靠配置。
+
+# 系统与内存
+## ESP.getFreeHeap()、ESP.getMinFreeHeap()、ESP.getMaxAllocHeap()
+```cpp
+uint32_t ESP.getFreeHeap()
+uint32_t ESP.getMinFreeHeap()
+uint32_t ESP.getMaxAllocHeap()
+```
+作用：读取当前空闲堆、运行以来最低空闲堆，以及当前可分配的最大连续内存块
+
+空闲堆较多但最大连续块较小时，可能已经出现内存碎片。诊断长期运行问题时，应同时观察最低空闲堆和最大连续块。
+
+## ESP.getChipModel()、ESP.getChipRevision()、ESP.getCpuFreqMHz()
+```cpp
+const char *ESP.getChipModel()
+uint8_t ESP.getChipRevision()
+uint32_t ESP.getCpuFreqMHz()
+```
+作用：读取芯片型号、修订版本与当前CPU频率，常用于启动诊断信息
+
+## ESP.restart()
+```cpp
+void ESP.restart()
+```
+作用：触发软件复位
+
+调用前应先保存必要状态并尽量完成串口或网络缓冲区中的重要数据发送。频繁用复位掩盖资源泄漏或任务阻塞会增加故障定位难度。
+
 # 字符串与Flash存储
 ## String.length()、String.charAt()、String.substring()、String.indexOf()、String.toInt()、String.c_str()
 ```cpp
@@ -880,12 +1272,18 @@ const uint8_t table[] PROGMEM = {1, 2, 3, 4};
 
 # 常见选择
 - 控制单个数字引脚：`pinMode()`、`digitalWrite()`、`digitalRead()`
-- 读取模拟量：`analogRead()`
-- 输出PWM：`analogWrite()`
+- 读取模拟量：通用场景使用`analogRead()`；需要校准毫伏值时使用`analogReadMilliVolts()`
+- 输出简单PWM：`analogWrite()`；需要指定频率、分辨率或通道时使用`ledcAttach()`、`ledcWrite()`
+- 周期硬件中断：`timerBegin()`、`timerAttachInterrupt()`、`timerAlarm()`
 - 周期执行任务：`millis()`配合无符号减法
+- 创建并发任务：`xTaskCreate()`；有明确核心亲和需求时使用`xTaskCreatePinnedToCore()`
+- 保护任务间共享资源：`xSemaphoreCreateMutex()`、`xSemaphoreTake()`、`xSemaphoreGive()`
 - 接收不定长串口数据：`available()`和`read()`逐字节解析
 - 发送可读调试信息：`print()`、`println()`
 - 发送二进制协议：`write()`
 - 访问I2C寄存器设备：`Wire.beginTransmission()`、`Wire.write()`、`Wire.endTransmission(false)`、`Wire.requestFrom()`
 - 访问SPI设备：`SPI.beginTransaction()`、手动控制CS、`SPI.transfer()`、`SPI.endTransaction()`
-- 保存少量掉电数据：`EEPROM.update()`、`EEPROM.get()`、`EEPROM.put()`
+- 保存少量掉电配置：优先使用`Preferences.begin()`与`putX()`、`getX()`
+- 连接无线网络：`WiFi.mode()`、`WiFi.begin()`、`WiFi.status()`
+- 定时深度睡眠：`esp_sleep_enable_timer_wakeup()`、`esp_deep_sleep_start()`
+- 诊断堆内存：`ESP.getFreeHeap()`、`ESP.getMinFreeHeap()`、`ESP.getMaxAllocHeap()`
