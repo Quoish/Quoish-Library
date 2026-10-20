@@ -11,7 +11,7 @@ category:
   - 嵌入式开发
 status:
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 Arduino程序以C++为基础，Arduino Core在此基础上提供了统一的引脚、时间和通信接口。不同开发板使用的微控制器和Core不同，支持的引脚、分辨率、串口数量及部分函数参数也可能不同。
 
@@ -184,6 +184,79 @@ void noTone(uint8_t pin)
 - `duration`：持续时间，单位ms；省略或填`0`时持续输出，直到调用`noTone()`
 
 `tone()`会占用定时器资源，可能影响部分引脚的PWM输出。不同Core对同时输出的音调数量和频率范围支持不同。
+
+## timerBegin()（ESP32）
+```cpp
+hw_timer_t *timerBegin(uint8_t timer,
+                       uint16_t divider,
+                       bool countUp)
+```
+作用：初始化一个ESP32硬件定时器，并返回指向该定时器的`hw_timer_t`指针
+
+参数：
+- `timer`：硬件定时器编号
+- `divider`：定时器时钟分频系数
+- `countUp`：`true`表示向上计数，`false`表示向下计数
+- 返回值`hw_timer_t *`：定时器句柄；初始化失败时应检查是否为`nullptr`
+
+以80 MHz定时器源时钟为例，分频系数为80时，计数频率为1 MHz，每个计数周期为1 µs：
+
+$$f_{timer}=\frac{80\,\mathrm{MHz}}{80}=1\,\mathrm{MHz}$$
+
+```cpp
+hw_timer_t *timer = timerBegin(0, 80, true);
+```
+
+该原型对应Arduino-ESP32 2.x。Arduino-ESP32 3.x调整了硬件定时器API，升级Core后应按照所安装版本的文档修改参数。
+
+## timerAttachInterrupt()（ESP32）
+```cpp
+void timerAttachInterrupt(hw_timer_t *timer,
+                          void (*fn)(void),
+                          bool edge)
+```
+作用：把中断服务函数绑定到指定的ESP32硬件定时器
+
+参数：
+- `timer`：`timerBegin()`返回的定时器句柄
+- `fn`：无参数、无返回值的中断服务函数
+- `edge`：`true`使用边沿触发，`false`使用电平触发
+
+```cpp
+void IRAM_ATTR onTimer()
+{
+  // 只执行很短的操作，例如更新计数或设置标志
+}
+
+timerAttachInterrupt(timer, &onTimer, true);
+```
+
+ESP32中断服务函数通常使用`IRAM_ATTR`修饰，使中断代码放入内部RAM。中断服务函数应保持简短，不要在其中调用`Serial.print()`、`delay()`或其他可能阻塞的接口。
+
+## timerAlarmWrite()、timerAlarmEnable()（ESP32）
+```cpp
+void timerAlarmWrite(hw_timer_t *timer,
+                     uint64_t alarmValue,
+                     bool autoreload)
+void timerAlarmEnable(hw_timer_t *timer)
+```
+作用：
+- `timerAlarmWrite()`：设置定时器到达哪个计数值时产生报警中断
+- `timerAlarmEnable()`：启用已经配置好的定时器报警
+
+参数：
+- `timer`：`timerBegin()`返回的定时器句柄
+- `alarmValue`：报警计数值，其实际时间由定时器计数频率决定
+- `autoreload`：`true`表示触发后自动重新装载，适合周期定时；`false`表示单次触发
+
+当每个计数周期为1 µs时，`1000000`对应1 s：
+
+```cpp
+timerAlarmWrite(timer, 1000000ULL, true);
+timerAlarmEnable(timer);
+```
+
+推荐的配置顺序为：`timerBegin()`、`timerAttachInterrupt()`、`timerAlarmWrite()`、`timerAlarmEnable()`。
 
 # 时间函数
 ## delay()、delayMicroseconds()
@@ -411,24 +484,51 @@ interrupts();
 
 关闭中断会影响时间计数、串口收发和其他依赖中断的功能，临界区应保持尽可能短。Arduino没有跨平台统一的DMA API，需要使用开发板Core或第三方库提供的接口。
 
+## portENTER_CRITICAL()、portEXIT_CRITICAL()、portENTER_CRITICAL_ISR()、portEXIT_CRITICAL_ISR()（ESP32）
+```cpp
+portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
+
+portENTER_CRITICAL(&mux);
+// 访问任务与中断共享的数据
+portEXIT_CRITICAL(&mux);
+```
+作用：在ESP32的FreeRTOS环境中进入和退出临界区，保护任务与中断之间或不同任务之间共享的数据
+
+参数：
+- `mux`：`portMUX_TYPE`类型的自旋锁，通常使用`portMUX_INITIALIZER_UNLOCKED`初始化
+
+中断服务函数中应使用对应的ISR版本：
+
+```cpp
+portENTER_CRITICAL_ISR(&mux);
+// 更新共享数据
+portEXIT_CRITICAL_ISR(&mux);
+```
+
+`volatile`用于提示编译器共享变量可能被异步修改，但不会自动保证复合操作的原子性。对于`++`、`--`以及多步读写，应根据访问场景使用临界区保护。临界区内不要执行串口输出或其他耗时操作。
+
 # [[串口通信]]
 ## Serial.begin()、Serial.end()
 ```cpp
 Serial.begin(baud)
 Serial.begin(baud, config)
+Serial.begin(baud, config, rxPin, txPin)
 Serial.end()
 ```
 作用：初始化或关闭串口
 参数：
 - `baud`：波特率，如`9600`、`115200`
 - `config`：数据位、校验位和停止位配置，如`SERIAL_8N1`；并非所有Core都支持相同配置
+- `rxPin`、`txPin`：接收和发送引脚；该重载由ESP32等部分Core提供
 
 ```cpp
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(115200, SERIAL_8N1, 44, 43);
 }
 ```
+
+ESP32允许在初始化硬件串口时指定RX和TX引脚。引脚能否映射到目标UART以及是否与板载电路冲突，应结合芯片和开发板原理图确认。
 
 `Serial`可能对应硬件UART，也可能对应原生USB虚拟串口。使用原生USB的开发板可以用`while (!Serial)`等待电脑打开串口，但这会让脱机运行的程序停在初始化阶段，通常应增加超时。
 
