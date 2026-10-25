@@ -112,6 +112,7 @@ def setup():
 ### `model.py`
 
 ```python
+import torch
 from torch import nn
 
 class Remember(nn.Module):
@@ -119,6 +120,11 @@ class Remember(nn.Module):
         super().__init__()
         layer = {"RNN": nn.RNN, "LSTM": nn.LSTM, "GRU": nn.GRU}[kind]
         self.core = layer(1, 24, batch_first=True)
+        if kind == "LSTM":
+            # 门排列为输入、忘记、候选、输出；提高初始保留倾向。
+            with torch.no_grad():
+                self.core.bias_ih_l0[24:48].fill_(2.0)
+                self.core.bias_hh_l0[24:48].zero_()
         self.head = nn.Linear(24, 2)
 
     def forward(self, x):
