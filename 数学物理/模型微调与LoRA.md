@@ -164,7 +164,7 @@ class LoRALinear(nn.Module):
         self.scale = alpha / rank
 
     def forward(self, x):
-        """输入 (B, cin)，返回 (B, cout)；只让 A、B 接受训练更新。"""
+        """输入 (B, cin)，返回 (B, cout)；基座冻结，A、B 保留求导能力。"""
 
         # 3. 行批量输入先乘 A.T 再乘 B.T；与冻结基座输出相加。
         return self.base(x) + self.scale * (x @ self.A.T @ self.B.T)
