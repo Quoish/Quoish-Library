@@ -10,7 +10,7 @@ category:
   - 机器学习和深度学习
 status: 完成
 created: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-02
 ---
 
 导航：[[机器学习与人工智能]]
@@ -75,9 +75,9 @@ $W_1$把$d$映射为$d_{ff}$，$W_2$映射回$d$。扩大中间维度提供更�
 
 ```text
 Transformer-demo/
-├── runtime.py
-├── model.py
-├── main.py
+├── runtime.py  # 统一处理项目路径、随机种子、CPU线程与计算设备
+├── model.py  # 实现带学习式位置嵌入和 Pre-LN 残差块的微型因果 Transformer
+├── main.py  # 检查 Transformer 的形状、因果前缀与一次下一词元训练更新
 └── outputs/  # 运行时自动生成，无须手工创建
 ```
 
@@ -88,92 +88,209 @@ Transformer-demo/
 ### `runtime.py`
 
 ```python
+"""统一处理项目路径、随机种子、CPU线程与计算设备。"""
+
+# 标准库
 from pathlib import Path
 import argparse
 import random
+
+# 第三方库（由统一环境提供）
 import numpy as np
 import torch
 
+# 1. 路径统一从 runtime.py 所在目录出发，复制项目后无须改绝对路径。
 ROOT = Path(__file__).resolve().parent
+
+# outputs/ 存放本项目的图像、指标与模型权重；不存在时自动创建。
 OUT = ROOT / "outputs"
 OUT.mkdir(exist_ok=True)
 
+
 def setup():
+    """初始化运行环境并返回 torch.device。
+
+    命令行参数只有 --cpu；ROOT、OUT 是导入时建立的项目路径。
+    """
+
+    # 2. 读取命令行选项：--cpu 允许在有显卡的机器上仍强制使用 CPU。
     parser = argparse.ArgumentParser()
     parser.add_argument("--cpu", action="store_true")
     args = parser.parse_args()
+
+    # 3. 固定 Python、NumPy 和 PyTorch 的随机种子；跨设备仍不保证逐位相同。
     random.seed(7)
     np.random.seed(7)
     torch.manual_seed(7)
+
+    # 小型教学网络限制 CPU 线程数，避免线程调度开销过大。
     torch.set_num_threads(2)
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.cpu else "cpu")
+
+    # 4. 仅当 CUDA 可用且没有指定 --cpu 时使用 GPU；调用方负责移动模型和数据。
+    device = torch.device(
+        "cuda" if torch.cuda.is_available() and not args.cpu else "cpu"
+    )
     print("device:", device)
+
+    # 返回 torch.device；各入口脚本共用相同的设备选择规则。
     return device
 ```
 
 ### `model.py`
 
 ```python
+"""实现带学习式位置嵌入和 Pre-LN 残差块的微型因果 Transformer。"""
+
+# 第三方库（由统一环境提供）
 import torch
 from torch import nn
 
+
 class TinyTransformer(nn.Module):
+    """实现带学习式位置嵌入和 Pre-LN 残差块的微型因果 Transformer。"""
+
     def __init__(self, vocab=16, dim=32, heads=4, max_length=32):
+        """vocab 为词表大小；dim 为隐藏维度；heads 为头数；max_length 限制位置表长度。"""
+
         super().__init__()
+
+        # 1. 词元编号映射为 dim 维向量；位置表具有相同维度，可以逐元素相加。
         self.token = nn.Embedding(vocab, dim)
         self.position = nn.Embedding(max_length, dim)
+
+        # 2. 两个 LayerNorm 分别位于注意力和前馈子层之前，即 Pre-LN。
         self.norm1, self.norm2 = nn.LayerNorm(dim), nn.LayerNorm(dim)
+
+        # 多头自注意力内部完成 Q/K/V 投影；dim 必须能被 heads 整除。
         self.attn = nn.MultiheadAttention(dim, heads, dropout=0, batch_first=True)
-        self.ffn = nn.Sequential(nn.Linear(dim, 64), nn.GELU(), nn.Linear(64, dim))
+
+        # 前馈网络逐位置共享：dim → 64 → dim，以便与残差相加。
+        self.ffn = nn.Sequential(
+            nn.Linear(dim, 64),
+            nn.GELU(),
+            nn.Linear(64, dim),
+        )
+
+        # 3. 最后归一化并投影到词表，为每个位置产生下一词元 logits。
         self.final_norm = nn.LayerNorm(dim)
         self.head = nn.Linear(dim, vocab)
 
     def forward(self, ids):
+        """输入整数编号 (B, T)，返回每位置词表 logits 与各头注意力权重。"""
+
+        # 输入 ids 为 (B, T)；位置索引按序列长度创建，不在批次之间分别学习。
         length = ids.shape[1]
+
+        # 词元和位置向量广播相加，得到 (B, T, dim)。
         x = self.token(ids) + self.position(torch.arange(length, device=ids.device))
+
+        # 布尔上三角屏蔽未来；此处 True 的含义是该位置禁止被关注。
         mask = torch.ones(length, length, device=ids.device, dtype=torch.bool).triu(1)
+
+        # 4. 先归一化，再用同一序列构造 Q、K、V。
         normalized = self.norm1(x)
-        mixed, weights = self.attn(normalized, normalized, normalized,
-            attn_mask=mask, need_weights=True, average_attn_weights=False)
+
+        # 保留各个头的权重，形状 (B, heads, T, T)，便于可视化或掩码检查。
+        mixed, weights = self.attn(
+            normalized,
+            normalized,
+            normalized,
+            attn_mask=mask,
+            need_weights=True,
+            average_attn_weights=False,
+        )
+
+        # 第一条残差连接：注意力只提供对原表示的增量。
         x = x + mixed
+
+        # 第二条残差连接：前馈变换仍保持隐藏维度不变。
         x = x + self.ffn(self.norm2(x))
+
+        # 最终返回 (B, T, vocab) logits 和全部头的注意力矩阵。
         return self.head(self.final_norm(x)), weights
 ```
 
 ### `main.py`
 
 ```python
+"""检查 Transformer 的形状、因果前缀与一次下一词元训练更新。"""
+
+# 标准库
 import json
+
+# 第三方库（由统一环境提供）
 import torch
 from torch import nn
+
+# 本项目模块
 from model import TinyTransformer
 from runtime import setup, OUT
 
+
 def main():
+    """检查 Transformer 的形状、因果前缀与一次下一词元训练更新。
+
+    按分段注释依次准备数据、执行计算并保存结果。
+    """
+
+    # 1. 初始化模型，词表默认包含16个词元编号。
     device = setup()
     model = TinyTransformer().to(device)
+
+    # 2. 构造两个长度6的序列，形状 (2, 6)，元素必须是合法词元编号。
     ids = torch.tensor([[1, 2, 3, 4, 5, 6], [2, 4, 6, 8, 10, 12]], device=device)
+
+    # 复制序列后只修改第4、5号位置，前4个词元保持不变。
     changed = ids.clone()
     changed[:, 4:] = 15
+    # 切换到评价模式；若含 Dropout／BatchNorm，其行为随之切换。
     model.eval()
+    # 以下运算不记录求导图，减少评价或参数检查所需的内存。
     with torch.no_grad():
+        # 3. 先在评价模式检查：改变未来词元不能影响前4个位置的 logits。
         before, weights = model(ids)
         after, _ = model(changed)
+
+    # 前缀输出最大差异应在浮点容差内；不检查已经被修改的位置。
     difference = (before[:, :4] - after[:, :4]).abs().max().item()
     assert difference < 1e-5
-    assert weights[..., torch.ones(6, 6, dtype=torch.bool, device=device).triu(1)].abs().max().item() < 1e-6
+
+    # 检查每个头的严格上三角权重都为零，直接验证掩码方向。
+    assert (
+        weights[..., torch.ones(6, 6, dtype=torch.bool, device=device).triu(1)]
+        .abs()
+        .max()
+        .item()
+        < 1e-6
+    )
+
+    # 4. 切回训练模式，进行一次真实的梯度更新。
     model.train()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    # 清除上一轮梯度；PyTorch 的 backward 默认会累加到 .grad。
     optimizer.zero_grad()
+
+    # 输入取前5个词元，目标取后5个词元，形成相差一个位置的预测任务。
     logits, _ = model(ids[:, :-1])
+
+    # 将批次和时间维合并为样本维，交叉熵仍以16类词表 logits 为输入。
     loss = nn.functional.cross_entropy(logits.reshape(-1, 16), ids[:, 1:].reshape(-1))
+    # 沿计算图计算参数梯度；此时参数数值尚未更新。
     loss.backward()
+    # 优化器根据当前梯度真正更新可训练参数。
     optimizer.step()
-    report = {"logits_shape": list(before.shape), "attention_shape": list(weights.shape),
-              "prefix_difference": difference, "one_step_loss": loss.item()}
+
+    # 5. 保存形状、前缀差异、单步损失及权重；一次更新不表示已经学会序列规律。
+    report = {
+        "logits_shape": list(before.shape),
+        "attention_shape": list(weights.shape),
+        "prefix_difference": difference,
+        "one_step_loss": loss.item(),
+    }
     print(report)
     (OUT / "metrics.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     torch.save(model.state_dict(), OUT / "transformer.pt")
+
 
 if __name__ == "__main__":
     main()
@@ -184,7 +301,10 @@ if __name__ == "__main__":
 在 VS Code 中打开项目根目录，选择 `ml-ai-notes` 的 Python 解释器，再在终端执行：
 
 ```powershell
+# 先激活环境，让下面的 python 使用指定解释器和依赖。
 conda activate ml-ai-notes
+
+# 从项目根目录执行主入口，结果将写入本项目的 outputs/。
 python main.py
 ```
 

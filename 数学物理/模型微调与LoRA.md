@@ -12,7 +12,7 @@ category:
   - 机器学习和深度学习
 status: 完成
 created: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-02
 ---
 
 导航：[[机器学习与人工智能]]
@@ -58,9 +58,9 @@ QLoRA 在量化基座上训练低秩适配器，包含额外量化与内存技�
 
 ```text
 模型微调与LoRA-demo/
-├── runtime.py
-├── model.py
-├── main.py
+├── runtime.py  # 统一处理项目路径、随机种子、CPU线程与计算设备
+├── model.py  # 为一个冻结线性层添加可训练的低秩增量，并提供合并权重接口
+├── main.py  # 用已知秩的目标变化验证 LoRA 的拟合、冻结与合并行为
 └── outputs/  # 运行时自动生成，无须手工创建
 ```
 
@@ -71,96 +71,210 @@ QLoRA 在量化基座上训练低秩适配器，包含额外量化与内存技�
 ### `runtime.py`
 
 ```python
+"""统一处理项目路径、随机种子、CPU线程与计算设备。"""
+
+# 标准库
 from pathlib import Path
 import argparse
 import random
+
+# 第三方库（由统一环境提供）
 import numpy as np
 import torch
 
+# 1. 路径统一从 runtime.py 所在目录出发，复制项目后无须改绝对路径。
 ROOT = Path(__file__).resolve().parent
+
+# outputs/ 存放本项目的图像、指标与模型权重；不存在时自动创建。
 OUT = ROOT / "outputs"
 OUT.mkdir(exist_ok=True)
 
+
 def setup():
+    """初始化运行环境并返回 torch.device。
+
+    命令行参数只有 --cpu；ROOT、OUT 是导入时建立的项目路径。
+    """
+
+    # 2. 读取命令行选项：--cpu 允许在有显卡的机器上仍强制使用 CPU。
     parser = argparse.ArgumentParser()
     parser.add_argument("--cpu", action="store_true")
     args = parser.parse_args()
+
+    # 3. 固定 Python、NumPy 和 PyTorch 的随机种子；跨设备仍不保证逐位相同。
     random.seed(7)
     np.random.seed(7)
     torch.manual_seed(7)
+
+    # 小型教学网络限制 CPU 线程数，避免线程调度开销过大。
     torch.set_num_threads(2)
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.cpu else "cpu")
+
+    # 4. 仅当 CUDA 可用且没有指定 --cpu 时使用 GPU；调用方负责移动模型和数据。
+    device = torch.device(
+        "cuda" if torch.cuda.is_available() and not args.cpu else "cpu"
+    )
     print("device:", device)
+
+    # 返回 torch.device；各入口脚本共用相同的设备选择规则。
     return device
 ```
 
 ### `model.py`
 
 ```python
+"""为一个冻结线性层添加可训练的低秩增量，并提供合并权重接口。"""
+
+# 标准库
 import math
+
+# 第三方库（由统一环境提供）
 import torch
 from torch import nn
 
+
 class LoRALinear(nn.Module):
+    """为一个冻结线性层添加可训练的低秩增量，并提供合并权重接口。"""
+
     def __init__(self, base_weight, rank=4, alpha=4):
+        """base_weight 是 (cout, cin) 张量；rank 控制低秩中间维度，alpha 控制缩放。"""
+
         super().__init__()
+
+        # 1. 基座权重按 (输出维, 输入维) 排列，沿用 PyTorch Linear 的存储约定。
         cout, cin = base_weight.shape
+
+        # 建立不带偏置的基座层，再复制外部提供的权重。
         self.base = nn.Linear(cin, cout, bias=False)
+        # 以下运算不记录求导图，减少评价或参数检查所需的内存。
         with torch.no_grad():
             self.base.weight.copy_(base_weight)
+
+        # 冻结基座：优化过程只应更新 A、B，不应给基座累计梯度。
         self.base.weight.requires_grad_(False)
+
+        # 2. A 为 (rank, 输入维)，先降维；B 为 (输出维, rank)，再升维。
         self.A = nn.Parameter(torch.empty(rank, cin, device=base_weight.device))
         self.B = nn.Parameter(torch.zeros(cout, rank, device=base_weight.device))
+
+        # A 随机、B 为零，使初始增量恰为零；两者都置零会使乘积梯度无法启动。
         nn.init.kaiming_uniform_(self.A, a=math.sqrt(5))
+
+        # alpha/rank 是增量缩放系数，与矩阵秩分开控制。
         self.scale = alpha / rank
 
     def forward(self, x):
+        """输入 (B, cin)，返回 (B, cout)；只让 A、B 接受训练更新。"""
+
+        # 3. 行批量输入先乘 A.T 再乘 B.T；与冻结基座输出相加。
         return self.base(x) + self.scale * (x @ self.A.T @ self.B.T)
 
     def merged_weight(self):
+        """返回 W0 + scale * B@A，不修改原始基座参数。"""
+
+        # 4. 将增量合并进同一权重矩阵，用于检查分支推理与合并推理是否等价。
         return self.base.weight + self.scale * (self.B @ self.A)
 ```
 
 ### `main.py`
 
 ```python
+"""用已知秩的目标变化验证 LoRA 的拟合、冻结与合并行为。"""
+
+# 标准库
 import json
+
+# 第三方库（由统一环境提供）
 import torch
+
+# 本项目模块
 from model import LoRALinear
 from runtime import setup, OUT
 
+
 def main():
+    """用已知秩的目标变化验证 LoRA 的拟合、冻结与合并行为。
+
+    按分段注释依次准备数据、执行计算并保存结果。
+    """
+
+    # 1. 初始化设备，设置64×64权重及秩4的适配器。
     device = setup()
     size, rank = 64, 4
+
+    # 2. 生成冻结基座，再人为添加秩不超过4的目标增量，便于验证表达能力。
     base = torch.randn(size, size, device=device) * 0.1
-    target = base + (torch.randn(size, rank, device=device) @
-                     torch.randn(rank, size, device=device)) * 0.03
+    target = (
+        base
+        + (
+            torch.randn(size, rank, device=device)
+            @ torch.randn(rank, size, device=device)
+        )
+        * 0.03
+    )
+
+    # 训练输入为 (512, 64)，目标输出由已知目标矩阵直接计算。
     x = torch.randn(512, size, device=device)
     y = x @ target.T
+
+    # 3. 建立适配器并复制基座快照；快照用于检查训练是否意外改写了基座。
     model = LoRALinear(base, rank).to(device)
     frozen = model.base.weight.detach().clone()
+
+    # 优化器仅接收 A、B；固定权重无需梯度和优化器状态。
     optimizer = torch.optim.Adam([model.A, model.B], lr=0.03)
-    initial = (model(x)-y).square().mean().item()
+
+    # 记录训练前误差，以确认后续变化确实来自适配器学习。
+    initial = (model(x) - y).square().mean().item()
+
+    # 4. 最小化适配输出与目标输出的平方误差，共更新500步。
     for step in range(500):
+        # 清除上一轮梯度；PyTorch 的 backward 默认会累加到 .grad。
         optimizer.zero_grad()
-        loss = (model(x)-y).square().mean()
+        # 构造当前批次的标量训练目标，反向传播将从这里开始。
+        loss = (model(x) - y).square().mean()
+        # 沿计算图计算参数梯度；此时参数数值尚未更新。
         loss.backward()
+        # 优化器根据当前梯度真正更新可训练参数。
         optimizer.step()
+
+    # 5. 用新的输入测试目标映射，避免只看训练样本。
     test_x = torch.randn(128, size, device=device)
+    # 以下运算不记录求导图，减少评价或参数检查所需的内存。
     with torch.no_grad():
+        # 分别执行两条支路相加，以及使用已合并的单一矩阵，两者应接近。
         adapted = model(test_x)
         merged = test_x @ model.merged_weight().T
         test_mse = (adapted - test_x @ target.T).square().mean().item()
+
+    # 6. 冻结检查使用逐元素严格相等；另外检查基座没有梯度。
     assert torch.equal(frozen, model.base.weight)
     assert model.base.weight.grad is None
+
+    # 合并涉及不同浮点乘法顺序，因此使用合理容差而非逐位相等。
     assert torch.allclose(adapted, merged, atol=1e-5, rtol=1e-4)
-    report = {"trainable_parameters": sum(p.numel() for p in model.parameters() if p.requires_grad),
-        "full_weight_parameters": size * size, "initial_mse": initial,
-        "test_mse": test_mse, "merge_max_error": (adapted-merged).abs().max().item()}
+
+    # 7. 对比512个可训练参数与4096个完整权重参数，并保存误差和适配器。
+    report = {
+        "trainable_parameters": sum(
+            p.numel() for p in model.parameters() if p.requires_grad
+        ),
+        "full_weight_parameters": size * size,
+        "initial_mse": initial,
+        "test_mse": test_mse,
+        "merge_max_error": (adapted - merged).abs().max().item(),
+    }
     print(report)
     (OUT / "metrics.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
-    torch.save({"A": model.A.detach().cpu(), "B": model.B.detach().cpu(),
-                "scale": model.scale, "base": base.cpu()}, OUT / "adapter_demo.pt")
+    torch.save(
+        {
+            "A": model.A.detach().cpu(),
+            "B": model.B.detach().cpu(),
+            "scale": model.scale,
+            "base": base.cpu(),
+        },
+        OUT / "adapter_demo.pt",
+    )
+
 
 if __name__ == "__main__":
     main()
@@ -171,7 +285,10 @@ if __name__ == "__main__":
 在 VS Code 中打开项目根目录，选择 `ml-ai-notes` 的 Python 解释器，再在终端执行：
 
 ```powershell
+# 先激活环境，让下面的 python 使用指定解释器和依赖。
 conda activate ml-ai-notes
+
+# 从项目根目录执行主入口，结果将写入本项目的 outputs/。
 python main.py
 ```
 

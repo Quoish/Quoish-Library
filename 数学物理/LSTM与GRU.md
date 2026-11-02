@@ -10,7 +10,7 @@ category:
   - 机器学习和深度学习
 status: 完成
 created: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-02
 ---
 
 导航：[[机器学习与人工智能]]
@@ -73,9 +73,9 @@ LSTM 的状态是`(h, c)`，GRU 和普通 RNN 的状态是`h`。若分段处理�
 
 ```text
 LSTM与GRU-demo/
-├── runtime.py
-├── model.py
-├── main.py
+├── runtime.py  # 统一处理项目路径、随机种子、CPU线程与计算设备
+├── model.py  # 用统一接口包装 RNN、LSTM 和 GRU，读取序列后输出类别
+├── main.py  # 比较三种循环层能否在噪声序列后保留开头的一位信号
 └── outputs/  # 运行时自动生成，无须手工创建
 ```
 
@@ -86,93 +86,194 @@ LSTM与GRU-demo/
 ### `runtime.py`
 
 ```python
+"""统一处理项目路径、随机种子、CPU线程与计算设备。"""
+
+# 标准库
 from pathlib import Path
 import argparse
 import random
+
+# 第三方库（由统一环境提供）
 import numpy as np
 import torch
 
+# 1. 路径统一从 runtime.py 所在目录出发，复制项目后无须改绝对路径。
 ROOT = Path(__file__).resolve().parent
+
+# outputs/ 存放本项目的图像、指标与模型权重；不存在时自动创建。
 OUT = ROOT / "outputs"
 OUT.mkdir(exist_ok=True)
 
+
 def setup():
+    """初始化运行环境并返回 torch.device。
+
+    命令行参数只有 --cpu；ROOT、OUT 是导入时建立的项目路径。
+    """
+
+    # 2. 读取命令行选项：--cpu 允许在有显卡的机器上仍强制使用 CPU。
     parser = argparse.ArgumentParser()
     parser.add_argument("--cpu", action="store_true")
     args = parser.parse_args()
+
+    # 3. 固定 Python、NumPy 和 PyTorch 的随机种子；跨设备仍不保证逐位相同。
     random.seed(7)
     np.random.seed(7)
     torch.manual_seed(7)
+
+    # 小型教学网络限制 CPU 线程数，避免线程调度开销过大。
     torch.set_num_threads(2)
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.cpu else "cpu")
+
+    # 4. 仅当 CUDA 可用且没有指定 --cpu 时使用 GPU；调用方负责移动模型和数据。
+    device = torch.device(
+        "cuda" if torch.cuda.is_available() and not args.cpu else "cpu"
+    )
     print("device:", device)
+
+    # 返回 torch.device；各入口脚本共用相同的设备选择规则。
     return device
 ```
 
 ### `model.py`
 
 ```python
+"""用统一接口包装 RNN、LSTM 和 GRU，读取序列后输出类别。"""
+
+# 第三方库（由统一环境提供）
 import torch
 from torch import nn
 
+
 class Remember(nn.Module):
+    """用统一接口包装 RNN、LSTM 和 GRU，读取序列后输出类别。"""
+
     def __init__(self, kind):
+        """kind 可取 RNN、LSTM、GRU；各模型从零状态开始读取独立序列。"""
+
         super().__init__()
-        layer = {"RNN": nn.RNN, "LSTM": nn.LSTM, "GRU": nn.GRU}[kind]
+
+        # 按名称选择循环层，三种结构均使用1维输入和24维隐藏状态。
+        layer = {
+            "RNN": nn.RNN,
+            "LSTM": nn.LSTM,
+            "GRU": nn.GRU,
+        }[kind]
+
+        # batch_first 只改变输入／逐步输出的轴顺序，不改变最终状态的轴顺序。
         self.core = layer(1, 24, batch_first=True)
+
+        # LSTM 专门设置忘记门的初始偏置，减轻训练初期首位信息迅速衰减的问题。
         if kind == "LSTM":
             # 门排列为输入、忘记、候选、输出；提高初始保留倾向。
+            # 以下运算不记录求导图，减少评价或参数检查所需的内存。
             with torch.no_grad():
                 self.core.bias_ih_l0[24:48].fill_(2.0)
                 self.core.bias_hh_l0[24:48].zero_()
+
+        # 用最后一个有效时间步的24维表示，输出0/1两类 logits。
         self.head = nn.Linear(24, 2)
 
     def forward(self, x):
+        """输入 (B, T, 1)，返回 (B, 2) logits 和对应结构的最终状态。"""
+
+        # RNN、GRU 的 state 是 h；LSTM 的 state 是 (h, c)。
         sequence, state = self.core(x)
+
+        # 本例所有序列等长且没有填充，故可直接取 [:, -1]；变长填充序列需另行处理。
         return self.head(sequence[:, -1]), state
 ```
 
 ### `main.py`
 
 ```python
+"""比较三种循环层能否在噪声序列后保留开头的一位信号。"""
+
+# 标准库
 import json
+
+# 第三方库（由统一环境提供）
 import torch
 from torch import nn
+
+# 本项目模块
 from model import Remember
 from runtime import setup, OUT
 
+
 def batch(n, device, length=16):
+    """返回首位携带类别信号的等长序列及标签；默认长度16。"""
+
+    # 1. 随机生成二分类标签，然后把类别写成首时刻的 -1/+1 信号。
     y = torch.randint(0, 2, (n,), device=device)
+
+    # 其余时间步只有小噪声；任务要求在最后一步回忆首位信息。
     x = 0.05 * torch.randn(n, length, 1, device=device)
     x[:, 0, 0] = y.float() * 2 - 1
+
+    # 输入形状 (n, length, 1)，标签形状 (n,)；分类目标不是序列最后一个噪声值。
     return x, y
 
+
 def main():
+    """比较三种循环层能否在噪声序列后保留开头的一位信号。
+
+    按分段注释依次准备数据、执行计算并保存结果。
+    """
+
+    # 2. 初始化设备和结果字典。
     device = setup()
     report = {}
+
+    # 3. 三种模型分别初始化、训练、评价，避免继承上一个模型的权重。
     for kind in ["RNN", "LSTM", "GRU"]:
         torch.manual_seed(7)
         model = Remember(kind).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+
+        # 每次更新使用一批新生成的序列，训练共400步。
         for step in range(400):
             x, y = batch(64, device)
+            # 清除上一轮梯度；PyTorch 的 backward 默认会累加到 .grad。
             optimizer.zero_grad()
+
+            # 只使用序列末尾得到的分类分数计算损失；state 用于后续结构检查。
             logits, state = model(x)
+            # 构造当前批次的标量训练目标，反向传播将从这里开始。
             loss = nn.functional.cross_entropy(logits, y)
+            # 沿计算图计算参数梯度；此时参数数值尚未更新。
             loss.backward()
+            # 限制全部参数梯度的总范数，缓解梯度爆炸；不改变前向预测。
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
+            # 优化器根据当前梯度真正更新可训练参数。
             optimizer.step()
+        # 切换到评价模式；若含 Dropout／BatchNorm，其行为随之切换。
         model.eval()
+        # 以下运算不记录求导图，减少评价或参数检查所需的内存。
         with torch.no_grad():
+            # 4. 额外生成512条测试序列；不使用训练批次评价记忆效果。
             x, y = batch(512, device)
+
+            # 只使用序列末尾得到的分类分数计算损失；state 用于后续结构检查。
             logits, state = model(x)
             accuracy = (logits.argmax(1) == y).float().mean().item()
-        state_shapes = [list(t.shape) for t in state] if isinstance(state, tuple) else [list(state.shape)]
-        report[kind] = {"test_accuracy": accuracy, "last_loss": loss.item(),
-                        "state_shapes": state_shapes}
+
+        # 5. LSTM 记录 h、c 两个形状；RNN、GRU 各记录一个 h 的形状。
+        state_shapes = (
+            [list(t.shape) for t in state]
+            if isinstance(state, tuple)
+            else [list(state.shape)]
+        )
+
+        # 将各结构的准确率、训练末次损失和状态尺寸分开记录。
+        report[kind] = {
+            "test_accuracy": accuracy,
+            "last_loss": loss.item(),
+            "state_shapes": state_shapes,
+        }
         torch.save(model.state_dict(), OUT / (kind + ".pt"))
     print(json.dumps(report, indent=2))
     (OUT / "metrics.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+
 
 if __name__ == "__main__":
     main()
@@ -183,7 +284,10 @@ if __name__ == "__main__":
 在 VS Code 中打开项目根目录，选择 `ml-ai-notes` 的 Python 解释器，再在终端执行：
 
 ```powershell
+# 先激活环境，让下面的 python 使用指定解释器和依赖。
 conda activate ml-ai-notes
+
+# 从项目根目录执行主入口，结果将写入本项目的 outputs/。
 python main.py
 ```
 
