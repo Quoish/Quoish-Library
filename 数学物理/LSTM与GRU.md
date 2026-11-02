@@ -165,7 +165,8 @@ class Remember(nn.Module):
         # LSTM 专门设置忘记门的初始偏置，减轻训练初期首位信息迅速衰减的问题。
         if kind == "LSTM":
             # 门排列为输入、忘记、候选、输出；提高初始保留倾向。
-            # 以下运算不记录求导图，减少评价或参数检查所需的内存。
+
+            # 不记录这一段的求导图；适用于评价、参数初始化或手动更新。
             with torch.no_grad():
                 self.core.bias_ih_l0[24:48].fill_(2.0)
                 self.core.bias_hh_l0[24:48].zero_()
@@ -233,22 +234,29 @@ def main():
         # 每次更新使用一批新生成的序列，训练共400步。
         for step in range(400):
             x, y = batch(64, device)
+
             # 清除上一轮梯度；PyTorch 的 backward 默认会累加到 .grad。
             optimizer.zero_grad()
 
             # 只使用序列末尾得到的分类分数计算损失；state 用于后续结构检查。
             logits, state = model(x)
+
             # 构造当前批次的标量训练目标，反向传播将从这里开始。
             loss = nn.functional.cross_entropy(logits, y)
+
             # 沿计算图计算参数梯度；此时参数数值尚未更新。
             loss.backward()
+
             # 限制全部参数梯度的总范数，缓解梯度爆炸；不改变前向预测。
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1)
+
             # 优化器根据当前梯度真正更新可训练参数。
             optimizer.step()
+
         # 切换到评价模式；若含 Dropout／BatchNorm，其行为随之切换。
         model.eval()
-        # 以下运算不记录求导图，减少评价或参数检查所需的内存。
+
+        # 不记录这一段的求导图；适用于评价、参数初始化或手动更新。
         with torch.no_grad():
             # 4. 额外生成512条测试序列；不使用训练批次评价记忆效果。
             x, y = batch(512, device)

@@ -145,7 +145,8 @@ class LoRALinear(nn.Module):
 
         # 建立不带偏置的基座层，再复制外部提供的权重。
         self.base = nn.Linear(cin, cout, bias=False)
-        # 以下运算不记录求导图，减少评价或参数检查所需的内存。
+
+        # 不记录这一段的求导图；适用于评价、参数初始化或手动更新。
         with torch.no_grad():
             self.base.weight.copy_(base_weight)
 
@@ -230,16 +231,20 @@ def main():
     for step in range(500):
         # 清除上一轮梯度；PyTorch 的 backward 默认会累加到 .grad。
         optimizer.zero_grad()
+
         # 构造当前批次的标量训练目标，反向传播将从这里开始。
         loss = (model(x) - y).square().mean()
+
         # 沿计算图计算参数梯度；此时参数数值尚未更新。
         loss.backward()
+
         # 优化器根据当前梯度真正更新可训练参数。
         optimizer.step()
 
     # 5. 用新的输入测试目标映射，避免只看训练样本。
     test_x = torch.randn(128, size, device=device)
-    # 以下运算不记录求导图，减少评价或参数检查所需的内存。
+
+    # 不记录这一段的求导图；适用于评价、参数初始化或手动更新。
     with torch.no_grad():
         # 分别执行两条支路相加，以及使用已合并的单一矩阵，两者应接近。
         adapted = model(test_x)
